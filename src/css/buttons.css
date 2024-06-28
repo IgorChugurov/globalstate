@@ -1,0 +1,140 @@
+.button {
+  cursor: pointer;
+  text-transform: none;
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--border-radius);
+  outline: 0;
+}
+
+/* Primary Button */
+.primaryButton {
+  height: 40px; /* Default height */
+  border: none;
+  color: var(--grey-white);
+  background-color: var(--primary-600);
+}
+.primaryButton[data-size="small"] {
+  height: 32px; /* Default height */
+}
+
+.primaryButton[data-variant="outlined"] {
+  border: 1px solid var(--primary-600);
+  background-color: var(--grey-white); /* White background */
+  color: var(--primary-500); /* Blue text */
+}
+
+.primaryButton:hover {
+  background-color: var(--primary-800); /* Darker blue */
+  color: var(--grey-white); /* White text */
+}
+
+.primaryButton[data-variant="outlined"]:hover {
+  color: var(--primary-800); /* Even darker text */
+  background-color: var(--grey-white); /* White background stays */
+  border-color: var(--primary-800);
+}
+
+.primaryButton:disabled {
+  background-color: var(--grey-300); /* Light gray */
+  color: var(--grey-100); /* Very light gray */
+  cursor: not-allowed;
+}
+
+.primaryButton[data-variant="outlined"]:disabled {
+  color: var(--grey-100); /* Very light gray */
+  border-color: var(--grey-100); /* Very light gray */
+  background-color: var(--grey-white); /* White background stays */
+}
+
+.primaryButton[data-size="small"] {
+  height: 32px; /* Smaller button height */
+}
+
+.primaryButton.primaryButtonBorderNone {
+  border: none;
+}
+/* warning button */
+.warningButton {
+  height: 40px; /* Default height */
+  border: none;
+  color: var(--system-error);
+  background-color: var(--system-srror-fill);
+}
+.warningButton[data-size="small"] {
+  height: 32px; /* Default height */
+}
+
+.warningButton[data-variant="outlined"] {
+  border: 1px solid var(--system-error);
+  background-color: var(--grey-white); /* White background */
+  color: var(--system-error); /* Blue text */
+}
+
+.warningButton:hover {
+  background-color: var(--system-srror-fill-dark); /* Darker blue */
+  /* color: var(--grey-white);  */
+}
+
+.warningButton[data-variant="outlined"]:hover {
+  color: var(--System-Error-Dark); /* Even darker text */
+  background-color: var(--grey-white); /* White background stays */
+  border-color: var(--System-Error-Dark);
+}
+
+.warningButton:disabled {
+  background-color: var(--grey-300); /* Light gray */
+  color: var(--grey-100); /* Very light gray */
+  cursor: not-allowed;
+}
+
+.warningButton[data-variant="outlined"]:disabled {
+  color: var(--grey-100); /* Very light gray */
+  border-color: var(--grey-100); /* Very light gray */
+  background-color: var(--grey-white); /* White background stays */
+}
+
+.warningButton[data-size="small"] {
+  height: 32px; /* Smaller button height */
+}
+
+/* Secondary Button */
+.secondaryButton {
+  height: 40px; /* Default height */
+  border: none;
+  background-color: var(--grey-100);
+  color: var(--grey-black);
+}
+
+.secondaryButton[data-size="small"] {
+  height: 32px;
+}
+
+.secondaryButton[data-variant="outlined"] {
+  border: 2px solid var(--grey-500);
+  background-color: var(--grey-white);
+}
+
+.secondaryButton:not(:disabled):hover {
+  background-color: var(--grey-200); /* Only apply hover effect if button is not disabled */
+}
+
+.secondaryButton[data-variant="outlined"]:hover {
+  /* No specific background color change for outlined on hover in your styled component */
+}
+
+.secondaryButton:not(:disabled):active {
+  background-color: var(--grey-200); /* Change as needed */
+}
+
+.secondaryButton:disabled {
+  color: var(--grey-300);
+  cursor: not-allowed;
+}
+.secondaryButton[data-variant="outlined"]:disabled {
+  background-color: var(--grey-white); /* Keeps the white background even when disabled */
+  color: var(--grey-300); /* Same light gray text as disabled state */
+}

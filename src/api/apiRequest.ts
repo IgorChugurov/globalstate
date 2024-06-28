@@ -4,12 +4,13 @@ const apiRequest = async <T>(
 ): Promise<T> => {
   try {
     const response = await fetch(url, options);
-    // if (!response.ok) {
-    //     throw new Error("Network response was not ok");
-    //   }
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
     return await response.json();
   } catch (error) {
-    console.error("Error deleting data:", error);
+    console.error("Error:", error);
     throw error;
   }
 };

@@ -1,3 +1,25 @@
 {
-  "LSPrefix": "LSPrefix-test-expample"
+  "LSPrefix": "LSPrefix-Template-APP",
+  "appGlobalStoreConfig": [
+    {
+      "name": "categories",
+      "title": "Категорії",
+      "apiUrl": "https://dummyjson.com/posts"
+    }
+  ],
+  "AuthData": {
+    "loginAndGetTokenUrl": "https://dummyjson.com/auth/login",
+    "credentials": {
+      "varName": "username",
+      "title": "User name",
+      "type": "text"
+    },
+
+    "getCurrentAuthUserUrl": "https://dummyjson.com/auth/me",
+    "refreshAuthSessionUrl": "https://dummyjson.com/auth/refresh"
+  },
+  "VERSION": "06282024a",
+  "TITLE": "Template APP",
+  "STORAGE": "LSPrefix-Template-APP",
+  "STUDIA": "Webdeal"
 }

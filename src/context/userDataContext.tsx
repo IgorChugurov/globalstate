@@ -1,7 +1,8 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import { getUser } from "../services/localStorage";
 import { IUser } from "../types/user";
-import { LSPrefix } from "../appdata.json";
+import LoginPage from "../pages/login/Login";
+import { GlobalStateContext } from "./GlobalStateProvider";
 
 const INIT_USER: IUser | null = getUser();
 const defaultState = {
@@ -16,7 +17,7 @@ interface Props {
 export const UserDataContext = createContext<IContext>(defaultState);
 export const UserDataContextProvider: React.FC<Props> = ({ children }) => {
   const [userData, setUserDataContenxt] = useState(defaultState.userData);
-
+  const { LSPrefix } = useContext(GlobalStateContext);
   watchAnyObject(
     window.localStorage,
     ["setItem", "getItem", "removeItem"],
@@ -36,7 +37,7 @@ export const UserDataContextProvider: React.FC<Props> = ({ children }) => {
         userData,
       }}
     >
-      {children}
+      {userData ? children : <LoginPage />}
     </UserDataContext.Provider>
   );
 };

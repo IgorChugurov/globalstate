@@ -1,0 +1,384 @@
+:root {
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  color: #171717;
+  background-color: #ffffff;
+  --Grey-50: #f8f8f8;
+  --Grey-100: #e8e8e8;
+  --Grey-200: #dcdcdc;
+  --Grey-300: #bdbdbd;
+  --Grey-400: #a4a4a4;
+  --Grey-500: #7c7c7c;
+  --Grey-600: #656565;
+  --Grey-700: #525252;
+  --Grey-White: #ffffff;
+  --Grey-Black: #171717;
+  --System-Error-Fill: #fbeae9;
+  --System-Error: #ff453a;
+  --System-Error-Dark: #ab140c;
+  --Primary-50: #eef7ff;
+  --Primary-100: #d8edff;
+  --Primary-500: #0768fd;
+  --Primary-600: #065ecf; /* Adjusted to create a progression */
+  --Primary-700: #0550b1; /* Darker than 600 */
+  --Primary-800: #044287; /* Darker than 700 but lighter than 950 */
+  --primary-950: #033f88; /* Even darker primary blue */
+  --grey-50: #f8f8f8;
+  --grey-100: #e8e8e8;
+  --grey-200: #dcdcdc;
+  --grey-400: #a4a4a4;
+  --grey-300: #bdbdbd;
+  --grey-500: #7c7c7c;
+  --grey-600: #656565;
+  --grey-700: #525252;
+  --grey-white: #ffffff;
+  --grey-black: #171717;
+  --system-error: #ff453a;
+
+  --system-srror-fill: #f7eae9;
+  --system-srror-fill-dark: #f8d5d3;
+  --primary-50: #eef7ff;
+  --primary-100: #d8edff;
+  --primary-500: #0768fd;
+  --primary-600: #065ecf; /* Adjusted to create a progression */
+  --primary-700: #0550b1; /* Darker than 600 */
+  --primary-800: #044287; /* Darker than 700 but lighter than 950 */
+  --primary-950: #033f88; /* Even darker primary blue */
+  --borderRadius: 6px;
+  --border-radius: 6px;
+  --bg-color: white;
+  --text-color: #111;
+
+  --Blue-Ribbon-50: #eef7ff;
+  --Blue-Ribbon-600: #0768fd;
+  --System-Info: #0a7bff;
+}
+
+.dark {
+  color: #ffffff;
+  background-color: #171717;
+
+  --Grey-700: #f8f8f8;
+  --Grey-600: #e8e8e8;
+  --Grey-500: #dcdcdc;
+  --Grey-400: #bdbdbd;
+  --Grey-300: #a4a4a4;
+  --Grey-200: #7c7c7c;
+  --Grey-100: #656565;
+  --Grey-50: #525252;
+  --Grey-White: #171717;
+  --Grey-Black: #ffffff;
+  --System-Error-Fill: #fbeae9;
+  --System-Error: #ff453a;
+  --System-Error-Dark: #ab140c;
+  --Primary-50: #eef7ff;
+  --Primary-100: #d8edff;
+  --Primary-500: #0768fd;
+  --Primary-600: #065ecf; /* Adjusted to create a progression */
+  --Primary-700: #0550b1; /* Darker than 600 */
+  --Primary-800: #044287; /* Darker than 700 but lighter than 950 */
+  --primary-950: #033f88; /* Even darker primary blue */
+
+  --grey-700: #f8f8f8;
+  --grey-600: #e8e8e8;
+  --grey-500: #dcdcdc;
+  --grey-400: #bdbdbd;
+  --grey-300: #a4a4a4;
+  --grey-200: #7c7c7c;
+  --grey-100: #656565;
+  --grey-50: #525252;
+
+  --grey-white: #171717;
+  --grey-black: #ffffff;
+  --system-error: #ff453a;
+
+  --system-srror-fill: #f7eae9;
+  --system-srror-fill-dark: #f8d5d3;
+  --primary-50: #eef7ff;
+  --primary-100: #d8edff;
+  --primary-500: #0768fd;
+  --primary-600: #065ecf; /* Adjusted to create a progression */
+  --primary-700: #0550b1; /* Darker than 600 */
+  --primary-800: #044287; /* Darker than 700 but lighter than 950 */
+  --primary-950: #033f88; /* Even darker primary blue */
+  --borderRadius: 6px;
+  --border-radius: 6px;
+  --bg-color: #111;
+  --text-color: white;
+
+  --Blue-Ribbon-50: #eef7ff;
+  --Blue-Ribbon-600: #0768fd;
+  --System-Info: #0a7bff;
+}
+
+/* :root {
+  --bgColor: white;
+  --textColor: #111;
+  --mainColor: #a086d3;
+  --borderColor: seagreen;
+}
+
+html[data-theme="light"] {
+  --background-color: white;
+  --text-color: #111;
+  --main-color: #a086d3;
+  --link-color: #543fd7;
+  --borderColor: seagreen;
+}
+
+html[data-theme="dark"] {
+  --background-color: #212a2e;
+  --text-color: #f7f8f8;
+  --main-color: #a086d3;
+  --link-color: #828fff;
+  --borderColor: seagreen;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  color: var(--link-color);
+} 
+
+body {
+  transition: 1s all ease;
+} 
+
+ .light {
+  background-color: white;
+  color: #111;
+}
+
+.dark {
+  background-color: #111;
+  color: #bbb;
+
+
+ .container {
+  max-width: 1366px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 0 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+/* new  */
+
+/* :root {
+  --bg: white;
+  --textColor: black;
+  --softBg: #f0f0f0;
+  --softTextColor: #626262;
+  --main-color: #1e297b;
+  --main-color-dark: #151c56;
+  --main-color-light: #bad4ff;
+} */
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  background: rgb(236, 236, 236);
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(199, 199, 199);
+  -webkit-border-radius: 5px;
+  border: 2px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body,
+p {
+  margin: 0;
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+
+  font-family: "Roboto Flex";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: #747bff;
+}
+
+.dark {
+  /* https://stackoverflow.com/questions/62162645/change-color-of-chromes-calendar-icon-in-html-date-input */
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(100%);
+  }
+  :is(input) {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar {
+    background: rgb(41, 41, 41);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(102, 102, 102);
+  }
+}
+
+.dark {
+  --bgColor: #0a0b0c;
+  --textColor: #ddd;
+  --softBg: #1f273a;
+  --softTextColor: #a6a6a6;
+}
+
+.light {
+  --bgColor: white;
+  --textColor: black;
+  --softBg: #f0f0f0;
+  --softTextColor: #626262;
+}
+
+/* button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+} */
+
+@media (prefers-color-scheme: light) {
+  /* :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  } */
+  /* button {
+    background-color: #f9f9f9;
+  } */
+}
+
+/* Define keyframes for the rotation animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Apply the rotation animation when the .rotate class is added */
+.rotate {
+  /* Use the defined 'spin' animation */
+  animation: spin 0.5s linear infinite;
+  /* Explanation:
+     - 'spin' is the name of the keyframes animation defined above.
+     - '2s' is the duration of one full rotation cycle. Adjust as needed for faster or slower rotation.
+     - 'linear' means the animation speed is constant.
+     - 'infinite' makes the animation repeat indefinitely. */
+}
+
+.pl10 {
+  padding-left: 10px;
+}
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Нестандартизированный, но поддерживается в Chrome и Opera */
+}
+.cursorPointer {
+  cursor: pointer;
+}
+.capitalazeFirsChar {
+  text-transform: capitalize;
+}
+
+/* **************************************************************** */
+.wrapIconInList {
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
+  border-radius: 6px;
+  border: 1px solid var(--Grey-100);
+  background: var(--Grey-White);
+}
+
+.icon_container {
+  color: var(--Grey-600);
+  border-radius: 6px;
+  border: 1px solid var(--Grey-200);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  transition: color 0.3s, background-color 0.3s; /* Smooth transition for color and background */
+}
+
+.icon_container:hover {
+  border-color: var(--Gray-500);
+  color: var(--Grey-Black);
+  cursor: pointer;
+  background-color: var(--Grey-100);
+}
+
+.paranga {
+  position: fixed; /* Fixes the element relative to the viewport */
+  display: flex; /* Sets the display mode to flex */
+  width: 100%; /* Sets the width to 100% of the viewport width */
+  height: 100%; /* Sets the height to 100% of the viewport height */
+  align-items: center; /* Vertically centers the children */
+  justify-content: center; /* Horizontally centers the children */
+  inset: 0px; /* Shorthand to set top, right, bottom, and left to 0 */
+  z-index: 1311; /* Stack order of the element */
+  top: 0; /* Top edge of the element */
+  left: 0; /* Left edge of the element */
+  opacity: 0.8; /* Transparency level of the element */
+  transition: all 0.5s ease-in-out; /* Transition effect for all properties */
+  background-color: rgba(97, 97, 97, 0.8); /* Gray background with opacity */
+}
