@@ -31,5 +31,5 @@ jobs:
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3 # Ensure you're using the latest version
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          deploy_key: ${{ secrets.macbook }}
           publish_dir: ./docs/build
