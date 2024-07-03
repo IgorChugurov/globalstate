@@ -28,8 +28,8 @@ jobs:
           cd docs
           npm run build
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3 # Ensure you're using the latest version
-        with:
-          deploy_key: ${{ secrets.macbook }}
-          publish_dir: ./docs/build
+          - name: Deploy
+          uses: peaceiris/actions-gh-pages@v4
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./public
