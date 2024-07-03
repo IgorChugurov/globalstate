@@ -87,7 +87,7 @@ Dr.Electron - [Dr-Electron](https://github.com/Dr-Electron) - Dr.Electron#9370
 Critical - [kilianhln](https://github.com/kilianhln) - Critical#7111  
 JSto - [JSto91](https://github.com/JSto91) - JSto#3746
 
-# Global State Management System Documentation
+# Global State Management System Documentation Ver 1
 
 ## Purpose of the Global State Management System
 
