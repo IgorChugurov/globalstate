@@ -1,25 +1,31 @@
+/**
+ * ServicePackage.ts
+ *
+ * This file defines the ApiService class, responsible for handling all CRUD operations
+ * for entities defined in the appdata.json's EntitiesForListAndServicesPackageAndEditPage.
+ * Each entity can utilize this service to interact with its respective backend API endpoints.
+ * Additionally, this service setup is used to generate routes (main.ts) for listing and editing pages dynamically.
+ */
+
 import { sendRequest } from "./request";
 import { IListResponse, IPaginate } from "../types/request";
-import { IProduct } from "../types/poduct";
+import appdata from "../appdata.json";
+import { IEntity } from "../types/lists";
+const { EntitiesForListAndServicesPackageAndEditPage } = appdata;
 
-export interface IEntity {
-  _id: string;
-  name: string;
-  [key: string]: string;
+export interface IApiService<T> {
+  deleteMany: (d: any) => Promise<any>;
+  deleteOne: (d: string) => Promise<any>;
+  updagteOne: (d: T) => Promise<T>;
+  createOne: (d: T) => Promise<T>;
+  getOne: (d: string) => Promise<T>;
+  getAll: () => Promise<T[]>;
 }
-// export interface IApiService<T> {
-//   deleteMany: (d: any) => Promise<any>;
-//   deleteOne: (d: string) => Promise<any>;
-//   updagteOne: (d: T) => Promise<T>;
-//   createOne: (d: T) => Promise<T>;
-//   getOne: (d: string) => Promise<T>;
-//   getAll: () => Promise<T[]>;
-// }
 
-class ApiService<T extends IEntity, U extends boolean = false> {
+export class ApiService<T extends IEntity, U extends boolean = false> {
   constructor(
     private endpoint: string,
-    private options?: { create: string },
+    private options?: any, //{ create: string },
     private useListResponse: U = false as U
   ) {}
 
@@ -54,7 +60,7 @@ class ApiService<T extends IEntity, U extends boolean = false> {
     });
   };
 
-  create = (body: Omit<T, "_id">): Promise<T> => {
+  createOne = (body: Omit<T, "_id">): Promise<T> => {
     const url = this.options?.create
       ? this.endpoint + this.options.create
       : this.endpoint;
@@ -68,7 +74,7 @@ class ApiService<T extends IEntity, U extends boolean = false> {
     });
   };
 
-  update = (id: string, body: T): Promise<T> => {
+  updateOne = (id: string, body: T): Promise<T> => {
     return new Promise((resolve, reject) => {
       const req = {
         url: `${this.endpoint}/${id}`,
@@ -100,9 +106,19 @@ class ApiService<T extends IEntity, U extends boolean = false> {
     });
   };
 }
-
-export const servicesPackage: { [key: string]: any } = {
-  products: new ApiService<IProduct>("https://dummyjson.com/products", {
-    create: "/add",
-  }),
-};
+const arrForServicesPackage = EntitiesForListAndServicesPackageAndEditPage.map(
+  (d) => ({ ...d.forServicePackage, collectionName: d.collectionName })
+);
+export const servicesPackage: { [key: string]: ApiService<IEntity, false> } =
+  Object.fromEntries(
+    arrForServicesPackage.map((d) => [
+      d.collectionName,
+      new ApiService<IEntity>(d.url, d.options),
+    ])
+  );
+//console.log(servicesPackage);
+// export const servicesPackage: { [key: string]: any } = {
+//   products: new ApiService<IEntity>("https://dummyjson.com/products", {
+//     create: "/add",
+//   }),
+// };

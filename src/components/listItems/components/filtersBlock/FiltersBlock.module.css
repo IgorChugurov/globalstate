@@ -1,0 +1,39 @@
+.filtersAndRelodWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+  .filtersWrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: "stretch" l;
+  }
+  .reloadIconWrapper {
+    display: flex;
+    padding: 7px;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid var(--Grey-200, #dcdcdc);
+    cursor: pointer;
+  }
+  .reloadIconWrapper:hover {
+    border-color: var(--Gray-500);
+  }
+}
+
+.clearAll {
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  height: 32px;
+  color: var(--Grey-Black);
+}
+.clearAll:hover {
+  background: var(--Blue-Ribbon-50, #eef7ff);
+  color: var(--Blue-Ribbon-600, #0768fd);
+}

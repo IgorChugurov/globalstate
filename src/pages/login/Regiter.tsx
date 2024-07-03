@@ -7,11 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 //import LockIcon from '@mui/icons-material/Lock';
 //import { FaEye } from "react-icons/fa";
-import ReportOutlinedIcon from "@mui/icons-material/ReportOutlined";
+
 //import { BiErrorAlt } from "react-icons/bi";
 //import { GrMail } from "react-icons/gr";
 //import { BsFillCheckSquareFill } from "react-icons/bs";
-import CheckIcon from "@mui/icons-material/Check";
+
 import {
   checkbox_validation,
   email_validation,
@@ -19,11 +19,11 @@ import {
   password_confirm_validation,
   password_validation,
 } from "./inputs";
-import { Input } from "../inputs/Input";
+//import { Input } from "../inputs/Input";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
-import { IUser } from "../../models/user";
-import { AppGlobalContext } from "../../context/appGlobalContext";
+//import { IUser } from "../../models/user";
+//import { AppGlobalContext } from "../../context/appGlobalContext";
 
 const Register = ({
   setRegister,
@@ -32,12 +32,10 @@ const Register = ({
   STUDIA,
 }: {
   setRegister: Dispatch<SetStateAction<boolean>>;
-  setUserData: (d: IUser | null) => void;
+  setUserData: (d: any | null) => void;
   year: number;
   STUDIA: string;
 }) => {
-  const { toggleDarkMode, darkMode, toggleParangaForViewportFalse, toggleParangaForViewportTrue } =
-    useContext(AppGlobalContext);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -51,7 +49,7 @@ const Register = ({
       .max(50)
       .matches(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        "Email not valid",
+        "Email not valid"
       ),
     // name: Yup.string().min(3).max(50),
 
@@ -67,7 +65,10 @@ const Register = ({
       .required("Confirm Password is required")
 
       .oneOf([Yup.ref("password")], "Passwords do not match"),
-    confirm: Yup.boolean().oneOf([true], "You must accept the terms and conditions"),
+    confirm: Yup.boolean().oneOf(
+      [true],
+      "You must accept the terms and conditions"
+    ),
   });
 
   // const {
@@ -86,7 +87,7 @@ const Register = ({
   const onSubmit = methods.handleSubmit(async (data) => {
     console.log(data);
     const { email, password } = data;
-    toggleParangaForViewportTrue();
+
     try {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
@@ -116,7 +117,6 @@ const Register = ({
       setError(err.message || "Internal Server Error");
       console.log(err);
     } finally {
-      toggleParangaForViewportFalse();
     }
   });
 
@@ -148,7 +148,9 @@ const Register = ({
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Create an Account</h1>
-      <h2 className={styles.subtitle}>Complete the following form to signup.</h2>
+      <h2 className={styles.subtitle}>
+        Complete the following form to signup.
+      </h2>
       <FormProvider {...methods}>
         <form
           onSubmit={(e) => e.preventDefault()}
@@ -158,21 +160,21 @@ const Register = ({
         >
           <div className={styles.inputWrap}>
             {/* <Input {...name_validation} /> */}
-            <Input {...email_validation} />
+            {/* <Input {...email_validation} />
             <Input {...password_validation} />
 
             <Input {...password_confirm_validation} className={styles.textArea} />
-            <Input {...checkbox_validation} />
+            <Input {...checkbox_validation} /> */}
           </div>
           <div className={styles.submitWrap}>
             {success && (
               <p className={styles.success}>
-                <CheckIcon /> Form has been submitted successfully
+                {/* <CheckIcon /> Form has been submitted successfully */}
               </p>
             )}
             {error && (
               <p className={styles.errorMessage}>
-                <ReportOutlinedIcon /> {error}
+                {/* <ReportOutlinedIcon /> {error} */}
               </p>
             )}
             <button onClick={onSubmit} className={styles.button}>

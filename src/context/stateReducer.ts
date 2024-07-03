@@ -5,7 +5,13 @@ export const reducer = (state: AppState, action: Action): AppState => {
     case "SET_DATA":
       return {
         ...state,
-        [action.payload.name]: { list: action.payload.data, loading: false },
+        [action.payload.name]: {
+          list: action.payload.data.map((item: any, i: number) => ({
+            ...item,
+            _id: i + Date.now() + "",
+          })),
+          loading: false,
+        },
       };
     case "CREATE_ITEM":
       return {

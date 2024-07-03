@@ -1,0 +1,15 @@
+.buttonContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.searchBox {
+  position: relative;
+  width: 288px;
+  cursor: text;
+}
+.searchIcon {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}

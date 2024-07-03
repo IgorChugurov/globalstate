@@ -1,6 +1,7 @@
 export interface DataItem {
-  name: string;
+  collection: string;
   apiUrl: string;
+  title: string;
 }
 
 export interface DataEntity {

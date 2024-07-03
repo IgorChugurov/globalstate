@@ -1,0 +1,161 @@
+{
+  "LSPrefix": "LSPrefix-Template-APP",
+  "appGlobalStoreConfig": [
+    {
+      "collection": "categories",
+      "title": "Категорії",
+      "apiUrl": "https://dummyjson.com/products/categories"
+    }
+  ],
+  "AuthData": {
+    "loginAndGetTokenUrl": "https://dummyjson.com/auth/login",
+    "credentials": {
+      "varName": "username",
+      "title": "User name",
+      "type": "text"
+    },
+
+    "getCurrentAuthUserUrl": "https://dummyjson.com/auth/me",
+    "refreshAuthSessionUrl": "https://dummyjson.com/auth/refresh"
+  },
+  "EntitiesForListAndServicesPackageAndEditPage": [
+    {
+      "title": "Products",
+      "collectionName": "products",
+      "forServicePackage": {
+        "url": "https://dummyjson.com/products",
+        "options": { "create": "/add" }
+      },
+      "forList": {
+        "searchBlock": "Search for products",
+        "filters": [
+          {
+            "collection": "categories",
+            "title": "Category",
+            "filteredFiled": "categories"
+          }
+        ],
+        "buttonBlock": { "title": "Create new rec" },
+        "columns": []
+      },
+      "forEdit": {
+        "title": ["Add product", "Edit product"],
+        "pageHeader": "Product details",
+        "sections": [
+          {
+            "title": "Product details",
+            "fields": [
+              {
+                "name": "name",
+                "label": "Name",
+                "placeholder": "Enter the name",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Name is required"
+              },
+              {
+                "name": "description",
+                "label": "Description",
+                "placeholder": "Add file description",
+                "type": "text",
+                "multipile": true,
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Description is required"
+              },
+              {
+                "name": "categories",
+                "label": "Categories",
+                "type": "select",
+                "placeholder": "Select category",
+                "collection": "categories",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Category is required"
+              },
+              {
+                "name": "dataMutation",
+                "label": "Enable data mutation",
+                "type": "switch",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "helperText": "choose  some value dataMutation"
+              }
+            ]
+          },
+          {
+            "title": "Other details",
+            "fields": [
+              {
+                "name": "name2",
+                "placeholder": "Enter the facilityId",
+                "helperText": "Enter the facilityId s new field",
+                "type": "number",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Name2 is required"
+              }
+            ]
+          },
+          {
+            "title": "Multiple fields",
+            "fields": [
+              {
+                "name": "categoriesmany",
+                "label": "Multiple categories label",
+                "placeholder": "Select category",
+                "collection": "categories",
+                "helperText": "Multiple categories helperText",
+                "type": "array",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "At least one category is required"
+              }
+            ]
+          },
+          {
+            "title": "Valid until",
+            "fields": [
+              {
+                "name": "validUntil",
+                "label": "some label",
+                "placeholder": "validUntil placeholder",
+                "helperText": "validUntil helperText",
+                "type": "date",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "validUntilDate is required"
+              },
+              {
+                "name": "validUntilRadio",
+                "label": "some label radio",
+                "placeholder": "radio placeholder",
+                "helperText": "dario helperText",
+                "type": "radio",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "options": [
+                  { "value": "1", "label": "1222" },
+                  { "value": "2", "label": "2333" },
+                  { "value": "3", "label": "3444" }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "VERSION": "06282024a",
+  "TITLE": "Template APP",
+  "STORAGE": "LSPrefix-Template-APP",
+  "STUDIA": "Webdeal"
+}

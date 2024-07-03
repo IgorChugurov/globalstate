@@ -92,15 +92,15 @@ export const GlobalStateProvider: React.FC<StateProviderProps> = ({
 }) => {
   const initialState: AppState = initialConfig.appGlobalStoreConfig.reduce(
     (acc: AppState, item: DataItem) => {
-      acc[item.name] = { list: [], loading: false };
+      acc[item.collection] = { list: [], loading: false };
       return acc;
     },
     {}
   );
-  const mapOfUrl: { [key: string]: string } =
+  const mapOfUrl: { [key: string]: { apiUrl: string; title: string } } =
     initialConfig.appGlobalStoreConfig.reduce(
-      (acc: { [key: string]: string }, item: DataItem) => {
-        acc[item.name] = item.apiUrl;
+      (acc: { [key: string]: any }, item: DataItem) => {
+        acc[item.collection] = { ...item };
         return acc;
       },
       {}
@@ -122,10 +122,10 @@ export const GlobalStateProvider: React.FC<StateProviderProps> = ({
   };
 
   const renewData = async (name: string) => {
-    if (state[name] && state[name].list.length === 0) {
+    if (state[name] && state[name].list && state[name].list.length === 0) {
       dispatch({ type: "SET_LOADING", payload: { name, loading: true } });
       apiRequest
-        .fetchData(mapOfUrl[name])
+        .fetchData(mapOfUrl[name].apiUrl)
         .then((data) => {
           dispatch({ type: "SET_DATA", payload: { name, data } });
         })

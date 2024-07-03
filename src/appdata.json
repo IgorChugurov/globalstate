@@ -2,9 +2,9 @@
   "LSPrefix": "LSPrefix-Template-APP",
   "appGlobalStoreConfig": [
     {
-      "name": "categories",
+      "collection": "categories",
       "title": "Категорії",
-      "apiUrl": "https://dummyjson.com/posts"
+      "apiUrl": "https://dummyjson.com/products/categories"
     }
   ],
   "AuthData": {
@@ -18,6 +18,190 @@
     "getCurrentAuthUserUrl": "https://dummyjson.com/auth/me",
     "refreshAuthSessionUrl": "https://dummyjson.com/auth/refresh"
   },
+  "EntitiesForListAndServicesPackageAndEditPage": [
+    {
+      "title": "Products",
+      "collectionName": "products",
+      "forServicePackage": {
+        "url": "https://dummyjson.com/products",
+        "options": { "create": "/add" }
+      },
+      "forList": {
+        "searchBlock": "Search for products",
+        "filters": [
+          {
+            "collection": "categories",
+            "title": "Category",
+            "filteredFiled": "categories"
+          }
+        ],
+        "buttonBlock": { "title": "Create new rec22" },
+        "columnsForGrid": [
+          {
+            "field": "title",
+            "headerName": "Title222",
+            "width": 250,
+            "options": {
+              "openEditPage": true
+            }
+          },
+          { "field": "brand", "headerName": "Brand", "width": 250 },
+          { "field": "category", "headerName": "Category", "width": 250 },
+          {
+            "field": "actions",
+            "headerName": "Actions",
+            "type": "actions",
+            "width": 250,
+            "options": {
+              "actions": [
+                { "name": "edit" },
+                { "name": "delete" },
+                { "name": "clone" },
+                { "name": "copy" },
+                { "name": "actions" }
+              ]
+            }
+          }
+        ]
+      },
+      "forEdit": {
+        "title": ["Add product222", "Edit product"],
+        "pageHeader": "Product details",
+        "sections": [
+          {
+            "title": "Info in Edit",
+            "fields": [
+              {
+                "name": "sku",
+                "label": "SKU",
+
+                "type": "view",
+                "forEitPage": "yes",
+                "forNewPage": "no"
+              },
+              {
+                "name": "returnPolicy",
+                "label": "Return Policy",
+
+                "type": "copy",
+                "forEitPage": "yes",
+                "forNewPage": "no"
+              }
+            ]
+          },
+
+          {
+            "title": "Product details",
+            "fields": [
+              {
+                "name": "name",
+                "label": "Name",
+                "placeholder": "Enter the name",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Name is required"
+              },
+              {
+                "name": "description",
+                "label": "Description",
+                "placeholder": "Add file description",
+                "type": "text",
+                "multipile": true,
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Description is required"
+              },
+              {
+                "name": "categories",
+                "label": "Categories",
+                "type": "select",
+                "placeholder": "Select category",
+                "collection": "categories",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Category is required"
+              },
+              {
+                "name": "dataMutation",
+                "label": "Enable data mutation",
+                "type": "switch",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "helperText": "choose  some value dataMutation"
+              }
+            ]
+          },
+          {
+            "title": "Other details",
+            "fields": [
+              {
+                "name": "name2",
+                "placeholder": "Enter the facilityId",
+                "helperText": "Enter the facilityId s new field",
+                "type": "number",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Name2 is required"
+              }
+            ]
+          },
+          {
+            "title": "Multiple fields",
+            "fields": [
+              {
+                "name": "categoriesmany",
+                "label": "Multiple categories label",
+                "placeholder": "Select category",
+                "collection": "categories",
+                "helperText": "Multiple categories helperText",
+                "type": "array",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "At least one category is required"
+              }
+            ]
+          },
+          {
+            "title": "Valid until",
+            "fields": [
+              {
+                "name": "validUntil",
+                "label": "some label",
+                "placeholder": "validUntil placeholder",
+                "helperText": "validUntil helperText",
+                "type": "date",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "validUntilDate is required"
+              },
+              {
+                "name": "validUntilRadio",
+                "label": "some label radio",
+                "placeholder": "radio placeholder",
+                "helperText": "dario helperText",
+                "type": "radio",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "options": [
+                  { "value": "1", "label": "1222" },
+                  { "value": "2", "label": "2333" },
+                  { "value": "3", "label": "3444" }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
   "VERSION": "06282024a",
   "TITLE": "Template APP",
   "STORAGE": "LSPrefix-Template-APP",

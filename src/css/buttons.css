@@ -8,6 +8,16 @@
   gap: 8px;
   border-radius: var(--border-radius);
   outline: 0;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+.button:focus,
+.button:focus-visible {
+  outline: 0 !important;
+}
+button:focus,
+button:focus-visible {
+  outline: 0 !important;
 }
 
 /* Primary Button */
@@ -119,7 +129,9 @@
 }
 
 .secondaryButton:not(:disabled):hover {
-  background-color: var(--grey-200); /* Only apply hover effect if button is not disabled */
+  background-color: var(
+    --grey-200
+  ); /* Only apply hover effect if button is not disabled */
 }
 
 .secondaryButton[data-variant="outlined"]:hover {
@@ -135,6 +147,8 @@
   cursor: not-allowed;
 }
 .secondaryButton[data-variant="outlined"]:disabled {
-  background-color: var(--grey-white); /* Keeps the white background even when disabled */
+  background-color: var(
+    --grey-white
+  ); /* Keeps the white background even when disabled */
   color: var(--grey-300); /* Same light gray text as disabled state */
 }

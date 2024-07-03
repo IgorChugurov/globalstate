@@ -1,17 +1,27 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./listItems.module.css";
 import "./customDataGrid.css";
 import { GlobalStateContext } from "../../context/GlobalStateProvider";
 
-import { useDebounce } from "../../hooks/debounce";
 import { servicesPackage } from "../../services/servicesPackage";
-import { DataGrid, GridCellParams, MuiEvent } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridCellParams,
+  GridColDef,
+  MuiEvent,
+} from "@mui/x-data-grid";
 import { INIT_PAGINATE } from "../../constants/constants";
 import Appmodal from "../appmodal/Appmodal";
+import { IEditField, IOptionsListItem } from "../../types/lists";
+import SearchBlock from "./components/searchBlock/SearchBlock";
+import FiltersBlock from "./components/filtersBlock/FiltersBlock";
+import { Icon_add } from "./Icons";
+import CreateItem from "./components/createItem/CreateItem";
+import { columnsForDataGrid } from "./components/columns/ColumnsForDataGrid";
 
 const ListItems = <
   ItemClass extends {
-    _id?: string;
+    _id: string;
     id?: string;
     name: string;
     email?: string;
@@ -19,34 +29,52 @@ const ListItems = <
     userId?: string;
   }
 >({
-  entityName,
+  options,
 }: {
-  entityName: string;
+  options: IOptionsListItem;
 }) => {
-  //const { state, renewData } = useContext(GlobalStateContext);
-  //console.log();
-  const itemsService = servicesPackage[entityName];
-  //   const renewDataCallback = useCallback(() => {
-  //     renewData(entityName);
-  //   }, [renewData, entityName]);
+  const { state, renewData } = useContext(GlobalStateContext);
+  const { collectionName, forEdit: dataForEditPage } = options;
+  // get all fields from all sections for create item for new page or edit page
+  // use getItemForEdit function for this
+  const allFields: IEditField[] = dataForEditPage.sections.reduce(
+    (acc: any, section: any) => {
+      acc = [...acc, ...section.fields];
+      return acc;
+    },
+    []
+  );
+
+  const { searchBlock, filters, buttonBlock, columnsForGrid } = options.forList;
+  //console.log(columnsForGrid);
+
+  const itemsService = servicesPackage[collectionName];
+  const renewDataCallback = useCallback(() => {
+    if (filters && filters.length) {
+      filters.forEach((filter) => {
+        if (
+          state[filter.collection] &&
+          state[filter.collection].list &&
+          state[filter.collection].list.length === 0
+        ) {
+          renewData(filter.collection);
+        }
+      });
+    }
+  }, [renewData, filters]);
 
   useEffect(() => {
-    //console.log("Current state:", state);
-    //renewDataCallback();
+    renewDataCallback();
   }, []);
 
-  const inputSearchRef = useRef<HTMLInputElement>(null);
   const [modalCreateOpen, setModalCreateOpen] = useState(false);
   const [items, setItems] = useState<ItemClass[]>([]);
   const [currentItem, setCurrentItem] = useState<ItemClass | null>(null);
   const [rowSelectionModel, setRowSelectionModel] = useState<string[]>([]);
   const [allItems, setAllItems] = useState(false);
 
-  const [fileType, setFileType] = useState("");
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
-  const [search, setSearch] = useState("");
-  const debounced = useDebounce(search, 700);
-  // const [loading, setLoading] = useState(true);
+
   const [paginate, setPaginate] = useState(INIT_PAGINATE);
 
   const handlePaginationModelChange = (data: {
@@ -66,25 +94,16 @@ const ListItems = <
       itemsService
         .getAll(paginate)
         .then((res: any) => {
-          const data = res.items || res[entityName];
-          setItems(data);
-          //   if (res.items) {
-          //     setItems(
-          //       res.items.map((d: any) => ({
-          //         ...d,
-          //       }))
-          //     );
-          //   } else if (res[entityName]) {
-          //     setItems(
-          //       res[entityName].map((d: any) => ({
-          //         ...d,
-          //       }))
-          //     );
-          //   }
-
+          const data = res.items || res[collectionName];
+          setItems(
+            data.map((d: any) => ({
+              ...d,
+              id: d.id ? d.id : d._id,
+              _id: d._id ? d._id : d.id,
+            }))
+          );
           const totalItems = res.totalItems || res.total;
           const totalPages = Math.ceil(totalItems / paginate.perPage);
-
           setPaginate((prev) => ({
             ...prev,
             currentPage: paginate.currentPage,
@@ -102,6 +121,10 @@ const ListItems = <
         });
     }
   }, [paginate]);
+  const createNewItem = () => {
+    setCurrentItem(null);
+    setModalCreateOpen(true);
+  };
 
   return (
     <>
@@ -110,15 +133,66 @@ const ListItems = <
           openModal={openConfirmModal}
           handleCloseModal={() => setOpenConfirmModal(false)}
           setOpenModal={setOpenConfirmModal}
-          modalTitle={`Do you really want to delete `}
+          modalTitle={`Do you really want to delete ${
+            allItems ? paginate.totalItems : rowSelectionModel.length
+          } item${rowSelectionModel.length > 1 ? "s" : ""}?`}
           handleAction={() => {}}
           action={"deleting"}
         />
       )}
+      {modalCreateOpen && (
+        <CreateItem
+          allFields={allFields}
+          dataForEditPage={dataForEditPage}
+          currentItem={getItemForEdit(allFields, currentItem)}
+          openModal={modalCreateOpen}
+          handleCloseModal={() => setModalCreateOpen(false)}
+          setOpenModal={setModalCreateOpen}
+          dataService={itemsService}
+        />
+      )}
       <div className={styles.container}>
-        <div onClick={() => setOpenConfirmModal(true)}> click</div>
+        <div className={styles.header}>
+          <div className={styles.searchBlockContainer}>
+            {searchBlock ? (
+              <SearchBlock
+                placeholder={searchBlock}
+                paginate={paginate}
+                disabled={!Boolean(paginate.loaded)}
+                setPaginate={setPaginate}
+                rowSelectionModel={rowSelectionModel}
+                setOpenConfirmModal={setOpenConfirmModal}
+                setAllItems={setAllItems}
+                allItems={allItems}
+                items={items}
+              />
+            ) : (
+              <div></div>
+            )}
+            {buttonBlock && (
+              <button
+                data-size="small"
+                className="button primaryButton"
+                onClick={createNewItem}
+                disabled={!Boolean(paginate.loaded)}
+              >
+                <span className="body-m-medium colorGreyWhite">
+                  {buttonBlock.title}
+                </span>
+                <Icon_add />
+              </button>
+            )}
+          </div>
+        </div>
+
+        <FiltersBlock
+          filters={filters}
+          setPaginate={setPaginate}
+          paginate={paginate}
+        />
+
         <DataGrid
-          className={"customDataGrid"}
+          className={"custom-data-grid"}
           onCellDoubleClick={(params, event) => {
             if (!event.ctrlKey) {
               event.defaultMuiPrevented = true;
@@ -151,21 +225,16 @@ const ListItems = <
           }}
           rowSelectionModel={rowSelectionModel}
           rows={items}
-          columns={[
-            { field: "title" },
-            { field: "brand" },
-            { field: "category" },
-          ]}
-          //   columns={columns({
-          //     setCurrentItem,
-          //     fileTypes,
-          //     groupedCompanies,
-          //     items,
-          //     levels,
-          //     setItems,
-          //     setModalCreateOpen,
-          //     onChange: updateData,
-          //   })}
+          columns={
+            columnsForDataGrid({
+              setCurrentItem,
+              items,
+              setItems,
+              setModalCreateOpen,
+              columnsForGrid,
+              dataService: itemsService,
+            }) as readonly GridColDef<ItemClass>[]
+          }
           localeText={{ noRowsLabel: "No matching accesses found" }}
           //autoHeight={true}
         />
@@ -175,3 +244,32 @@ const ListItems = <
 };
 
 export default ListItems;
+
+const getItemForEdit = <T,>(allFields: IEditField[], currentItem: T) => {
+  let data = allFields.reduce((acc: any, field: any) => {
+    if (field.forNewPage === "yes") {
+      acc[field.name] =
+        field.type === "number"
+          ? 0
+          : field.type === "boolean"
+          ? false
+          : field.type === "select"
+          ? "none"
+          : field.type === "switch"
+          ? true
+          : field.type === "radio"
+          ? field.options[0].value
+          : field.type === "array"
+          ? []
+          : "";
+    }
+    return acc;
+  }, {});
+  if (currentItem) {
+    const dataFromServer: any = {
+      ...JSON.parse(JSON.stringify(currentItem)),
+    };
+    data = { ...data, ...dataFromServer };
+  }
+  return data;
+};
