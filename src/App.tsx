@@ -1,8 +1,6 @@
-import { API } from "./api/apiRequest";
 //import SomeComponent from "./components/someComponents/SomeComponent";
 import { GlobalStateProvider } from "./context/GlobalStateProvider";
 import { RouterProvider } from "react-router-dom";
-import "./App.css";
 import ErrorBoundary from "./components/error-boundary";
 
 interface IProps {
@@ -13,10 +11,8 @@ interface IProps {
 const App: React.FC<IProps> = ({ router, initConfig }) => {
   return (
     <ErrorBoundary>
-      <GlobalStateProvider initialConfig={initConfig} apiRequest={API}>
-        <div className="mainCootainer">
-          <RouterProvider router={router} />
-        </div>
+      <GlobalStateProvider initialConfig={initConfig}>
+        <RouterProvider router={router} />
       </GlobalStateProvider>
     </ErrorBoundary>
   );

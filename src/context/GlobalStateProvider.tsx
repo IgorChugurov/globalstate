@@ -18,6 +18,8 @@ import ParangaForViewport from "../components/parangaForViewport/ParangaForViewp
 import { UserDataContextProvider } from "./userDataContext";
 import { getDarkModeLS, setDarkModeLS } from "../services/localStorage";
 
+import { API } from "../api/apiRequest";
+
 import "../css/index.css";
 import "../css/typography.css";
 import "../css/colors.css";
@@ -81,15 +83,16 @@ export const GlobalStateContext = createContext<{
 
 interface StateProviderProps {
   initialConfig: IInitalConfig;
-  apiRequest: ApiRequestFunctions;
+
   children: React.ReactNode;
 }
 
 export const GlobalStateProvider: React.FC<StateProviderProps> = ({
   initialConfig,
-  apiRequest,
+
   children,
 }) => {
+  const apiRequest: ApiRequestFunctions = API;
   const initialState: AppState = initialConfig.appGlobalStoreConfig.reduce(
     (acc: AppState, item: DataItem) => {
       acc[item.collection] = { list: [], loading: false };

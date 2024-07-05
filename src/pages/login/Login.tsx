@@ -64,6 +64,31 @@ const LoginPage = () => {
   const handleRegister = () => {
     setRegister(true);
   };
+  const { VITE_PROJECTID: PROJECTID, VITE_SSOSERVERURL: SSOSERVERURL } =
+    import.meta.env;
+
+  if (PROJECTID && SSOSERVERURL) {
+    return (
+      <div
+        style={{
+          height: "100dvh",
+          width: "100%",
+          padding: "32px",
+          borderRadius: "6px",
+          border: "1px solid",
+          alignItems: "center",
+          justifyContent: "center",
+          display: "flex",
+        }}
+      >
+        <iframe
+          src={`${SSOSERVERURL}/login?projectid=${PROJECTID}`}
+          width="90%"
+          height="90%"
+        />
+      </div>
+    );
+  }
 
   return (
     <>

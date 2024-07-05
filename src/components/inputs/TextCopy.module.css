@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+  width: 100%;
+}
+.linkContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+  border-radius: 6px;
+  width: 100%;
+  .labelContainer {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    align-self: stretch;
+  }
+  .inputContainer {
+    display: flex;
+    height: 40px;
+    padding: 8px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 6px;
+    border: 1px solid var(--Grey-200, #dcdcdc);
+    background: var(--Grey-50, #f8f8f8);
+  }
+  .lognTextWithScroll {
+    max-width: 90%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .lognTextWithScroll::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  .copy_icon {
+    cursor: pointer;
+  }
+}

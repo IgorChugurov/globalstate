@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
 import InputLabel from "./InputLabel";
+import styles from "./TextView.module.css";
 const isFormInvalid = (err: any) => {
   if (Object.keys(err).length > 0) return true;
   return false;
@@ -37,14 +38,7 @@ export const TextView = ({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "16px",
-        alignSelf: "stretch",
-      }}
-    >
+    <div className={styles.container}>
       {label && (
         <InputLabel
           label={label}

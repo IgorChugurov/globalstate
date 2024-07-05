@@ -1,6 +1,9 @@
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
 import InputLabel from "./InputLabel";
+import styles from "./TextCopy.module.css";
+import { Icon_copy } from "./Icons";
+import { copyToClipBoardUtil } from "../../utils/copyToClipboard";
 const isFormInvalid = (err: any) => {
   if (Object.keys(err).length > 0) return true;
   return false;
@@ -37,15 +40,8 @@ export const TextCopy = ({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "16px",
-        alignSelf: "stretch",
-      }}
-    >
-      {label && (
+    <div className={styles.container}>
+      {/* {label && (
         <InputLabel
           label={label}
           options={{
@@ -56,20 +52,46 @@ export const TextCopy = ({
             required,
           }}
         />
-      )}
-      <span
+      )} */}
+
+      <div
+        className={styles.linkContainer}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`body-s-regular colorBlack`}
-        style={{
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-        }}
       >
-        {value}
-      </span>
+        <div className={styles.labelContainer}>
+          <span className="body-xs-regular colorGrey500">{label}</span>
+        </div>
+        <div className={styles.inputContainer}>
+          <span
+            className={`body-s-regular colorGrey500 ${styles.lognTextWithScroll}`}
+          >
+            {value}
+          </span>
+          <Icon_copy
+            className={styles.copy_icon}
+            onClick={() => copyToClipBoardUtil(value, `${label} was copied`)}
+          />
+        </div>
+      </div>
+
+      {/* <div
+        className={`${styles.inputContainer}`}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <span className={`body-s regular colorGrey500 textWithEllipsis`}>
+          {value}
+        </span>
+        <Icon_copy
+          className={styles.copy_icon}
+          // onClick={() => copyToClipBoard("apiKey", "API key was copied")}
+        />
+      </div> */}
 
       {helperText && !isInvalid && (
         <span

@@ -8,6 +8,7 @@
     }
   ],
   "AuthData": {
+    "ssoServer": "https://authdev.site",
     "loginAndGetTokenUrl": "https://dummyjson.com/auth/login",
     "credentials": {
       "varName": "username",
@@ -41,9 +42,7 @@
             "field": "title",
             "headerName": "Title222",
             "width": 250,
-            "options": {
-              "openEditPage": true
-            }
+            "type": "openEditPage"
           },
           { "field": "brand", "headerName": "Brand", "width": 250 },
           { "field": "category", "headerName": "Category", "width": 250 },
@@ -74,7 +73,6 @@
               {
                 "name": "sku",
                 "label": "SKU",
-
                 "type": "view",
                 "forEitPage": "yes",
                 "forNewPage": "no"
@@ -82,7 +80,6 @@
               {
                 "name": "returnPolicy",
                 "label": "Return Policy",
-
                 "type": "copy",
                 "forEitPage": "yes",
                 "forNewPage": "no"

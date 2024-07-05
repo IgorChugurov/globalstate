@@ -44,7 +44,7 @@ const ActionCell: React.FC<{
   dataService,
   actions,
 }) => {
-  console.log(item.title, actions);
+  //console.log(item.title, actions);
 
   const [action, setAction] = useState("");
   const [modalTitle, setModalTitle] = useState("");
