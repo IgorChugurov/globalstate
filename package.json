@@ -1,6 +1,6 @@
 {
   "name": "templatewithglobalstate",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "description": "Template with global state management, authentication, and routing",
   "main": "src/index.ts",
