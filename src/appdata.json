@@ -3,12 +3,11 @@
   "appGlobalStoreConfig": [
     {
       "collection": "categories",
-      "title": "Категорії",
+      "title": "Category",
       "apiUrl": "https://dummyjson.com/products/categories"
     }
   ],
   "AuthData": {
-    "ssoServer": "https://authdev.site",
     "loginAndGetTokenUrl": "https://dummyjson.com/auth/login",
     "credentials": {
       "varName": "username",
@@ -20,6 +19,365 @@
     "refreshAuthSessionUrl": "https://dummyjson.com/auth/refresh"
   },
   "EntitiesForListAndServicesPackageAndEditPage": [
+    {
+      "title": "Groups of companies",
+      "collectionName": "groupCompanies",
+      "forServicePackage": {
+        "url": "https://dummyjson.com/products",
+        "options": { "create": "/add" }
+      },
+      "forList": {
+        "searchBlock": "Search for groups",
+        "buttonBlock": { "title": "New companies group" },
+        "columnsForGrid": []
+      },
+      "forEdit": {
+        "title": ["Create new group of companies", "Edit product"],
+        "pageHeader": "Group of companies details",
+        "sections": [
+          {
+            "title": "Info",
+            "fields": [
+              {
+                "name": "name",
+                "label": "Company group",
+                "placeholder": "Enter company group name",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Name is required"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Companies",
+      "collectionName": "company",
+      "forServicePackage": {
+        "url": "https://dummyjson.com/products",
+        "options": { "create": "/add" }
+      },
+      "forList": {
+        "searchBlock": "Search for companies",
+
+        "buttonBlock": { "title": "New company" },
+        "columnsForGrid": [
+          {
+            "field": "title",
+            "headerName": "Name",
+            "width": 250,
+            "type": "naigateToDetails"
+          },
+          { "field": "admins", "headerName": "Assigned users", "width": 250 },
+          { "field": "createdAt", "headerName": "Created", "width": 250 },
+          {
+            "field": "actions",
+            "headerName": "Actions",
+            "type": "actions",
+            "width": 250,
+            "options": {
+              "actions": [{ "name": "edit" }, { "name": "delete" }]
+            }
+          }
+        ]
+      },
+      "forEdit": {
+        "title": ["Create new company", "Edit product"],
+        "pageHeader": "Group of companies details",
+        "sections": [
+          {
+            "title": "Info",
+            "fields": [
+              {
+                "name": "name",
+                "label": "Company name",
+                "placeholder": "Enter company  name",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Name is required"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Group Admins!",
+      "collectionName": "groupAdmins",
+      "forServicePackage": {
+        "url": "https://dummyjson.com/products",
+        "options": { "create": "/add" }
+      },
+      "forList": {
+        "searchBlock": "Search for admins",
+
+        "buttonBlock": { "title": "New group admin" },
+        "columnsForGrid": [
+          {
+            "field": "title",
+            "headerName": "email",
+            "width": 250
+          },
+
+          { "field": "createdAt", "headerName": "Created", "width": 250 },
+          {
+            "field": "actions",
+            "headerName": "Actions",
+            "type": "actions",
+            "width": 250,
+            "options": {
+              "actions": [{ "name": "delete" }]
+            }
+          }
+        ]
+      },
+      "forEdit": {
+        "title": ["Create new company admin", ""],
+        "pageHeader": "Company admin details",
+        "sections": [
+          {
+            "title": "Info",
+            "fields": [
+              {
+                "name": "email",
+                "label": "Email",
+                "placeholder": "Enter email",
+                "type": "email",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Email is required"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Group Settings",
+      "collectionName": "groupSettings",
+      "forServicePackage": {
+        "url": "https://dummyjson.com/products",
+        "options": { "create": "/add" }
+      },
+      "forList": {
+        "searchBlock": "Search for settings",
+
+        "buttonBlock": { "title": "New setting" },
+        "columnsForGrid": [
+          {
+            "field": "title",
+            "headerName": "key",
+            "width": 250
+          },
+          {
+            "field": "value",
+            "headerName": "Value",
+            "width": 250
+          },
+          {
+            "field": "description",
+            "headerName": "Description",
+            "width": 250
+          },
+
+          { "field": "createdAt", "headerName": "Created", "width": 250 },
+          {
+            "field": "actions",
+            "headerName": "Actions",
+            "type": "actions",
+            "width": 250,
+            "options": {
+              "actions": [{ "name": "delete" }]
+            }
+          }
+        ]
+      },
+      "forEdit": {
+        "title": ["Create new setting", ""],
+        "pageHeader": "Company setting details",
+        "sections": [
+          {
+            "title": "Info",
+            "fields": [
+              {
+                "name": "key",
+                "label": "Key",
+                "placeholder": "Enter key",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Key is required"
+              },
+              {
+                "name": "value",
+                "label": "Value",
+                "placeholder": "Enter value",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Value is required"
+              },
+              {
+                "name": "description",
+                "label": "Description",
+                "placeholder": "Add file description",
+                "type": "text",
+                "multipile": true,
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Description is required"
+              }
+            ]
+          }
+        ]
+      }
+    },
+
+    {
+      "title": "Company Admins",
+      "collectionName": "companyAdmins",
+      "forServicePackage": {
+        "url": "https://dummyjson.com/products",
+        "options": { "create": "/add" }
+      },
+      "forList": {
+        "searchBlock": "Search for company admins",
+
+        "buttonBlock": { "title": "New admin" },
+        "columnsForGrid": [
+          {
+            "field": "title",
+            "headerName": "Name",
+            "width": 250,
+            "type": "naigateToDetails"
+          },
+
+          { "field": "createdAt", "headerName": "Created", "width": 250 },
+          {
+            "field": "actions",
+            "headerName": "Actions",
+            "type": "actions",
+            "width": 250,
+            "options": {
+              "actions": [{ "name": "delete" }]
+            }
+          }
+        ]
+      },
+      "forEdit": {
+        "title": ["Create new admin for company", ""],
+        "pageHeader": "",
+        "sections": [
+          {
+            "title": "Info",
+            "fields": [
+              {
+                "name": "email",
+                "label": "Email",
+                "placeholder": "Enter email",
+                "type": "email",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Email is required"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Company Settings",
+      "collectionName": "companySettings",
+      "forServicePackage": {
+        "url": "https://dummyjson.com/products",
+        "options": { "create": "/add" }
+      },
+      "forList": {
+        "searchBlock": "Search for settings",
+
+        "buttonBlock": { "title": "New setting" },
+        "columnsForGrid": [
+          {
+            "field": "title",
+            "headerName": "key",
+            "width": 250
+          },
+          {
+            "field": "value",
+            "headerName": "Value",
+            "width": 250
+          },
+          {
+            "field": "description",
+            "headerName": "Description",
+            "width": 250
+          },
+
+          { "field": "createdAt", "headerName": "Created", "width": 250 },
+          {
+            "field": "actions",
+            "headerName": "Actions",
+            "type": "actions",
+            "width": 250,
+            "options": {
+              "actions": [{ "name": "delete" }]
+            }
+          }
+        ]
+      },
+      "forEdit": {
+        "title": ["Create new setting for company", ""],
+        "pageHeader": "Company setting details",
+        "sections": [
+          {
+            "title": "Info",
+            "fields": [
+              {
+                "name": "key",
+                "label": "Key",
+                "placeholder": "Enter key",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Key is required"
+              },
+              {
+                "name": "value",
+                "label": "Value",
+                "placeholder": "Enter value",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Value is required"
+              },
+              {
+                "name": "description",
+                "label": "Description",
+                "placeholder": "Add file description",
+                "type": "text",
+                "multipile": true,
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Description is required"
+              }
+            ]
+          }
+        ]
+      }
+    },
     {
       "title": "Products",
       "collectionName": "products",

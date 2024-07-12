@@ -2,15 +2,27 @@
 import styles from "./Columns.module.css";
 
 import { Dispatch, SetStateAction } from "react";
-import { IColumnForDataGrud, IEntity } from "../../../../types/lists";
+import { IEntity } from "../../../../types/lists";
 import { ApiService, IApiService } from "../../../../services/servicesPackage";
 import ActionCell from "../actionCell/ActionCell";
+import { IColumnForDataGrud } from "../../../../types/appdata";
+import { Link, useMatches } from "react-router-dom";
 
 //import ActionCell from "./ActionCell";
 interface IItemInCell {
   _id: string;
   [key: string]: any;
 }
+// create an array of columns for the data grid.
+// The array is created from the array of columnsForGrid
+// the columnsForGrid is an array of IColumnForDataGrud
+// the array of items is used to get the data for the cells
+// the dataService is used to update the data
+// the setModalCreateOpen is used to open the edit or create modal
+// the setCurrentItem is used to set the current item for the selected row
+// the onChange is used to update the data in the parent component
+// the setItems is used to update the items in the parent component
+// redirect to the edit page when the cell is clicked if the type is naigateToDetails in the column
 
 export const columnsForDataGrid = ({
   setCurrentItem,
@@ -65,6 +77,8 @@ const getColumn = ({
 }) => {
   //console.log(column);
   const { field, headerName, width, options, type } = column;
+
+  const url = window.location.pathname;
   return {
     field: field,
     headerName: headerName,
@@ -84,6 +98,12 @@ const getColumn = ({
                 {itemInRow[field]}
               </span>
             </div>
+          ) : type && type === "naigateToDetails" ? (
+            <Link className={styles.linkWrap} to={`${url}/${itemInRow._id}`}>
+              <span className="body-s-regular colorGreyBlack textWithEllipsis">
+                {itemInRow[field]}
+              </span>
+            </Link>
           ) : type &&
             type === "actions" &&
             column.options &&

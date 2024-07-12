@@ -9,28 +9,28 @@
   gap: 8px;
   border-radius: 6px;
   border: 1px solid;
-  border-color: var(--grey-200);
-  background-color: var(--grey-white);
-  color: var(--grey-black);
+  border-color: var(--Border-Default-Secondary);
+  background-color: var(--Background-Gray-Default);
+  color: var(--Text-Default-Default);
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   outline: 0;
 }
 .filterButton.active {
   border: none;
-  background-color: var(--primary-100);
-  color: var(--grey-500);
+  background-color: var(--Primary-100);
+  color: var(--Grey-500);
 }
 
 .filterButton.active:hover,
 .filterButton.active:active {
-  background-color: var(--primary-200);
+  background-color: var(--Primary-200);
 }
 
 .filterButton:hover,
 .filterButton:active {
-  background-color: var(--grey-200);
+  background-color: var(--Background-Gray-Tertiary-Hover);
 }
 .filterButton:disabled {
-  background-color: var(--grey-50);
-  color: var(--grey-300);
+  background-color: var(--Background-Gray-Default-Hover);
+  color: var(--Text-Default-Disabled);
 }

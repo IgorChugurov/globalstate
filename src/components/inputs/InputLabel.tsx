@@ -13,14 +13,14 @@ const InputLabel = ({
 }) => {
   const { isInvalid, disabled, isFocused, isHovered, required } = options;
   const labelColor = isInvalid
-    ? "var(--system-error,#ff453a)"
+    ? "var(--System-Error,#ff453a)"
     : disabled
     ? "var(--Grey-300, #7C7C7C)"
     : isFocused
-    ? "var(--primary-600,#0768fd)"
+    ? "var(--Primary-600,#0768fd)"
     : isHovered
-    ? "var(--grey-black)"
-    : "var(--grey-600)";
+    ? "var(--Grey-Black)"
+    : "var(--Grey-600)";
   return (
     <div className="labelWrapper">
       <span

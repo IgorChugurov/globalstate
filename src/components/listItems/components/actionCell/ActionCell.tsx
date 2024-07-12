@@ -30,7 +30,7 @@ import { ApiService } from "../../../../services/servicesPackage";
 var timeoutIDA: any = {};
 //https://codesandbox.io/p/sandbox/mui-datagrid-change-cell-props-on-row-hover-u8d2q8?file=%2Fdemo.tsx%3A51%2C52-51%2C69&fontsize=14&hidenavigation=1&theme=dark
 const ActionCell: React.FC<{
-  actions: any;
+  actions: any[];
   rowId?: number | string;
   item: IEntity;
   setCurrentItem?: (d: any) => void;
@@ -42,10 +42,8 @@ const ActionCell: React.FC<{
   setCurrentItem,
   setEditModalOpen,
   dataService,
-  actions,
+  actions = [],
 }) => {
-  //console.log(item.title, actions);
-
   const [action, setAction] = useState("");
   const [modalTitle, setModalTitle] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -122,45 +120,47 @@ const ActionCell: React.FC<{
   return (
     <>
       <div className={styles.iconContainer}>
-        {setCurrentItem && setEditModalOpen && (
-          <div
-            className={styles.iconWrapper}
-            onClick={(e: React.MouseEvent<HTMLElement>) => {
-              if (item) {
-                setCurrentItem(item);
-                setEditModalOpen(true);
-              }
-            }}
-          >
-            <Icon_edit_inlist />
-          </div>
-        )}
-
-        <div
-          className={styles.iconWrapper}
-          onClick={(event: React.MouseEvent<HTMLElement>) => {
-            copyToClipBoard();
-          }}
-        >
-          <Icon_content_copy />
-        </div>
-        <div
-          className={styles.iconWrapper}
-          onClick={(event: React.MouseEvent<HTMLElement>) => {
-            handleActionItem("regenerating");
-          }}
-        >
-          <Icon_autorenew />
-        </div>
-
-        <div
-          className={styles.iconWrapper}
-          onClick={(e: React.MouseEvent<HTMLElement>) => {
-            handleActionItem("deleting");
-          }}
-        >
-          <Icon_delete_inlist />
-        </div>
+        {actions.map((action, i) => (
+          <React.Fragment key={i}>
+            {action.name === "edit" && (
+              <>
+                {setCurrentItem && setEditModalOpen && (
+                  <div
+                    className={styles.iconWrapper}
+                    onClick={(e: React.MouseEvent<HTMLElement>) => {
+                      if (item) {
+                        setCurrentItem(item);
+                        setEditModalOpen(true);
+                      }
+                    }}
+                  >
+                    <Icon_edit_inlist />
+                  </div>
+                )}
+              </>
+            )}
+            {action.name === "copy" && (
+              <div
+                className={styles.iconWrapper}
+                onClick={(event: React.MouseEvent<HTMLElement>) => {
+                  copyToClipBoard();
+                }}
+              >
+                <Icon_content_copy />
+              </div>
+            )}
+            {action.name === "delete" && (
+              <div
+                className={styles.iconWrapper}
+                onClick={(e: React.MouseEvent<HTMLElement>) => {
+                  handleActionItem("deleting");
+                }}
+              >
+                <Icon_delete_inlist />
+              </div>
+            )}
+          </React.Fragment>
+        ))}
       </div>
 
       {openModal && (

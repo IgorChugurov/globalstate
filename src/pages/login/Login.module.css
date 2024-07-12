@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-color);
+  background-color: var(--Background-Gray-Default);
 
   .loginWrapper {
     max-width: 500px;
@@ -36,7 +36,7 @@
       margin-bottom: 10px;
       margin-top: 20px;
       background-color: var(--Primary-600);
-      color: var(--Grey-White);
+      color: var(--Background-Gray-Default);
     }
     .loginIcon {
       width: 32px;

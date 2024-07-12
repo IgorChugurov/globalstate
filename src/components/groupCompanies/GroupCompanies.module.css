@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.header {
+  display: flex;
+  padding: 16px 24px 8px 24px;
+
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-bottom: var(--Stroke-Border, 1px) solid var(--Gray-100, #e7e7e7);
+  min-height: 58px;
+}
+.right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.table {
+  width: 100%;
+}

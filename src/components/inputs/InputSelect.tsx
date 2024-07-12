@@ -118,7 +118,7 @@ export const InputSelect = <T,>({
                             <IconFirstComponent
                               type={selectedOption?.name || ""}
                               classN={disabled ? "colorGrey500" : ""}
-                              iconColor={disabled ? "var(--grey-500)" : ""}
+                              iconColor={disabled ? "var(--Grey-500)" : ""}
                             />
                           )}
 

@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { GlobalStateContext } from "../../../../context/GlobalStateProvider";
-import { CircularProgress, Modal } from "@mui/material";
+import { Modal } from "@mui/material";
 import styles from "./CreateItem.module.css";
 import CloseButton from "../../../CloseButton/CloseButton";
 
@@ -12,7 +12,12 @@ import { InputText } from "../../../inputs/InputText";
 import { InputSelect } from "../../../inputs/InputSelect";
 import { InputSwitch } from "../../../inputs/InputSwitch";
 import { InputRadio } from "../../../inputs/InputRadio";
-import { sendMessage, setError, setSuccess } from "../../../../utils";
+import {
+  createSchema,
+  sendMessage,
+  setError,
+  setSuccess,
+} from "../../../../utils";
 import { InputMultipleSelect } from "../../../inputs/InputMultipleSelect";
 import { TextView } from "../../../inputs/TextView";
 import { TextCopy } from "../../../inputs/TextCopy";
@@ -343,49 +348,3 @@ const CreateItem = ({
 };
 
 export default CreateItem;
-
-function getValidator(type: string) {
-  switch (type) {
-    case "number":
-      return Yup.number();
-    case "switch":
-      return Yup.boolean();
-    case "date":
-      return Yup.date();
-    case "array":
-      return Yup.array();
-    default:
-      return Yup.string();
-  }
-}
-
-const createSchema = (allFields: IEditField[]) => {
-  return allFields.reduce<Record<string, Yup.AnySchema>>((schema, field) => {
-    let validator = getValidator(field.type);
-
-    if (field.required) {
-      const message = field.requiredText || "This field is required";
-
-      // Apply specific validations based on the field type
-      switch (field.type) {
-        case "array":
-          // Safely use `min()` only for arrays
-          validator = (validator as Yup.ArraySchema<any, any>).min(1, message);
-          break;
-        case "select":
-          // Safely use `min()` only for arrays
-          validator = (validator as Yup.ArraySchema<any, any>).notOneOf(
-            ["none"],
-            message
-          );
-          break;
-        default:
-          validator = validator.required(message);
-          break;
-      }
-    }
-
-    schema[field.name] = validator;
-    return schema;
-  }, {});
-};

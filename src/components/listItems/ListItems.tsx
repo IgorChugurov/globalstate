@@ -12,12 +12,14 @@ import {
 } from "@mui/x-data-grid";
 import { INIT_PAGINATE } from "../../constants/constants";
 import Appmodal from "../appmodal/Appmodal";
-import { IEditField, IOptionsListItem } from "../../types/lists";
+
 import SearchBlock from "./components/searchBlock/SearchBlock";
 import FiltersBlock from "./components/filtersBlock/FiltersBlock";
 import { Icon_add } from "./Icons";
 import CreateItem from "./components/createItem/CreateItem";
 import { columnsForDataGrid } from "./components/columns/ColumnsForDataGrid";
+import { getItemForEdit } from "../../utils";
+import { IEditField, IOptionsListItem } from "../../types/appdata";
 
 const ListItems = <
   ItemClass extends {
@@ -244,32 +246,3 @@ const ListItems = <
 };
 
 export default ListItems;
-
-const getItemForEdit = <T,>(allFields: IEditField[], currentItem: T) => {
-  let data = allFields.reduce((acc: any, field: any) => {
-    if (field.forNewPage === "yes") {
-      acc[field.name] =
-        field.type === "number"
-          ? 0
-          : field.type === "boolean"
-          ? false
-          : field.type === "select"
-          ? "none"
-          : field.type === "switch"
-          ? true
-          : field.type === "radio"
-          ? field.options[0].value
-          : field.type === "array"
-          ? []
-          : "";
-    }
-    return acc;
-  }, {});
-  if (currentItem) {
-    const dataFromServer: any = {
-      ...JSON.parse(JSON.stringify(currentItem)),
-    };
-    data = { ...data, ...dataFromServer };
-  }
-  return data;
-};

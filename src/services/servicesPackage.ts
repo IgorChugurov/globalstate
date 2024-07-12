@@ -49,6 +49,26 @@ export class ApiService<T extends IEntity, U extends boolean = false> {
       sendRequest(req).then(resolve, reject);
     });
   };
+  getMany = (
+    paginate?: IPaginate
+  ): Promise<U extends true ? IListResponse<T> : T[]> => {
+    return new Promise((resolve, reject) => {
+      const req = {
+        url: `${this.endpoint}`,
+        method: "GET",
+        queryString: paginate?.query,
+        page: paginate?.currentPage,
+        perPage: paginate?.perPage,
+        search: paginate?.search,
+        limit: paginate?.perPage,
+        skip:
+          (paginate?.perPage || 0) *
+          (paginate?.currentPage ? paginate?.currentPage - 1 : 0),
+      };
+
+      sendRequest(req).then(resolve, reject);
+    });
+  };
 
   getOne = (id: string): Promise<T> => {
     return new Promise((resolve, reject) => {

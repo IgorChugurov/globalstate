@@ -1,0 +1,192 @@
+.container {
+  display: flex;
+  padding: 12px 24px;
+
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  background: var(--Text-Default-Default, #262626);
+  /* gap: 40px;
+  display: flex;
+  align-items: center;
+  background-color: var(--Grey-White);
+  width: 100%;
+  height: 32px; */
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.logoWrapper {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f8f7fb 0%, #b7b1d4 100%);
+  cursor: pointer;
+}
+.mainMenuItemWrapper {
+  display: flex;
+  padding: 4px 16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.mainMenuItemWrapper.active {
+  background: var(--Primary-900, #52466c);
+}
+.mainMenuItem {
+  color: var(--Gray-White, #fff);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+}
+
+.buttonWrapper {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--Primary-200, #e5e4f0);
+  color: var(---Text-Default-Default, #262626);
+  cursor: pointer;
+}
+
+.avatarWrapper {
+  display: flex;
+  width: 32px;
+
+  height: 32px;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  background: var(--Primary-900, #52466c);
+  cursor: pointer;
+}
+.avatar {
+  color: var(--Background-Gray-Default, #fff);
+  font-family: "Roboto Flex";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+  text-transform: "uppercase";
+}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  .logoTitleWrap:hover .firstTitle,
+  .logoTitleWrap:hover .secondTitle {
+    color: var(--Primary-500);
+  }
+
+  .logoTitleWrap {
+    display: flex;
+    align-items: center;
+    .logoTitleWrap:hover {
+      color: var(--Primary-500);
+    }
+    .firstTitle {
+      color: #000;
+      font-family: Ubuntu;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 14px;
+    }
+    .secondTitle {
+      color: #000;
+      font-family: Ubuntu;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14px;
+    }
+  }
+}
+.menuWrap {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex: 1 0 0;
+  .itemMenuWrap {
+    display: flex;
+    align-items: center;
+    .itemMenu {
+      cursor: pointer;
+    }
+    .itemMenu:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.titleWrap {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background-color: var(--Grey-100);
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.titleWrap:hover {
+  background-color: var(
+    --primary-100
+  ); /* Replace with your actual color code or variable */
+}
+
+.titleWrap.active {
+  background-color: var(--primary-100); /* Active state when anchorEl is true */
+}
+
+/* .titleWrap:hover {
+  background-color: var(--Grey-300);
+} */
+
+/* :global(#navbarDropDownMenu) {
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+} */
+:global(.menuItem).menuItemContainer:hover {
+  background-color: transparent !important;
+}
+.menuItemWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.menuItemAsBorder {
+  border-bottom: 1px solid #dcdcdc;
+  width: 100%;
+}

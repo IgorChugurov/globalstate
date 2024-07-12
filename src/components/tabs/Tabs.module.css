@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  padding: 13px 24px;
+
+  align-items: flex-start;
+  gap: 24px;
+
+  align-self: stretch;
+}
+.tab {
+  display: flex;
+  height: 32px;
+  padding: 4px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--Gray-Black, #262626);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 21px */
+}
+.active {
+  background: var(--Primary-200, #e5e4f0);
+  color: var(--Primary-950, #352d48);
+}

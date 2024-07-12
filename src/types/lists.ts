@@ -72,11 +72,11 @@ export interface IActionData {
   copyFields?: { field: string }[];
   component?: any;
 }
-export interface IColumnForDataGrud {
+interface IColumnForDataGrud {
   field: string;
   headerName: string;
   width: number;
-  type?: "view" | "openEditPage" | "actions";
+  type?: "view" | "openEditPage" | "actions" | "naigateToDetail";
   options?: {
     // this is for action cell
     actions?: IActionData[];

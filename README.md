@@ -234,3 +234,9 @@ Components needing to update data can call `updateData` or other functions that 
 ## Using the Data
 
 Components subscribed to the context receive the current state and can react to changes, e.g., displaying loading indicators or updated data.
+
+# Figma
+
+- **static-site-generator** (also called **[Jamstack](https://jamstack.org/)**).
+- variblae explorer https://www.figma.com/community/plugin/1310888112326715990/figma-variable-explorer **[Plagin](https://jamstack.org/)**)
+- https://github.com/mui/mui-design-kits/issues/281

@@ -29,27 +29,7 @@ import "../css/buttons.css";
 import "../css/modal.css";
 
 import { createTheme, PaletteMode, ThemeProvider } from "@mui/material";
-
-interface IAuthData {
-  loginAndGetTokenUrl: string;
-  credentials: {
-    varName: string;
-    title: string;
-    type: string;
-  };
-  getCurrentAuthUserUrl: string;
-  refreshAuthSessionUrl: string;
-}
-
-interface IInitalConfig {
-  appGlobalStoreConfig: DataItem[];
-  TITLE: string;
-  VERSION: string;
-  STORAGE: string;
-  STUDIA: string;
-  AuthData: IAuthData;
-  LSPrefix: string;
-}
+import { IAuthData, IInitalConfig } from "../types/appdata";
 
 const initDarkMode = getDarkModeLS() as PaletteMode;
 setModeClassForBody(initDarkMode);
@@ -62,7 +42,7 @@ const initState = {
   AuthData: {} as IAuthData,
   TITLE: "",
   VERSION: "",
-  STORAGE: "",
+
   STUDIA: "",
   LSPrefix: "",
 };
@@ -76,7 +56,7 @@ export const GlobalStateContext = createContext<{
   AuthData: IAuthData;
   TITLE: string;
   VERSION: string;
-  STORAGE: string;
+
   STUDIA: string;
   LSPrefix: string;
 }>(initState);
@@ -162,7 +142,7 @@ export const GlobalStateProvider: React.FC<StateProviderProps> = ({
         AuthData,
         TITLE,
         VERSION,
-        STORAGE: initialConfig.STORAGE,
+
         STUDIA: initialConfig.STUDIA,
         LSPrefix,
       }}

@@ -37,3 +37,10 @@
 .colorPrimary600 {
   color: var(--Primary-600);
 }
+
+.colorTextPrimary {
+  color: var(--Text-Primary-Default);
+}
+.colorBackgroundDefault {
+  color: var(--Backgroud-Default-Default);
+}

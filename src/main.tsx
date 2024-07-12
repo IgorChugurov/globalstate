@@ -14,6 +14,7 @@ import "./index.css";
 import ListItems from "./components/listItems/ListItems";
 import { createBrowserRouter } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar.tsx";
+
 import "./index.css";
 // here you can add your own css files like this files with styles and classes
 // import "../css/index.css";
@@ -25,13 +26,20 @@ import "./index.css";
 // import "../css/modal.css";
 // and orevrite global styles , colors, typography, inputs, menu, buttons, modal and ect
 import initConfig from "./appdata.json";
-import { IOptionsListItem } from "./types/lists.ts";
+
+import NavbarApp from "./components/navbar/NavbarApp.tsx";
+import GroupsCompanies from "./components/groupsCompanies/GroupsCompanies.tsx";
+import GroupCompanies from "./components/groupCompanies/GroupCompanies.tsx";
+import { IOptionsListItem } from "./types/appdata.ts";
+import Company from "./components/Company/Company.tsx";
 export const LSPrefix = initConfig.LSPrefix;
 
 const EntitiesForListAndServicesPackageAndEditPage =
   initConfig.EntitiesForListAndServicesPackageAndEditPage;
 
-const routers = EntitiesForListAndServicesPackageAndEditPage.map((d) => ({
+const routers = EntitiesForListAndServicesPackageAndEditPage.filter((d) => {
+  return d.collectionName !== "groupCompanies";
+}).map((d) => ({
   path: `/${d.collectionName}`,
   element: (
     <div className="mainCootainer">
@@ -41,14 +49,76 @@ const routers = EntitiesForListAndServicesPackageAndEditPage.map((d) => ({
   ),
 }));
 
+const initDataGroupCompanies =
+  EntitiesForListAndServicesPackageAndEditPage.find(
+    (d) => d.collectionName === "groupCompanies"
+  ) as IOptionsListItem;
+
+const initDataCompany = EntitiesForListAndServicesPackageAndEditPage.find(
+  (d) => d.collectionName === "company"
+) as IOptionsListItem;
+const initDataGroupAdmins = EntitiesForListAndServicesPackageAndEditPage.find(
+  (d) => d.collectionName === "groupAdmins"
+) as IOptionsListItem;
+const initDataGroupSettings = EntitiesForListAndServicesPackageAndEditPage.find(
+  (d) => d.collectionName === "groupSettings"
+) as IOptionsListItem;
+const initDataCompanySettings =
+  EntitiesForListAndServicesPackageAndEditPage.find(
+    (d) => d.collectionName === "companySettings"
+  ) as IOptionsListItem;
+const initDataCompanyAdmins = EntitiesForListAndServicesPackageAndEditPage.find(
+  (d) => d.collectionName === "companyAdmins"
+) as IOptionsListItem;
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <div className="mainCootainer">
-        <Navbar />
+        <NavbarApp />
       </div>
     ),
+  },
+  {
+    path: "/groups",
+    element: (
+      <div className="mainCootainer">
+        <NavbarApp />
+        <GroupsCompanies initDataGroupCompanies={initDataGroupCompanies} />
+      </div>
+    ),
+    children: [
+      {
+        path: "/groups/:groupId",
+        element: (
+          <>
+            {initDataGroupCompanies ? (
+              <GroupCompanies
+                initDataGroupCompanies={initDataGroupCompanies}
+                initDataCompany={initDataCompany}
+                initDataGroupAdmins={initDataGroupAdmins}
+                initDataGroupSettings={initDataGroupSettings}
+              />
+            ) : null}
+          </>
+        ),
+        children: [
+          {
+            path: "/groups/:groupId/:compqanyId",
+            element: (
+              <>
+                <Company
+                  initDataCompany={initDataCompany}
+                  initDataCompanyAdmins={initDataCompanyAdmins}
+                  initDataCompanySettings={initDataCompanySettings}
+                />
+              </>
+            ),
+          },
+        ],
+      },
+    ],
   },
   ...routers,
 
