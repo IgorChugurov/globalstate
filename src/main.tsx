@@ -16,6 +16,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar.tsx";
 
 import "./index.css";
+
 // here you can add your own css files like this files with styles and classes
 // import "../css/index.css";
 // import "../css/typography.css";
@@ -32,6 +33,8 @@ import GroupsCompanies from "./components/groupsCompanies/GroupsCompanies.tsx";
 import GroupCompanies from "./components/groupCompanies/GroupCompanies.tsx";
 import { IOptionsListItem } from "./types/appdata.ts";
 import Company from "./components/Company/Company.tsx";
+import Environment from "./components/environment/Environment.tsx";
+import Settings from "./components/settings/Settings.tsx";
 export const LSPrefix = initConfig.LSPrefix;
 
 const EntitiesForListAndServicesPackageAndEditPage =
@@ -54,6 +57,12 @@ const initDataGroupCompanies =
     (d) => d.collectionName === "groupCompanies"
   ) as IOptionsListItem;
 
+const initDataAppAdmins = EntitiesForListAndServicesPackageAndEditPage.find(
+  (d) => d.collectionName === "appAdmins"
+) as IOptionsListItem;
+const initDataEnvironment = EntitiesForListAndServicesPackageAndEditPage.find(
+  (d) => d.collectionName === "environment"
+) as IOptionsListItem;
 const initDataCompany = EntitiesForListAndServicesPackageAndEditPage.find(
   (d) => d.collectionName === "company"
 ) as IOptionsListItem;
@@ -72,16 +81,16 @@ const initDataCompanyAdmins = EntitiesForListAndServicesPackageAndEditPage.find(
 ) as IOptionsListItem;
 
 const router = createBrowserRouter([
+  // {
+  //   path: "/",
+  //   element: (
+  //     <div className="mainCootainer">
+  //       <NavbarApp />
+  //     </div>
+  //   ),
+  // },
   {
     path: "/",
-    element: (
-      <div className="mainCootainer">
-        <NavbarApp />
-      </div>
-    ),
-  },
-  {
-    path: "/groups",
     element: (
       <div className="mainCootainer">
         <NavbarApp />
@@ -119,6 +128,24 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "/environments",
+    element: (
+      <div className="mainCootainer">
+        <NavbarApp />
+        <Environment initDataEnvironment={initDataEnvironment} />
+      </div>
+    ),
+  },
+  {
+    path: "/settings",
+    element: (
+      <div className="mainCootainer">
+        <NavbarApp />
+        <Settings initDataAppAdmins={initDataAppAdmins} />
+      </div>
+    ),
   },
   ...routers,
 

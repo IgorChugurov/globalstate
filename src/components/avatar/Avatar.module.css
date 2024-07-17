@@ -1,0 +1,23 @@
+.avatarWrapper {
+  display: flex;
+  width: 32px;
+  height: 32px;
+
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-full, 9999px);
+  background: var(--background-primary-default, #52466c);
+  cursor: pointer;
+}
+.avatarWrapper:hover {
+  background: var(--background-primary-default-hover, #75649d);
+}
+.avatarWrapper:active {
+  background: var(--background-primary-default-pressed, #625483);
+}
+
+.avatar {
+  color: var(--text-primary-on-primary, #fff);
+
+  text-transform: uppercase;
+}

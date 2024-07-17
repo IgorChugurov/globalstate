@@ -27,6 +27,7 @@ import "../css/inputs.css";
 import "../css/menu.css";
 import "../css/buttons.css";
 import "../css/modal.css";
+import "../css/customDataGrid.css";
 
 import { createTheme, PaletteMode, ThemeProvider } from "@mui/material";
 import { IAuthData, IInitalConfig } from "../types/appdata";
@@ -45,6 +46,8 @@ const initState = {
 
   STUDIA: "",
   LSPrefix: "",
+  routeData: {},
+  changeRouteData: () => {},
 };
 
 export const GlobalStateContext = createContext<{
@@ -59,6 +62,8 @@ export const GlobalStateContext = createContext<{
 
   STUDIA: string;
   LSPrefix: string;
+  routeData: any;
+  changeRouteData: (d: any) => void;
 }>(initState);
 
 interface StateProviderProps {
@@ -96,6 +101,14 @@ export const GlobalStateProvider: React.FC<StateProviderProps> = ({
   const [AuthData] = useState(initialConfig.AuthData);
   // this only for listItems
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const [routeData, changeRouteData] = useReducer(
+    (state: { [key: string]: any }, newState: { [key: string]: any }) => ({
+      ...state,
+      ...newState,
+    }),
+    initState.routeData
+  );
 
   const toggleDarkMode = () => {
     const mode = darkMode === "dark" ? "light" : "dark";
@@ -142,7 +155,8 @@ export const GlobalStateProvider: React.FC<StateProviderProps> = ({
         AuthData,
         TITLE,
         VERSION,
-
+        routeData,
+        changeRouteData,
         STUDIA: initialConfig.STUDIA,
         LSPrefix,
       }}

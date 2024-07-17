@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Company.module.css";
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
 import { servicesPackage } from "../../services/servicesPackage";
@@ -11,6 +11,7 @@ import Tabs from "../tabs/Tabs";
 import CompanyAdmmins from "../companyAdmins/CompanyAdmins";
 import ListsItemsInTab from "../listItemsInTab/ListItemsInTab";
 import Createmodal from "../appmodal/Createmodal";
+import { GlobalStateContext } from "../../context/GlobalStateProvider";
 
 const Company = ({
   initDataCompany,
@@ -23,7 +24,7 @@ const Company = ({
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [searchState, setSearchState] = useState<string>("");
-  const [gorupName, setGroupName] = useState<string>("Group");
+
   const { forList, title } = initDataCompany;
   const {
     forList: forListAdmins,
@@ -35,11 +36,6 @@ const Company = ({
     title: titleSettings,
     forEdit: forEditSettings,
   } = initDataCompanySettings;
-  const dataForBreadcrums = [
-    { title: title, link: "/groups" },
-    { title: gorupName, link: "/groups/1" },
-    { title: "company" },
-  ];
 
   const {
     searchBlock: placeholderSearchAdmins,
@@ -68,16 +64,19 @@ const Company = ({
   const itemsService = servicesPackage["company"];
 
   const location = useLocation();
+  const changeRouteData = useContext(GlobalStateContext).changeRouteData;
+
   const createData = (data: any) => {
     console.log(data);
   };
   useEffect(() => {
+    changeRouteData({ company: null });
     if (itemsService) {
       setLoading(true);
       itemsService.getOne(location.pathname.split("/")[2]).then((res) => {
-        const groupCompanies: ICompany = res as ICompany;
-        setGroupName(groupCompanies.name || "Group");
+        const company: ICompany = res as ICompany;
         setLoading(false);
+        changeRouteData({ company: company });
       });
     }
   }, []);
@@ -124,7 +123,6 @@ const Company = ({
         />
       )}
       <div className={styles.header}>
-        <Breadcrumbs data={dataForBreadcrums} />
         <div className={styles.right}>
           <SearchInputSimple
             disabled={loading}

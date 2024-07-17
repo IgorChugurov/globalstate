@@ -2,11 +2,11 @@
   cursor: pointer;
   text-transform: none;
   display: flex;
-  padding: 8px 16px;
+  padding: var(--space-200, 8px) var(--space-400, 16px);
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  border-radius: var(--border-radius);
+  gap: var(--space-200, 8px);
+  border-radius: var(--radius-200, 8px);
   outline: 0;
   transition: border-color 0.25s, background-color 0.25s;
 }
@@ -24,33 +24,34 @@ button:focus-visible {
 .primaryButton {
   height: 40px; /* Default height */
   border: none;
-  color: var(--Background-Gray-Default);
-  background-color: var(--Primary-600);
+  color: var(--text-primary-on-primary, #fff);
+  background: var(--background-primary-default, #52466c);
 }
 .primaryButton[data-size="small"] {
   height: 32px; /* Default height */
 }
 
 .primaryButton[data-variant="outlined"] {
-  border: 1px solid var(--Primary-600);
-  background-color: var(--Background-Gray-Default); /* White background */
-  color: var(--Primary-500); /* Blue text */
+  border: 1px solid var(--background-primary-default, #52466c);
+  background-color: var(--text-primary-default); /* White background */
+  color: var(--background-primary-default, #52466c);
 }
 
 .primaryButton:hover {
-  background-color: var(--Primary-800); /* Darker blue */
-  color: var(--Background-Gray-Default); /* White text */
+  background: var(--background-primary-default-hover, #75649d);
 }
 
 .primaryButton[data-variant="outlined"]:hover {
   color: var(--Primary-800); /* Even darker text */
-  background-color: var(--Background-Gray-Default); /* White background stays */
+  background-color: var(
+    --background-primary-default
+  ); /* White background stays */
   border-color: var(--Primary-800);
 }
 
 .primaryButton:disabled {
-  background-color: var(--Background-Gray-Disabled); /* Light gray */
-  color: var(--Text-Tertiary-Disabled); /* Very light gray */
+  background: var(--background-gray-default-disabled, #e7e7e7);
+  color: var(--text-default-default-disabled, #888);
   cursor: not-allowed;
 }
 
@@ -60,6 +61,9 @@ button:focus-visible {
   background-color: var(--Background-Gray-Default); /* White background stays */
 }
 
+.primaryButton:active {
+  background: var(--background-primary-default-pressed, #625483);
+}
 .primaryButton[data-size="small"] {
   height: 32px; /* Smaller button height */
 }
@@ -113,45 +117,81 @@ button:focus-visible {
 /* Secondary Button */
 .secondaryButton {
   height: 40px; /* Default height */
-  border: none;
-  background-color: var(--Background-Gray-Tertiary);
-  color: var(--Text-Default-Default);
+
+  border: var(--stroke-border, 1px) solid var(--border-primary-default, #b7b1d4);
+  background: var(--background-gray-default, #fff);
+  color: var(--text-primary-default, #52466c);
 }
 
 .secondaryButton[data-size="small"] {
   height: 32px;
 }
 
-.secondaryButton[data-variant="outlined"] {
-  border: 2px solid var(--Text-Default-Secondary, --Grey-500);
-  background-color: var(--Background-Gray-Default);
-}
-
 .secondaryButton:not(:disabled):hover {
-  background-color: var(
-    --Background-Gray-Tertiary-Hover
-  ); /* Only apply hover effect if button is not disabled */
-}
-
-.secondaryButton[data-variant="outlined"]:hover {
-  /* No specific background color change for outlined on hover in your styled component */
+  border: var(--stroke-border, 1px) solid
+    var(--border-primary-secondary, #8777b0);
+  background: var(--background-gray-default, #fff);
+  color: var(--text-primary-default, #52466c);
 }
 
 .secondaryButton:not(:disabled):active {
-  background-color: var(
-    --Background-Gray-Tertiary-Hover
-  ); /* Change as needed */
+  border: var(--stroke-border, 1px) solid
+    var(--border-primary-tertiary, #352d48);
+  background: var(--background-gray-default, #fff);
+  color: var(--text-primary-default, #52466c);
 }
 
 .secondaryButton:disabled {
-  color: var(--Background-Gray-Disabled);
+  color: var(--text-default-default-disabled, #888);
+  border: var(--stroke-border, 1px) solid
+    var(--border-default-default-disabled, #b0b0b0);
+  background: var(--background-gray-default, #fff);
   cursor: not-allowed;
 }
-.secondaryButton[data-variant="outlined"]:disabled {
-  background-color: var(
-    --Background-Gray-Default
-  ); /* Keeps the white background even when disabled */
-  color: var(
-    --Background-Gray-Disabled
-  ); /* Same light gray text as disabled state */
+
+/* icon Button */
+.iconButton {
+  cursor: pointer;
+  text-transform: none;
+  outline: 0;
+  transition: border-color 0.25s, background-color 0.25s;
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-200, 8px);
+  border: none;
+}
+
+.iconButton:focus,
+.iconButton:focus-visible {
+  outline: 0 !important;
+}
+.iconButton:focus,
+.iconButton:focus-visible {
+  outline: 0 !important;
+}
+
+.primaryIconButton {
+  height: 40px;
+  width: 40px;
+  border: none;
+  color: var(--icons-default-default);
+  background: var(--background-primary-tertiary, #e5e4f0);
+}
+.primaryIconButton[data-size="small"] {
+  height: 32px;
+  width: 32px;
+}
+.primaryIconButton:hover {
+  background: var(--background-primary-tertiary-hover, #b7b1d4);
+}
+.primaryIconButton:disabled {
+  background: var(--background-gray-default-disabled, #e7e7e7);
+  color: var(--icons-default-default-disabled);
+  cursor: not-allowed;
+}
+
+.primaryIconButton:active {
+  background: var(--background-primary-tertiary-pressed, #d0cee4);
 }

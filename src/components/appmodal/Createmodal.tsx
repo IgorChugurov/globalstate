@@ -71,7 +71,9 @@ const Createmodal = ({
       >
         <div className={styles.wrapper}>
           <div className={styles.header}>
-            <span className="headers-h3 colorGreyBlack">{modalTitle}</span>
+            <span className={`${styles.headerTitle} headings-h1`}>
+              {modalTitle}
+            </span>
 
             <CloseButton
               onClick={() => {

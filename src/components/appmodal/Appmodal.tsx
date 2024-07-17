@@ -44,7 +44,7 @@ const Appmodal = ({
       >
         <div className={styles.wrapper}>
           <div className={styles.header}>
-            <span className="headers-h3 colorGreyBlack">
+            <span className={`${styles.headerTitle} headings-h1`}>
               Confirm {action ? action : "action"}
             </span>
 

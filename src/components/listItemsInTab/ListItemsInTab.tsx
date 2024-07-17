@@ -48,8 +48,7 @@ const ListsItemsInTab = ({
       itemsService
         .getMany(paginate)
         .then((res: any) => {
-          const data = res.items || res["products"];
-
+          const data = res.items || res["products"] || res["posts"] || [];
           setItems(
             data.map((d: any) => ({
               ...d,
@@ -59,7 +58,6 @@ const ListsItemsInTab = ({
           );
           const totalItems = res.totalItems || res.total;
           const totalPages = Math.ceil(totalItems / paginate.perPage);
-
           setPaginate((prev) => ({
             ...prev,
             currentPage: paginate.currentPage,

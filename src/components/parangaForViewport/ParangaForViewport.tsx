@@ -17,6 +17,7 @@ export const ParangaForViewport = () => {
       window.removeEventListener("showParange", parangaSetDisplay);
     };
   }, []);
+  //console.log(dispalyElement);
   return (
     <>
       {dispalyElement && (

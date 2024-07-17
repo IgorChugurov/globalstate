@@ -5,13 +5,12 @@
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-  border-radius: 6px;
+  gap: var(--space-150, 6px);
 }
 .input-container .labelWrapper {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: var(--space-050, 2px);
   align-self: stretch;
 }
 .input-container .inputBox {

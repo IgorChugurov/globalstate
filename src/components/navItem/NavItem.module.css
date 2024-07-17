@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  padding: var(--space-200, 8px) var(--space-300, 12px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-200, 8px);
+  border-radius: var(--radius-100, 4px);
+  background: var(--background-primary-secondary, #f8f7fb);
+  cursor: pointer;
+}
+.container.active {
+  background: var(--background-primary-default, #52466c);
+  box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.08);
+  .title {
+    color: var(--text-primary-on-primary, #fff);
+  }
+}
+.title {
+  color: var(--text-default-secondary, #6d6d6d);
+  text-align: center;
+}

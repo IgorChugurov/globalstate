@@ -15,6 +15,7 @@ import SearchInputSimple from "../listItems/components/searchInput/SearchInputSi
 import { Outlet, useLocation } from "react-router-dom";
 import Createmodal from "../appmodal/Createmodal";
 import ListsItemsInTab from "../listItemsInTab/ListItemsInTab";
+import { createAnyEntity } from "../../utils";
 
 const GroupCompany = ({
   initDataGroupCompanies,
@@ -27,12 +28,18 @@ const GroupCompany = ({
   initDataGroupAdmins: IOptionsListItem;
   initDataGroupSettings: IOptionsListItem;
 }) => {
+  const location = useLocation();
+  const groupId = location.pathname.split("/")[2];
+  // Проверяем, содержит ли текущий путь вложенный маршрут (проверяем наличие второго сегмента после /group/:id)
+  const isChildRoute = location.pathname.split("/").length > 3;
+  //console.log(isChildRoute);
   // this const use for disabled interaction with page when data is loading in the tabs
   const [loading, setLoading] = useState<boolean>(false);
   const [searchState, setSearchState] = useState<string>("");
-  const [gorupName, setGroupName] = useState<string>("Group");
 
   const { title } = initDataGroupCompanies;
+
+  // this is data for tabs
   const {
     forList: forListCompanies,
     title: titleCompanies,
@@ -48,10 +55,6 @@ const GroupCompany = ({
     title: titleSettings,
     forEdit: forEditSettings,
   } = initDataGroupSettings;
-  const dataForBreadcrums = [
-    { title: title, link: "/groups" },
-    { title: gorupName },
-  ];
 
   const {
     searchBlock: placeholderSearchCompanies,
@@ -81,30 +84,34 @@ const GroupCompany = ({
   );
   const [buttonBlock, setButtonBlock] = useState<any>(buttonBlockCompanies);
 
-  const itemsService = servicesPackage["groupCompanies"];
+  const groupService = servicesPackage["groupCompanies"];
 
-  const location = useLocation();
+  const changeRouteData = useContext(GlobalStateContext).changeRouteData;
 
-  // Проверяем, содержит ли текущий путь вложенный маршрут (проверяем наличие второго сегмента после /group/:id)
-  const isChildRoute = location.pathname.split("/").length > 3;
-
-  // const createNewItem = () => {
-  //   setCurrentItem(null);
-  //   setModalCreateOpen(true);
-  // };
-  //console.log(items);
-  const createData = (data: any) => {
-    console.log(data);
+  const createData = async (data: any) => {
+    const tabServiceName =
+      tab === 0 ? "company" : tab === 1 ? "groupAdmins" : "groupSettings";
+    // here we add new item to the list from the active tab and add gorupId bs all items linked to group
+    const tabService = servicesPackage[tabServiceName];
+    const dataToSend = { ...data, groupId };
+    await createAnyEntity(dataToSend, tabService);
   };
 
   useEffect(() => {
-    if (itemsService) {
+    changeRouteData({ groupCompanies: null });
+    if (groupService) {
       setLoading(true);
-      itemsService.getOne(location.pathname.split("/")[2]).then((res) => {
-        const groupCompanies: IGroupCompanies = res as IGroupCompanies;
-        setGroupName(groupCompanies.name || "Group");
-        setLoading(false);
-      });
+      groupService
+        .getOne(groupId)
+        .then((res) => {
+          const groupCompanies: IGroupCompanies = res as IGroupCompanies;
+          changeRouteData({ groupCompanies: groupCompanies });
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
     }
   }, []);
 
@@ -170,9 +177,13 @@ const GroupCompany = ({
           handleAction={createData}
         />
       )}
-      <div className={`${styles.container} ${isChildRoute ? "hidden" : ""}`}>
+      <Outlet />
+      <div
+        className={`${styles.container} ${
+          isChildRoute ? styles.childRoute : ""
+        }`}
+      >
         <div className={styles.header}>
-          <Breadcrumbs data={dataForBreadcrums} />
           <div className={styles.right}>
             <SearchInputSimple
               disabled={loading}
@@ -194,6 +205,7 @@ const GroupCompany = ({
             </button>
           </div>
         </div>
+
         <Tabs
           tabs={[titleCompanies, titleAdmins, titleSettings]}
           setTab={setTab}
@@ -219,7 +231,6 @@ const GroupCompany = ({
           />
         )}
       </div>
-      <Outlet />
     </React.Fragment>
   );
 };

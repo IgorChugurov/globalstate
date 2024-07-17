@@ -3,14 +3,20 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(
-    --Grey-White
-  ); /* Assuming grey.white translates to #FFFFFF */
-  border-radius: 20px;
+
   display: flex;
+  padding: var(--space-0, 0px);
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: var(--space-800, 32px);
+  border-radius: var(--radius-400, 16px);
+  background: var(--background-gray-default, #fff);
+  /* card shadow/L */
+  box-shadow: 0px 184px 51px 0px rgba(52, 46, 72, 0),
+    0px 118px 47px 0px rgba(52, 46, 72, 0.01),
+    0px 66px 40px 0px rgba(52, 46, 72, 0.05),
+    0px 29px 29px 0px rgba(52, 46, 72, 0.09),
+    0px 7px 16px 0px rgba(52, 46, 72, 0.1);
 }
 
 .wrapper:focus-visible {
@@ -50,7 +56,7 @@
   }
 }
 
-.header {
+/* .header {
   display: flex;
   padding: 16px 24px;
   justify-content: space-between;
@@ -61,15 +67,30 @@
   background: var(--Grey-50, #f8f8f8);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+} */
+
+.header {
+  display: flex;
+  align-self: stretch;
+  justify-content: space-between;
+  padding: var(--space-300, 12px) var(--space-600, 24px);
+  align-items: center;
+  gap: var(--space-300, 12px);
+  border-radius: var(--radius-400, 16px) var(--radius-400, 16px) 0px 0px;
+  border-bottom: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
+  background: var(--background-primary-secondary, #f8f7fb);
+}
+.headerTitle {
+  color: var(--text-default-default, #262626);
 }
 .content {
-  display: inline-flex;
+  display: flex;
+  padding: var(--space-0, 0px) var(--space-600, 24px);
   flex-direction: column;
   align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 16px;
-
-  border-radius: 20px;
+  gap: var(--space-200, 8px);
+  align-self: stretch;
   /* background: var(--Gray-0, #fff); */
 
   .textWrapper {
@@ -86,12 +107,10 @@
 
 .editContent {
   display: flex;
-  padding: 0px 24px;
-
+  padding: var(--space-0, 0px) var(--space-600, 24px);
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
-
+  gap: var(--space-200, 8px);
   align-self: stretch;
 }
 .form {
@@ -103,13 +122,15 @@
 .footer {
   display: flex;
   align-self: stretch;
-  padding: 16px 24px;
+  padding: var(--space-300, 12px) var(--space-600, 24px);
   justify-content: flex-end;
-  gap: 16px;
-  border-top: 1px solid var(--Grey-100);
+  align-items: flex-start;
+  gap: var(--space-400, 16px);
+  border-top: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
   .buttonWrapper {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: var(--space-400, 16px);
   }
 }

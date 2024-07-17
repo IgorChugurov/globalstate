@@ -1,0 +1,597 @@
+:root {
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  /* Mode-1: Mode 1 */
+
+  /* Collection: COLOR PRIMITIVES */
+  --Primary-50: rgba(248, 247, 251, 1);
+  --Primary-100: rgba(236, 235, 244, 1);
+  --Primary-200: rgba(229, 228, 240, 1);
+  --Primary-300: rgba(208, 206, 228, 1);
+  --Primary-400: rgba(183, 177, 212, 1);
+  --Primary-500: rgba(155, 145, 193, 1);
+  --Primary-600: rgba(135, 119, 176, 1);
+  --Primary-700: rgba(117, 100, 157, 1);
+  --Primary-800: rgba(98, 84, 131, 1);
+  --Primary-900: rgba(82, 70, 108, 1);
+  --Primary-950: rgba(53, 45, 72, 1);
+  --Gray-White: rgba(255, 255, 255, 1);
+  --Gray-50: rgba(246, 246, 246, 1);
+  --Gray-100: rgba(231, 231, 231, 1);
+  --Gray-200: rgba(209, 209, 209, 1);
+  --Gray-300: rgba(176, 176, 176, 1);
+  --Gray-400: rgba(136, 136, 136, 1);
+  --Gray-500: rgba(109, 109, 109, 1);
+  --Gray-600: rgba(93, 93, 93, 1);
+  --Gray-700: rgba(79, 79, 79, 1);
+  --Gray-800: rgba(69, 69, 69, 1);
+  --Gray-900: rgba(61, 61, 61, 1);
+  --Gray-Black: rgba(38, 38, 38, 1);
+  --Green-100: rgba(218, 251, 225, 1);
+  --Green-200: rgba(172, 238, 187, 1);
+  --Green-300: rgba(111, 221, 139, 1);
+  --Green-400: rgba(74, 194, 107, 1);
+  --Green-500: rgba(45, 164, 78, 1);
+  --Green-600: rgba(26, 127, 55, 1);
+  --Green-700: rgba(17, 99, 41, 1);
+  --Green-800: rgba(4, 79, 30, 1);
+  --Green-900: rgba(0, 61, 22, 1);
+  --Green-1000: rgba(0, 45, 17, 1);
+  --Blue-100: rgba(221, 244, 255, 1);
+  --Blue-200: rgba(182, 227, 255, 1);
+  --Blue-300: rgba(128, 204, 255, 1);
+  --Blue-400: rgba(84, 174, 255, 1);
+  --Blue-500: rgba(33, 139, 255, 1);
+  --Blue-600: rgba(9, 105, 218, 1);
+  --Blue-700: rgba(5, 80, 174, 1);
+  --Blue-800: rgba(3, 61, 139, 1);
+  --Blue-900: rgba(10, 48, 105, 1);
+  --Blue-1000: rgba(0, 33, 85, 1);
+  --Orange-100: rgba(255, 241, 229, 1);
+  --Orange-200: rgba(255, 216, 181, 1);
+  --Orange-300: rgba(255, 183, 124, 1);
+  --Orange-400: rgba(251, 143, 68, 1);
+  --Orange-500: rgba(225, 111, 36, 1);
+  --Orange-600: rgba(188, 76, 0, 1);
+  --Orange-700: rgba(149, 56, 0, 1);
+  --Orange-800: rgba(118, 44, 0, 1);
+  --Orange-900: rgba(92, 34, 0, 1);
+  --Orange-1000: rgba(71, 23, 0, 1);
+  --Red-100: rgba(255, 235, 233, 1);
+  --Red-200: rgba(255, 206, 203, 1);
+  --Red-300: rgba(255, 171, 168, 1);
+  --Red-400: rgba(255, 129, 130, 1);
+  --Red-500: rgba(250, 69, 73, 1);
+  --Red-600: rgba(207, 34, 46, 1);
+  --Red-700: rgba(164, 14, 38, 1);
+  --Red-800: rgba(130, 7, 30, 1);
+  --Red-900: rgba(102, 0, 24, 1);
+  --Red-1000: rgba(76, 0, 20, 1);
+  --System-Error: #ff453a;
+
+  /* Collection: TYPOGRAPHY PRIMITIVES */
+  --Headings-font: General Sans;
+  --Body-font: Inter;
+  --Mono-font: Roboto mono;
+  --Scale-01: 12;
+  --Scale-02: 14;
+  --Scale-03: 16;
+  --Scale-04: 20;
+  --Scale-05: 24;
+  --Scale-06: 40;
+  --Weight-Regular: 400;
+  --Weight-Medium: 500;
+  --Weight-Semibold: 600;
+  --Weight-Bold: 700;
+
+  /* Collection: TYPOGRAPHY */
+  --Title-Hero-Font-Family: var(--Headings-font);
+  --Title-Hero-Size: var(--Scale-06);
+  --Title-Hero-Font-weight: var(--Weight-Semibold);
+  --Heading-Font-Family: var(--Headings-font);
+  --Heading-Size: var(--Scale-04);
+  --Heading-Font-weight: var(--Weight-Medium);
+  --Body-Font-Family: var(--Body-font);
+  --Body-Size-Small: var(--Scale-01);
+  --Body-Size-Medium: var(--Scale-02);
+  --Body-Size-Large: var(--Scale-03);
+  --Body-Font-Weight-Regular: var(--Weight-Regular);
+  --Body-Font-Weight-Strong: var(--Weight-Medium);
+
+  /* Collection: SIZE */
+  --Space-0: 0;
+  --Space-050: 2;
+  --Space-100: 4;
+  --Space-150: 6;
+  --Space-200: 8;
+  --Space-300: 12;
+  --Space-400: 16;
+  --Space-600: 24;
+  --Space-800: 32;
+  --Space-1000: 40;
+  --Space-1200: 48;
+  --Space-1600: 64;
+  --Space-2400: 96;
+  --Space-4000: 160;
+  --Radius-100: 4;
+  --Stroke-Border: 1px;
+  --Radius-200: 8;
+  --Radius-400: 16;
+  --Radius-Full: 9999;
+  --Radius-Number: 0;
+  --Icon-XSmall: 16;
+  --Icon-Small: 24;
+  --Icon-Medium: 32;
+  --Icon-Large: 40;
+
+  /* Mode-2: Light */
+
+  /* Collection: COLOR */
+  --Background-Gray-Default: var(--Gray-White);
+  --Background-Gray-Default-Hover: var(--Gray-50);
+  --Background-Gray-Secondary: var(--Gray-50);
+  --Background-Gray-Secondary-Hover: var(--Gray-100);
+  --Background-Gray-Tertiary: var(--Gray-100);
+  --Background-Gray-Tertiary-Hover: var(--Gray-200);
+  --Background-Gray-Disabled: var(--Gray-300);
+  --Text-Default-Default: var(--Gray-Black);
+  --Text-Default-Disabled: var(--Gray-300);
+  --Text-Default-Secondary: var(--Gray-600);
+  --Text-Default-Tertiary: var(--Gray-400);
+  --Text-Tertiary-Disabled: var(--Gray-100);
+
+  --Border-Default-Default: var(--Gray-100);
+  --Border-Default-Secondary: var(--Gray-200);
+  --Border-Default-Tertiary: var(--Gray-300);
+  --Background-Primary-Default: var(--Primary-950);
+  --Background-Primary-Default-Hover: var(--Primary-900);
+  --Background-Primary-Secondary: var(--Primary-900);
+  --Background-Primary-Secondary-Hover: var(--Primary-800);
+  --Background-Primary-Tertiary: var(--Primary-200);
+  --Background-Primary-Tertiary-Hover: var(--Primary-300);
+  --Background-Primary-Login: var(--Primary-50);
+  --Text-Primary-Default: var(--Primary-900);
+  --Text-Primary-Secondary: var(--Primary-600);
+  --Text-Primary-Tertiary: var(--Primary-400);
+  --Text-Primary-On-Primary: var(--Primary-50);
+  --Border-Primary-Default: var(--Primary-100);
+  --Border-Primary-Secondary: var(--Primary-200);
+  --Border-Primary-Tertiary: var(--Primary-300);
+  --Icons-Default-Default: var(--Gray-Black);
+  --Icons-Default-Secondary: var(--Gray-500);
+  --Icons-Default-Tertiary: var(--Gray-300);
+  --Icons-Primary-Default: var(--Primary-900);
+  --Icons-Primary-Secondary: var(--Primary-600);
+  --Icons-Primary-Tertiary: var(--Primary-400);
+  --Icons-Primary-On-brand: var(--Primary-50);
+
+  /* Mode-3: Dark */
+}
+
+.dark {
+  /* Collection: COLOR */
+  --Background-Gray-Default: var(--Gray-Black);
+  --Background-Gray-Default-Hover: var(--Gray-900);
+  --Background-Gray-Secondary: var(--Gray-900);
+  --Background-Gray-Secondary-Hover: var(--Gray-800);
+  --Background-Gray-Tertiary: var(--Gray-800);
+  --Background-Gray-Tertiary-Hover: var(--Gray-700);
+  --Text-Default-Default: var(--Gray-White);
+  --Text-Default-Secondary: var(--Gray-100);
+  --Text-Default-Tertiary: var(--Gray-300);
+  --Border-Default-Default: var(--Gray-800);
+  --Border-Default-Secondary: var(--Gray-700);
+  --Border-Default-Tertiary: var(--Gray-600);
+  --Background-Primary-Default: var(--Primary-50);
+  --Background-Primary-Default-Hover: var(--Primary-100);
+  --Background-Primary-Secondary: var(--Primary-100);
+  --Background-Primary-Secondary-Hover: var(--Primary-200);
+  --Background-Primary-Tertiary: var(--Primary-800);
+  --Background-Primary-Tertiary-Hover: var(--Primary-700);
+  --Background-Primary-Login: rgba(255, 255, 255, 1);
+  --Text-Primary-Default: var(--Primary-100);
+  --Text-Primary-Secondary: var(--Primary-300);
+  --Text-Primary-Tertiary: var(--Primary-400);
+  --Text-Primary-On-Primary: var(--Primary-950);
+  --Border-Primary-Default: var(--Primary-900);
+  --Border-Primary-Secondary: var(--Primary-800);
+  --Border-Primary-Tertiary: var(--Primary-700);
+  --Icons-Default-Default: var(--Gray-White);
+  --Icons-Default-Secondary: var(--Gray-400);
+  --Icons-Default-Tertiary: var(--Gray-800);
+  --Icons-Primary-Default: var(--Primary-50);
+  --Icons-Primary-Secondary: var(--Primary-300);
+  --Icons-Primary-Tertiary: var(--Primary-500);
+  --Icons-Primary-On-brand: var(--Primary-950);
+}
+
+:root {
+  color: #171717;
+  background-color: #ffffff;
+  --Grey-50: #f8f8f8;
+  --Grey-100: #e8e8e8;
+  --Grey-200: #dcdcdc;
+  --Grey-300: #bdbdbd;
+  --Grey-400: #a4a4a4;
+  --Grey-500: #7c7c7c;
+  --Grey-600: #656565;
+  --Grey-700: #525252;
+  --Grey-White: #ffffff;
+  --Grey-Black: #171717;
+  --System-Error-Fill: #fbeae9;
+  --System-Error: #ff453a;
+  --System-Error-Dark: #ab140c;
+  --Primary-50: #eef7ff;
+  --Primary-100: #d8edff;
+  --Pimary-200: #9acffe;
+  --Primary-500: #0768fd;
+  --Primary-600: #065ecf; /* Adjusted to create a progression */
+  --Primary-700: #0550b1; /* Darker than 600 */
+  --Primary-800: #044287; /* Darker than 700 but lighter than 950 */
+  --primary-950: #033f88; /* Even darker primary blue */
+  --grey-50: #f8f8f8;
+  --grey-100: #e8e8e8;
+  --grey-200: #dcdcdc;
+  --grey-400: #a4a4a4;
+  --grey-300: #bdbdbd;
+  --grey-500: #7c7c7c;
+  --grey-600: #656565;
+  --grey-700: #525252;
+  --grey-white: #ffffff;
+  --grey-black: #171717;
+  --system-error: #ff453a;
+
+  --system-srror-fill: #f7eae9;
+  --system-srror-fill-dark: #f8d5d3;
+  --primary-50: #eef7ff;
+  --primary-100: #d8edff;
+  --primary-200: #9acffe;
+  --primary-500: #0768fd;
+  --primary-600: #065ecf; /* Adjusted to create a progression */
+  --primary-700: #0550b1; /* Darker than 600 */
+  --primary-800: #044287; /* Darker than 700 but lighter than 950 */
+  --primary-950: #033f88; /* Even darker primary blue */
+
+  --borderRadius: 6px;
+  --border-radius: 6px;
+  --bg-color: white;
+  --text-color: #111;
+
+  --Blue-Ribbon-50: #eef7ff;
+  --Blue-Ribbon-600: #0768fd;
+  --System-Info: #0a7bff;
+}
+
+.dark {
+  color: #ffffff;
+  background-color: #171717;
+
+  --Grey-700: #f8f8f8;
+  --Grey-600: #e8e8e8;
+  --Grey-500: #dcdcdc;
+  --Grey-400: #bdbdbd;
+  --Grey-300: #a4a4a4;
+  --Grey-200: #7c7c7c;
+  --Grey-100: #656565;
+  --Grey-50: #525252;
+  --Grey-White: #171717;
+  --Grey-Black: #ffffff;
+  --System-Error-Fill: #fbeae9;
+  --System-Error: #ff453a;
+  --System-Error-Dark: #ab140c;
+  --Primary-50: #eef7ff;
+  --Primary-100: #d8edff;
+  --Primary-200: #9acffe;
+  --Primary-500: #0768fd;
+  --Primary-600: #065ecf; /* Adjusted to create a progression */
+  --Primary-700: #0550b1; /* Darker than 600 */
+  --Primary-800: #044287; /* Darker than 700 but lighter than 950 */
+  --primary-950: #033f88; /* Even darker primary blue */
+
+  --grey-700: #f8f8f8;
+  --grey-600: #e8e8e8;
+  --grey-500: #dcdcdc;
+  --grey-400: #bdbdbd;
+  --grey-300: #a4a4a4;
+  --grey-200: #7c7c7c;
+  --grey-100: #656565;
+  --grey-50: #525252;
+
+  --grey-white: #171717;
+  --grey-black: #ffffff;
+  --system-error: #ff453a;
+
+  --system-srror-fill: #f7eae9;
+  --system-srror-fill-dark: #f8d5d3;
+  --primary-50: #eef7ff;
+  --primary-100: #d8edff;
+  --primary-200: #9acffe;
+  --primary-500: #0768fd;
+  --primary-600: #065ecf; /* Adjusted to create a progression */
+  --primary-700: #0550b1; /* Darker than 600 */
+  --primary-800: #044287; /* Darker than 700 but lighter than 950 */
+  --primary-950: #033f88; /* Even darker primary blue */
+  --borderRadius: 6px;
+  --border-radius: 6px;
+  --bg-color: #111;
+  --text-color: white;
+
+  --Blue-Ribbon-50: #eef7ff;
+  --Blue-Ribbon-600: #0768fd;
+  --System-Info: #0a7bff;
+}
+
+/* :root {
+  --bgColor: white;
+  --textColor: #111;
+  --mainColor: #a086d3;
+  --borderColor: seagreen;
+}
+
+html[data-theme="light"] {
+  --background-color: white;
+  --text-color: #111;
+  --main-color: #a086d3;
+  --link-color: #543fd7;
+  --borderColor: seagreen;
+}
+
+html[data-theme="dark"] {
+  --background-color: #212a2e;
+  --text-color: #f7f8f8;
+  --main-color: #a086d3;
+  --link-color: #828fff;
+  --borderColor: seagreen;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  color: var(--link-color);
+} 
+
+body {
+  transition: 1s all ease;
+} 
+
+ .light {
+  background-color: white;
+  color: #111;
+}
+
+.dark {
+  background-color: #111;
+  color: #bbb;
+
+
+ .container {
+  max-width: 1366px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 0 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+/* new  */
+
+/* :root {
+  --bg: white;
+  --textColor: black;
+  --softBg: #f0f0f0;
+  --softTextColor: #626262;
+  --main-color: #1e297b;
+  --main-color-dark: #151c56;
+  --main-color-light: #bad4ff;
+} */
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  background: rgb(236, 236, 236);
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(199, 199, 199);
+  -webkit-border-radius: 5px;
+  border: 2px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body,
+p {
+  margin: 0;
+}
+
+/* body {
+  max-width: 100vw;
+  overflow-x: hidden;
+
+  font-family: "Roboto Flex";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: #747bff;
+} */
+
+.dark {
+  /* https://stackoverflow.com/questions/62162645/change-color-of-chromes-calendar-icon-in-html-date-input */
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(100%);
+  }
+  :is(input) {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar {
+    background: rgb(41, 41, 41);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(102, 102, 102);
+  }
+}
+
+.dark {
+  --bgColor: #0a0b0c;
+  --textColor: #ddd;
+  --softBg: #1f273a;
+  --softTextColor: #a6a6a6;
+}
+
+.light {
+  --bgColor: white;
+  --textColor: black;
+  --softBg: #f0f0f0;
+  --softTextColor: #626262;
+}
+
+/* button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+} */
+
+@media (prefers-color-scheme: light) {
+  /* :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  } */
+  /* button {
+    background-color: #f9f9f9;
+  } */
+}
+
+/* Define keyframes for the rotation animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Apply the rotation animation when the .rotate class is added */
+.rotate {
+  /* Use the defined 'spin' animation */
+  animation: spin 0.5s linear infinite;
+  /* Explanation:
+     - 'spin' is the name of the keyframes animation defined above.
+     - '2s' is the duration of one full rotation cycle. Adjust as needed for faster or slower rotation.
+     - 'linear' means the animation speed is constant.
+     - 'infinite' makes the animation repeat indefinitely. */
+}
+
+.pl10 {
+  padding-left: 10px;
+}
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Нестандартизированный, но поддерживается в Chrome и Opera */
+}
+.cursorPointer {
+  cursor: pointer;
+}
+.capitalazeFirsChar {
+  text-transform: capitalize;
+}
+
+/* **************************************************************** */
+.wrapIconInList {
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
+  border-radius: 6px;
+  border: 1px solid var(--Grey-100);
+  background: var(--Grey-White);
+}
+
+.icon_container {
+  color: var(--Grey-600);
+  border-radius: 6px;
+  border: 1px solid var(--Grey-200);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  transition: color 0.3s, background-color 0.3s; /* Smooth transition for color and background */
+}
+
+.icon_container:hover {
+  border-color: var(--Gray-500);
+  color: var(--Grey-Black);
+  cursor: pointer;
+  background-color: var(--Grey-100);
+}
+
+.paranga {
+  position: fixed; /* Fixes the element relative to the viewport */
+  display: flex; /* Sets the display mode to flex */
+  width: 100%; /* Sets the width to 100% of the viewport width */
+  height: 100%; /* Sets the height to 100% of the viewport height */
+  align-items: center; /* Vertically centers the children */
+  justify-content: center; /* Horizontally centers the children */
+  inset: 0px; /* Shorthand to set top, right, bottom, and left to 0 */
+  z-index: 1311; /* Stack order of the element */
+  top: 0; /* Top edge of the element */
+  left: 0; /* Left edge of the element */
+  opacity: 0.8; /* Transparency level of the element */
+  transition: all 0.5s ease-in-out; /* Transition effect for all properties */
+  background-color: rgba(97, 97, 97, 0.8); /* Gray background with opacity */
+}
+.hidden {
+  display: none !important;
+}

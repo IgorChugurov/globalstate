@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useWindowDimensions from "../../hooks/windowDimensions";
 
 import styles from "./NavbarApp.module.css";
@@ -6,17 +6,27 @@ import styles from "./NavbarApp.module.css";
 import { Menu, MenuItem } from "@mui/material";
 
 import { UserDataContext } from "../../context/userDataContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-import { Icon_folder_closed, Icon_Move_item, Icon_Person } from "./Icons";
+import { Icon_Move_item, Icon_Person } from "./Icons";
 import { GlobalStateContext } from "../../context/GlobalStateProvider";
 import { Icon_Logo, Icon_Setting } from "../icons/Icons";
+import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
+import Avatar from "../avatar/Avatar";
+import NavItem from "../navItem/NavItem";
 
 const NavbarApp = () => {
+  const location = useLocation();
   const { userData } = useContext(UserDataContext);
-  const { toggleDarkMode, TITLE, VERSION } = useContext(GlobalStateContext);
+
+  const { toggleDarkMode, TITLE, VERSION, routeData } =
+    useContext(GlobalStateContext);
   const userTitle = (userData?.email || "PP").substring(0, 2);
   const { windowWidth } = useWindowDimensions();
+
+  const [breadcrumbsData, setBreadcrumbsData] = useState<
+    { title: string; link?: string }[]
+  >([]);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -34,6 +44,31 @@ const NavbarApp = () => {
     event.preventDefault();
     toggleDarkMode();
   };
+  // set data for breadcrumbs
+  useEffect(() => {
+    const arr = location.pathname.split("/");
+    if (location.pathname === "/" || location.pathname === "/groups") {
+      setBreadcrumbsData([{ title: "Company groups", link: "/" }]);
+    } else if (arr[1] === "groups") {
+      const groupCompanies = routeData?.groupCompanies;
+      const titleGroup = groupCompanies?.name || groupCompanies?.title || "";
+      const arrData = [
+        { title: "Company groups", link: "/" },
+        { title: titleGroup },
+      ];
+      if (arr.length === 4) {
+        arrData[1].link = `/groups/${arr[2]}`;
+        const company = routeData?.company;
+        const titleCompany = company?.name || company?.title || "";
+        arrData.push({ title: titleCompany });
+      }
+      setBreadcrumbsData(arrData);
+    } else if (location.pathname === "/environments") {
+      setBreadcrumbsData([{ title: "Environments", link: "/environments" }]);
+    } else if (location.pathname === "/settings") {
+      setBreadcrumbsData([{ title: "Settings", link: "/settings" }]);
+    }
+  }, [location.pathname, routeData]);
 
   return (
     <>
@@ -96,85 +131,24 @@ const NavbarApp = () => {
               <Icon_Logo />
             </Link>
           </div>
-          <div
-            className={`${styles.mainMenuItemWrapper} ${
-              location.pathname === "/groups" ? styles.active : ""
-            }`}
-          >
-            <Link to={`/groups`} className={styles.mainMenuItem}>
-              Company Management
-            </Link>
+          <div className={styles.navigationItems}>
+            <NavItem title="Companies" link="/" startRoute="groups" />
+            <NavItem title="Environments" link="/environments" />
           </div>
-          <div
-            className={`${styles.mainMenuItemWrapper} ${
-              location.pathname === "/environment" ? styles.active : ""
-            }`}
-          >
-            <Link to={`/environment`} className={styles.mainMenuItem}>
-              Environment
-            </Link>
-          </div>
+          <Breadcrumbs data={breadcrumbsData} />
         </div>
+
         <div className={styles.right}>
-          <div className={styles.buttonWrapper}>
-            <Icon_Setting />
-          </div>
-          <div className={styles.avatarWrapper} onClick={handleClick}>
-            <span className={styles.avatar}>{userTitle}</span>
-          </div>
-        </div>
-
-        {/* <Link to={`/products`} className={styles.logoWrap}>
-          <Icon_folder_closed />
-          <div className={styles.logoTitleWrap}>
-            <span className={styles.firstTitle}>WEB.</span>
-            <span className={styles.secondTitle}>deal</span>
-          </div>
-        </Link>
-        <div className={styles.menuWrap}>
-          <div className={styles.itemMenuWrap}>
-            <Link
-              to={`/users`}
-              className={[
-                styles.itemMenu,
-                "colorGreyBlack",
-                location.pathname === "/users"
-                  ? "body-m-bold"
-                  : "body-m-medium",
-              ].join(" ")}
+          <Link to={`/settings`}>
+            <button
+              className={`iconButton primaryIconButton`}
+              data-size="small"
             >
-              Users
-            </Link>
-          </div>
-          <div className={styles.itemMenuWrap}>
-            <Link
-              to={`/products`}
-              className={[
-                styles.itemMenu,
-                "colorGreyBlack",
-                location.pathname === "/products"
-                  ? "body-m-bold"
-                  : "body-m-medium",
-              ].join(" ")}
-            >
-              Products
-            </Link>
-          </div>
+              <Icon_Setting />
+            </button>
+          </Link>
+          <Avatar title={userTitle} onClick={handleClick} />
         </div>
-
-        <div
-          className={`${styles.titleWrap} ${anchorEl ? styles.active : ""}`}
-          onClick={handleClick}
-        >
-          <span
-            className="body-s-regular colorGreyBlack"
-            style={{
-              textTransform: "uppercase",
-            }}
-          >
-            {usetTitle}
-          </span>
-        </div> */}
       </div>
     </>
   );

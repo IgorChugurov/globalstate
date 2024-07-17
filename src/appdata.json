@@ -57,7 +57,7 @@
       "title": "Companies",
       "collectionName": "company",
       "forServicePackage": {
-        "url": "https://dummyjson.com/products",
+        "url": "https://dummyjson.com/posts",
         "options": { "create": "/add" }
       },
       "forList": {
@@ -256,7 +256,7 @@
         "columnsForGrid": [
           {
             "field": "title",
-            "headerName": "Name",
+            "headerName": "Email",
             "width": 250,
             "type": "naigateToDetails"
           },
@@ -378,6 +378,78 @@
         ]
       }
     },
+    {
+      "title": "Environment",
+      "collectionName": "environment",
+      "forServicePackage": {
+        "url": "https://dummyjson.com/posts",
+        "options": { "create": "/add" }
+      },
+      "forList": {
+        "searchBlock": "Search for environment",
+
+        "buttonBlock": { "title": "New environment variable" },
+        "columnsForGrid": []
+      },
+      "forEdit": {
+        "title": ["Create new varible", ""],
+        "pageHeader": "Environment variable details",
+        "sections": []
+      }
+    },
+    {
+      "title": "appAdmins",
+      "collectionName": "appAdmins",
+      "forServicePackage": {
+        "url": "https://dummyjson.com/posts",
+        "options": { "create": "/add" }
+      },
+      "forList": {
+        "searchBlock": "Search for admins",
+
+        "buttonBlock": { "title": "New admin" },
+        "columnsForGrid": [
+          {
+            "field": "title",
+            "headerName": "Email",
+            "width": 250
+          },
+
+          { "field": "createdAt", "headerName": "Created", "width": 250 },
+          {
+            "field": "actions",
+            "headerName": "Actions",
+            "type": "actions",
+            "width": 250,
+            "options": {
+              "actions": [{ "name": "delete" }]
+            }
+          }
+        ]
+      },
+      "forEdit": {
+        "title": ["Create new admin for app", ""],
+        "pageHeader": "",
+        "sections": [
+          {
+            "title": "Info",
+            "fields": [
+              {
+                "name": "email",
+                "label": "Email",
+                "placeholder": "Enter email",
+                "type": "email",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Email is required"
+              }
+            ]
+          }
+        ]
+      }
+    },
+
     {
       "title": "Products",
       "collectionName": "products",

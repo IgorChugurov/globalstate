@@ -1,0 +1,34 @@
+import { sendMessage, setError, setSuccess } from "./sendMessage";
+
+export const createAnyEntity = async (data: any, service: any) => {
+  sendMessage("showParange");
+  try {
+    const res = await service.createOne(data);
+    setSuccess("Updated successfully");
+  } catch (err: any) {
+    console.log(err);
+    setError(err.message || "an error occurred");
+  } finally {
+    sendMessage("hideParange");
+    setTimeout(() => {
+      setSuccess("");
+      setError("");
+    }, 5000);
+  }
+};
+export const updateAnyEntity = async (data: any, service: any) => {
+  sendMessage("showParange");
+  try {
+    const res = await service.updateOne(data);
+    setSuccess("Updated successfully");
+  } catch (err: any) {
+    console.log(err);
+    setError(err.message || "an error occurred");
+  } finally {
+    sendMessage("hideParange");
+    setTimeout(() => {
+      setSuccess("");
+      setError("");
+    }, 5000);
+  }
+};
