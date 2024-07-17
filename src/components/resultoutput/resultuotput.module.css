@@ -2,24 +2,72 @@
   position: fixed;
   z-index: 1301;
 
-  right: 40px;
-  bottom: 40px;
-}
-.innerContainerError,
-.innerContainerSuccess {
-  display: inline-flex;
-  padding: 16px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  border-radius: 10px;
-  border: 1px solid var(--Grey-200, #dcdcdc);
-  width: 480px;
+  justify-content: center;
+  padding-bottom: 24px;
 }
 .innerContainerError {
-  background: #f0bcb9;
+  display: flex;
+  width: 368px;
+  max-width: 600px;
+
+  padding: var(--space-300, 12px);
+  align-items: center;
+  gap: var(--space-200, 8px);
+  border-radius: var(--radius-200, 8px);
+  border: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
+  background: var(--background-error-default, #fef2f0);
+  /* card shadow/S */
+  box-shadow: 0px 2px 8px 0px rgba(171, 166, 194, 0.3);
 }
 .innerContainerSuccess {
-  background: #d9f3cd;
+  display: flex;
+  width: 368px;
+  max-width: 600px;
+  padding: var(--space-300, 12px);
+  align-items: center;
+  gap: var(--space-200, 8px);
+  border-radius: var(--radius-200, 8px);
+  border: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
+  background: var(--background-success-default, #edfdf0);
+  /* card shadow/S */
+  box-shadow: 0px 2px 8px 0px rgba(171, 166, 194, 0.3);
+  color: var(--text-default-default, #262626);
+}
+.iconSuccess {
+  display: flex;
+  width: var(--icon-xsmall, 16px);
+  height: var(--icon-xsmall, 16px);
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--icons-success-default);
+}
+.iconError {
+  display: flex;
+  width: var(--icon-xsmall, 16px);
+  height: var(--icon-xsmall, 16px);
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--icons-error-default);
+}
+.iconClose {
+  display: flex;
+  width: var(--icon-xsmall, 16px);
+  height: var(--icon-xsmall, 16px);
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  color: var(--icons-default-default);
 }
 .titleWrap {
   display: flex;
@@ -27,12 +75,4 @@
   align-items: center;
   gap: 12px;
   overflow-x: hidden;
-}
-.iconClose {
-  cursor: pointer;
-}
-.iconInfo {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
 }

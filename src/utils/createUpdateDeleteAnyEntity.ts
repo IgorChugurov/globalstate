@@ -4,7 +4,7 @@ export const createAnyEntity = async (data: any, service: any) => {
   sendMessage("showParange");
   try {
     const res = await service.createOne(data);
-    setSuccess("Updated successfully");
+    setSuccess("Created successfully");
   } catch (err: any) {
     console.log(err);
     setError(err.message || "an error occurred");

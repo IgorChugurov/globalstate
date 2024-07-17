@@ -213,3 +213,27 @@ export const Icon_add: React.FC<IconProjectsProps> = ({
     </svg>
   );
 };
+export const Icon_close: React.FC<IconProjectsProps> = ({
+  onClick,
+  className,
+}) => {
+  const handleClick = (e: React.MouseEvent<SVGElement>) => {
+    //e.stopPropagation();
+    if (onClick) {
+      onClick(e);
+    }
+  };
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      onClick={handleClick}
+      className={className}
+    >
+      <path d="M13.46 12L19 17.54V19H17.54L12 13.46L6.46 19H5V17.54L10.54 12L5 6.46V5H6.46L12 10.54L17.54 5H19V6.46L13.46 12Z" />
+    </svg>
+  );
+};

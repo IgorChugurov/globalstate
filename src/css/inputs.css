@@ -13,108 +13,145 @@
   gap: var(--space-050, 2px);
   align-self: stretch;
 }
+.labelWrapper .inputLabel {
+  color: var(--text-default-secondary, #6d6d6d);
+  /* Body/S/Medium */
+  font-family: var(--body-font-family, Inter);
+  font-size: var(--body-sizeS, 12px);
+  font-style: normal;
+  font-weight: var(--body-font-weight-strong, 500);
+  line-height: 115%; /* 13.8px */
+}
 .input-container .inputBox {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  position: relative;
   align-self: stretch;
 }
-
-.custom-input {
+.iconInput {
+  color: var(--icons-default-secondary, #6d6d6d);
+}
+.iconInputDisabled {
+  color: var(--icons-default-default-disabled, #6d6d6d);
+}
+input,
+textarea {
   width: 100%;
   display: flex;
-  padding: 8px;
-  justify-content: space-between;
+  padding: var(--space-200, 8px);
   align-items: center;
+  gap: var(--space-100, 4px);
   align-self: stretch;
-  border-radius: 6px;
-  border: 1px solid;
-  border-color: var(--Background-Gray-Tertiary-Hover);
-  height: 40px;
-  gap: 8px;
-  background-color: var(--Background-Gray-Default);
   cursor: text;
   text-transform: none;
-  color: var(--Text-Default-Default);
   outline: 0;
-  font-family: "Roboto Flex", sans-serif;
-  font-size: 14px;
+  justify-content: space-between;
+  height: 40px;
+  color: var(--text-default-default, #262626);
+  /* Body/M/Regular */
+  font-family: var(--body-font-family, Inter);
+  font-size: var(--body-sizeM, 14px);
   font-style: normal;
-  font-weight: 400;
+  font-weight: var(--body-font-weight-regular, 400);
+  line-height: 115%; /* 16.1px */
+
+  border-radius: var(--radius-200, 8px);
+  border: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
+  background: var(--background-primary-secondary, #f8f7fb);
 }
-.custom-input[type="date"] {
+
+textarea::placeholder,
+input::placeholder {
+  color: var(--text-default-secondary, #6d6d6d);
+  /* Body/M/Regular */
+  font-family: var(--body-font-family, Inter);
+  font-size: var(--body-sizeM, 14px);
+  font-style: normal;
+  font-weight: var(--body-font-weight-regular, 400);
+  line-height: 115%; /* 16.1px */
+}
+textarea {
+  height: 64px;
+}
+
+input[type="date"] {
   display: block;
 }
 
-.custom-input[data-size="small"] {
+input[data-size="small"] {
   height: 32px;
-  padding: var(--borderRadius, 4px) 8px;
 }
-.custom-textarea {
-  width: 100%;
-  display: flex;
-  padding: 8px;
-  resize: none;
 
-  border-radius: 6px;
-  border: 1px solid;
-  border-color: var(--Background-Gray-Tertiary-Hover);
-  height: 80px;
+input:hover,
+textarea:hover {
+  border: var(--stroke-border, 1px) solid var(--border-primary-default, #b7b1d4);
+}
+input:focus,
+textarea:focus {
+  border: var(--stroke-border, 1px) solid
+    var(--border-primary-tertiary, #352d48);
+  background: var(--background-primary-secondary, #f8f7fb);
+}
+input:focus .inputLabel,
+textarea:focus .inputLabel {
+  color: var(--text-primary-default, #52466c);
+}
+input:focus .helper-text,
+textarea:focus .helper-text {
+  color: var(--text-primary-default, #52466c);
+}
+input[data-error="true"],
+textarea[data-error="true"] {
+  border: var(--stroke-border, 1px) solid var(--border-error-default, #82071e);
+  background: var(--background-primary-secondary, #f8f7fb);
+}
+input[data-error="true"] .inputLabel,
+textarea[data-error="true"] .inputLabel {
+  color: var(--text-error-default, #cf222e);
+}
 
-  background-color: var(--Background-Gray-Default);
-  cursor: text;
-  text-transform: none;
-  color: var(--Text-Default-Default);
-  outline: 0;
-  font-family: "Roboto Flex", sans-serif;
-  font-size: 14px;
+input:disabled,
+textarea:disabled {
+  border: var(--stroke-border, 1px) solid
+    var(--border-default-default-disabled, #b0b0b0);
+  background: var(--background-gray-default-disabled, #e7e7e7);
+  cursor: not-allowed;
+  color: var(--text-default-default-disabled, #888);
+}
+input:disabled .inputLabel,
+textarea:disabled .inputLabel {
+  color: var(--text-default-default-disabled, #888);
+}
+input:disabled .helper-text,
+textarea:disabled .helper-text {
+  color: var(--text-default-default-disabled, #888);
+}
+
+input:disabled::placeholder,
+textarea:disabled::placeholder {
+  color: var(--text-default-default-disabled, #888);
+}
+
+.helper-text {
+  color: var(--text-default-secondary, #6d6d6d);
+  /* Body/S/Medium */
+  font-family: var(--body-font-family, Inter);
+  font-size: var(--body-sizeS, 12px);
   font-style: normal;
-  font-weight: 400;
+  font-weight: var(--body-font-weight-strong, 500);
+  line-height: 115%; /* 13.8px */
 }
-textarea.custom-textarea::placeholder,
-input.custom-input::placeholder {
-  vertical-align: middle;
-  color: var(--Text-Default-Secondary, #656565);
-
-  font-family: "Roboto Flex", sans-serif;
-  font-size: 14px;
+.error-text {
+  color: var(--text-error-default, #cf222e);
+  /* Body/S/Medium */
+  font-family: var(--body-font-family, Inter);
+  font-size: var(--body-sizeS, 12px);
   font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-}
-
-.custom-input:hover,
-.custom-textarea:hover {
-  border-color: var(--Text-Default-Default);
-}
-.custom-input:focus,
-.custom-textarea:focus {
-  border-color: var(--Primary-600);
-}
-.custom-input[data-error="true"],
-.custom-textarea[data-error="true"] {
-  border-color: var(--System-Error);
-}
-
-.custom-input::placeholder,
-.custom-textarea::placeholder {
-  color: var(--Text-Default-Secondary);
-  font-family: Roboto Mono, monospace;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-}
-.custom-input:disabled,
-.custom-textarea:disabled {
-  border-color: var(--Background-Gray-Secondary);
-}
-
-.custom-input:disabled::placeholder,
-.custom-textarea:disabled::placeholder {
-  color: var(--Text-Default-Secondary);
+  font-weight: var(--body-font-weight-strong, 500);
+  line-height: 115%; /* 13.8px */
 }
 
 .custom_select {

@@ -23,13 +23,8 @@ const InputLabel = ({
     : "var(--Grey-600)";
   return (
     <div className="labelWrapper">
-      <span
-        className="body-xs-regular colorGrey500"
-        style={{ color: labelColor }}
-      >
-        {label}
-      </span>
-      {required && <span className="body-xs-regular colorSystemError ">*</span>}
+      <span className="inputLabel">{label}</span>
+      {required && <span className="body-s-medium colorSystemError ">*</span>}
     </div>
   );
 };

@@ -53,7 +53,6 @@ export const InputText = ({
       <div className="inputBox">
         {multiline ? (
           <textarea
-            className="custom-textarea"
             data-error={isInvalid}
             disabled={disabled}
             placeholder={placeholder}
@@ -68,7 +67,6 @@ export const InputText = ({
         ) : (
           <input
             type={type}
-            className="custom-input"
             data-error={isInvalid}
             disabled={disabled}
             placeholder={placeholder}
@@ -83,19 +81,13 @@ export const InputText = ({
         )}
       </div>
       {helperText && !isInvalid && (
-        <span
-          className="body-xs-regular colorGrey600"
-          style={{ lineHeight: "12px" }}
-        >
+        <span className="helper-text" style={{ lineHeight: "12px" }}>
           {helperText}
         </span>
       )}
 
       {isInvalid && (
-        <span
-          className="body-xs-regular colorSystemError"
-          style={{ lineHeight: "12px" }}
-        >
+        <span className="error-text" style={{ lineHeight: "12px" }}>
           {inputErrors?.error?.message}
         </span>
       )}

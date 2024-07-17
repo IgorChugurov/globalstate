@@ -108,11 +108,15 @@ const GroupsCompanies = ({
             <span className={`body-m-medium`}>{buttonTitle}</span>
           </button>
         </div>
-        <div className={styles.companiesGroup}>
-          {groupsCompanies.map((group) => (
-            <GroupCompanies group={group} key={group._id} />
-          ))}
-        </div>
+        {groupsCompanies.length ? (
+          <div className={styles.companiesGroup}>
+            {groupsCompanies.map((group, i) => (
+              <GroupCompanies group={group} key={i} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState />
+        )}
       </div>
       <Outlet />
     </>
@@ -157,6 +161,27 @@ const GroupCompanies = ({ group }: { group: any }) => {
             <Icon_east />
           </button>
         </Link>
+      </div>
+    </div>
+  );
+};
+const EmptyState = () => {
+  return (
+    <div className={styles.emptyStateWrapper}>
+      <div className={styles.emptyState}>
+        <div className={styles.emptyStateContainer}>
+          <span className={`${styles.headerEmptyState} headings-h2`}>
+            You have no company groups
+          </span>
+          <div className={styles.emptyStateTextWrapper}>
+            <span className={`${styles.headerEmptyText} body-m-regular`}>
+              Company groups that you create will end up here.
+            </span>
+            <span className={`${styles.headerEmptyText} body-m-regular`}>
+              Add a Company group to get started.
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -71,7 +71,7 @@ const Createmodal = ({
       >
         <div className={styles.wrapper}>
           <div className={styles.header}>
-            <span className={`${styles.headerTitle} headings-h1`}>
+            <span className={`${styles.headerTitle} headings-h2`}>
               {modalTitle}
             </span>
 

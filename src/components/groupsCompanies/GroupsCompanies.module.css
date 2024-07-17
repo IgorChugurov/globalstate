@@ -3,7 +3,6 @@
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
 }
 .header {
   display: flex;
@@ -16,7 +15,7 @@
 
 .companiesGroup {
   display: flex;
-  justify-content: center;
+  padding: var(--space-0, 0px) var(--space-600, 24px);
   align-items: flex-start;
   align-content: flex-start;
   gap: var(--space-600, 24px);
@@ -119,4 +118,43 @@
 }
 .groupInfo {
   color: var(--text-default-secondary, #6d6d6d);
+}
+
+.emptyStateWrapper {
+  padding: var(--space-0, 0px) var(--space-600, 24px);
+  width: 100%;
+}
+.emptyState {
+  display: flex;
+  width: 100%;
+  padding: var(--space-1000, 40px) var(--space-600, 24px);
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-600, 24px);
+  border-radius: var(--radius-400, 16px);
+  background: var(--background-primary-secondary, #f8f7fb);
+}
+.emptyStateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-300, 12px);
+  align-self: stretch;
+}
+.headerEmptyState {
+  color: var(--text-default-default, #262626);
+  text-align: center;
+}
+.emptyStateTextWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-150, 6px);
+  align-self: stretch;
+  justify-content: center;
+  width: 100%;
+}
+.headerEmptyText {
+  color: var(--text-default-secondary, #6d6d6d);
+  text-align: center;
 }
