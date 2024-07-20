@@ -2,8 +2,8 @@
   "LSPrefix": "LSPrefix-Template-APP",
   "appGlobalStoreConfig": [
     {
-      "collection": "categories",
-      "title": "Category",
+      "collection": "projects",
+      "title": "Projects",
       "apiUrl": "https://dummyjson.com/products/categories"
     }
   ],

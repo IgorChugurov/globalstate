@@ -53,6 +53,7 @@ export interface IInitalConfig {
   appGlobalStoreConfig: DataItem[];
   AuthData: IAuthData;
   EntitiesForListAndServicesPackageAndEditPage: IOptionsListItem;
+  currentProject: string;
 }
 
 /**

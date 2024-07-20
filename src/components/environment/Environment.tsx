@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import { IOptionsListItem } from "../../types/appdata";
 import styles from "./Environment.module.css";
 import { IEnvirnoment } from "../../types/environment";
@@ -6,6 +6,7 @@ import { servicesPackage } from "../../services/servicesPackage";
 import { createAnyEntity } from "../../utils";
 import { get } from "http";
 import { getEnvironmentData } from "worker_threads";
+import { updateAnyEntity } from "../../utils/createUpdateDeleteAnyEntity";
 const dumnData = [
   {
     id: "1",
@@ -62,6 +63,10 @@ const Environment = ({
     await createAnyEntity(d, itemsService);
     getEnvironmentData();
   };
+  const updateItem = async (d: IEnvirnoment) => {
+    await updateAnyEntity(d, itemsService);
+    getEnvironmentData();
+  };
   //todo get data from server and change getMany to getAll
   const getEnvironmentData = () => {
     itemsService.getMany().then((res) => {
@@ -84,6 +89,7 @@ const Environment = ({
       //   );
     });
   };
+
   useEffect(() => {
     getEnvironmentData();
   }, []);
@@ -97,9 +103,18 @@ const Environment = ({
         <div className={styles.tableHeader}>action</div>
 
         {envVariables.map((envVar, idx) => (
-          <EditEnvVar key={idx} idx={idx} item={envVar} />
+          <div className={styles.tableRow} key={idx}>
+            <EditEnvVar
+              idx={idx}
+              item={envVar}
+              updateItem={updateItem}
+              setEnvVariables={setEnvVariables}
+            />
+          </div>
         ))}
-        <CreateEnvVar createItem={createItem} />
+        <div className={styles.tableRow}>
+          <CreateEnvVar createItem={createItem} />
+        </div>
         {/* Create */}
         {/* {renewListValues && (
             <NewKeyValueRow
@@ -122,22 +137,74 @@ const Environment = ({
 
 export default Environment;
 
-const EditEnvVar = ({ item, idx }: { item: IEnvirnoment; idx: number }) => {
+const EditEnvVar = ({
+  item,
+  idx,
+  updateItem,
+  setEnvVariables,
+}: {
+  item: IEnvirnoment;
+  idx: number;
+  updateItem: (d: IEnvirnoment) => void;
+  setEnvVariables: (d: IEnvirnoment[]) => void;
+}) => {
+  const [data, setData] = useReducer(
+    (state: { [key: string]: any }, newState: { [key: string]: any }) => ({
+      ...state,
+      ...newState,
+    }),
+    item
+  );
+  const resetChanges = () => {
+    setData(item);
+  };
+
   return (
     <>
       <div className={styles.tableCell}>
-        <input type="text" value={item.key} />
+        <input
+          type="text"
+          value={data.key}
+          onChange={(e) => setData({ key: e.target.value })}
+        />
       </div>
       <div className={styles.tableCell}>
-        <input type="text" value={item.type} />
+        <input
+          type="text"
+          value={data.type}
+          onChange={(e) => setData({ type: e.target.value })}
+        />
       </div>
       <div className={styles.tableCell}>
-        <input type="text" value={item.placeholder} />
+        <input
+          type="text"
+          value={data.placeholder}
+          onChange={(e) => setData({ placeholder: e.target.value })}
+        />
       </div>
       <div className={styles.tableCell}>
-        <input type="text" value={item.description} />
+        <input
+          type="text"
+          value={data.description}
+          onChange={(e) => setData({ description: e.target.value })}
+        />
       </div>
-      <div className={styles.tableCell}>save</div>
+      <div className={styles.tableCell}>
+        <button
+          data-size="small"
+          className="button primaryButton"
+          onClick={() => updateItem(data as IEnvirnoment)}
+        >
+          save
+        </button>
+        <button
+          data-size="small"
+          className="button secondaryButton"
+          onClick={() => resetChanges()}
+        >
+          reset
+        </button>
+      </div>
     </>
   );
 };
@@ -154,22 +221,61 @@ const CreateEnvVar = ({
     placeholder: "",
     description: "",
   };
+  const [data, setData] = useReducer(
+    (state: { [key: string]: any }, newState: { [key: string]: any }) => ({
+      ...state,
+      ...newState,
+    }),
+    item
+  );
+  const resetChanges = () => {
+    setData(item);
+  };
   return (
     <>
       <div className={styles.tableCell}>
-        <input type="text" value={item.key} />
+        <input
+          type="text"
+          value={data.key}
+          onChange={(e) => setData({ key: e.target.value })}
+        />
       </div>
       <div className={styles.tableCell}>
-        <input type="text" value={item.type} />
+        <input
+          type="text"
+          value={data.type}
+          onChange={(e) => setData({ type: e.target.value })}
+        />
       </div>
       <div className={styles.tableCell}>
-        <input type="text" value={item.placeholder} />
+        <input
+          type="text"
+          value={data.placeholder}
+          onChange={(e) => setData({ placeholder: e.target.value })}
+        />
       </div>
       <div className={styles.tableCell}>
-        <input type="text" value={item.description} />
+        <input
+          type="text"
+          value={data.description}
+          onChange={(e) => setData({ description: e.target.value })}
+        />
       </div>
       <div className={styles.tableCell}>
-        <button onClick={() => createItem(item)}>create</button>
+        <button
+          data-size="small"
+          className="button primaryButton"
+          onClick={() => createItem(item)}
+        >
+          create
+        </button>
+        <button
+          data-size="small"
+          className="button secondaryButton"
+          onClick={() => resetChanges()}
+        >
+          reset
+        </button>
       </div>
     </>
   );

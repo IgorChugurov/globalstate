@@ -7,23 +7,33 @@
 .table {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  border: 0.5px solid;
-  border-color: var(--action-disabled-background);
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--action-disabled-background);
   border-radius: 3px;
 }
-.tablehHeader {
+
+.tableHeader {
   font-size: 13px;
   font-weight: 500;
-  padding-left: 1rem; /* Assuming px refers to padding on the x-axis, which typically means both left and right */
+  padding-left: 1rem;
   padding-right: 1rem;
   display: flex;
   height: 35px;
   align-items: center;
-  border-right: 0.5px solid;
-  border-right-color: var(--action-disabled-background);
   background-color: var(--action-disabled-background);
-  border-bottom: 0.5px solid;
-  border-bottom-color: var(--action-disabled-background);
-  min-width: 250px;
-  flex-basis: 250px;
+  border-bottom: 1px solid var(--action-disabled-background);
+  text-align: left;
+}
+
+.tableRow {
+  display: contents; /* To make the divs behave like tr elements */
+}
+
+.tableCell {
+  display: flex;
+  padding: 8px;
+  border-bottom: 1px solid var(--action-disabled-background);
+  display: flex;
+  align-items: center;
 }

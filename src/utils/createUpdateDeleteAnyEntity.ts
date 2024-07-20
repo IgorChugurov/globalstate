@@ -32,3 +32,19 @@ export const updateAnyEntity = async (data: any, service: any) => {
     }, 5000);
   }
 };
+export const deleteAnyEntity = async (id: string, service: any) => {
+  sendMessage("showParange");
+  try {
+    const res = await service.deleteOne(id);
+    setSuccess("Deleted successfully");
+  } catch (err: any) {
+    console.log(err);
+    setError(err.message || "an error occurred");
+  } finally {
+    sendMessage("hideParange");
+    setTimeout(() => {
+      setSuccess("");
+      setError("");
+    }, 5000);
+  }
+};

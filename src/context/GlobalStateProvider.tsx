@@ -1,6 +1,7 @@
 import React, {
   createContext,
   Dispatch,
+  useEffect,
   useMemo,
   useReducer,
   useState,
@@ -48,6 +49,8 @@ const initState = {
   LSPrefix: "",
   routeData: {},
   changeRouteData: () => {},
+  currentProject: "",
+  setCurrentProject: () => {},
 };
 
 export const GlobalStateContext = createContext<{
@@ -64,6 +67,8 @@ export const GlobalStateContext = createContext<{
   LSPrefix: string;
   routeData: any;
   changeRouteData: (d: any) => void;
+  currentProject: string;
+  setCurrentProject: (d: string) => void;
 }>(initState);
 
 interface StateProviderProps {
@@ -99,9 +104,13 @@ export const GlobalStateProvider: React.FC<StateProviderProps> = ({
   const [VERSION] = useState(initialConfig.VERSION);
   const [LSPrefix] = useState(initialConfig.LSPrefix);
   const [AuthData] = useState(initialConfig.AuthData);
+  const [currentProject, setCurrentProject] = useState(
+    initialConfig.currentProject
+  );
   // this only for listItems
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // for store data for each route in the app to use this data in the components
   const [routeData, changeRouteData] = useReducer(
     (state: { [key: string]: any }, newState: { [key: string]: any }) => ({
       ...state,
@@ -144,6 +153,18 @@ export const GlobalStateProvider: React.FC<StateProviderProps> = ({
     });
   }, [darkMode]);
 
+  // this is main useEffect to fetch prolecgts for the first time
+  //  and set the fisrt prodject as a current project
+  useEffect(() => {
+    renewData("projects");
+  }, []);
+  useEffect(() => {
+    if (!state["projects"]?.loading && state["projects"]?.list.length > 0) {
+      console.log(state["projects"]?.list[0]);
+      setCurrentProject(state["projects"]?.list[0]._id);
+    }
+  }, [state["projects"]?.loading]);
+
   return (
     <GlobalStateContext.Provider
       value={{
@@ -159,6 +180,8 @@ export const GlobalStateProvider: React.FC<StateProviderProps> = ({
         changeRouteData,
         STUDIA: initialConfig.STUDIA,
         LSPrefix,
+        currentProject,
+        setCurrentProject,
       }}
     >
       <ThemeProvider theme={theme}>
