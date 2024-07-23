@@ -183,46 +183,68 @@ const GroupCompany = ({
           isChildRoute ? styles.childRoute : ""
         }`}
       >
-        <div className={styles.header}>
-          <div className={styles.right}>
-            <SearchInputSimple
-              disabled={loading}
-              setSearchState={setSearchState}
-              placeholder={placeholder}
-            />
-            <button
-              data-size="small"
-              className="button primaryButton colorBackgroundDefault"
-              onClick={() => {
-                setModalCreateOpen(true);
-              }}
-              disabled={loading}
-            >
-              <Icon_add />
-              <span className="body-m-medium">
-                {buttonBlock?.title || "Create"}
-              </span>
-            </button>
-          </div>
-        </div>
-
         <Tabs
           tabs={[titleCompanies, titleAdmins, titleSettings]}
           setTab={setTab}
           tab={tab}
         />
+
         {/* only for reload purpose */}
         {tab === 0 && (
-          <ListsItemsInTab
-            initData={initDataCompany}
-            searchState={searchState}
-          />
+          <>
+            <div className={styles.header}>
+              <SearchInputSimple
+                disabled={loading}
+                setSearchState={setSearchState}
+                placeholder={placeholder}
+              />
+              <button
+                data-size="small"
+                className="button primaryButton colorBackgroundDefault"
+                onClick={() => {
+                  setModalCreateOpen(true);
+                }}
+                disabled={loading}
+              >
+                <Icon_add />
+                <span className="body-m-medium">
+                  {buttonBlock?.title || "Create"}
+                </span>
+              </button>
+            </div>
+            <ListsItemsInTab
+              initData={initDataCompany}
+              searchState={searchState}
+            />
+          </>
         )}
         {tab === 1 && (
-          <ListsItemsInTab
-            initData={initDataGroupAdmins}
-            searchState={searchState}
-          />
+          <>
+            <div className={styles.header}>
+              <SearchInputSimple
+                disabled={loading}
+                setSearchState={setSearchState}
+                placeholder={placeholder}
+              />
+              <button
+                data-size="small"
+                className="button primaryButton colorBackgroundDefault"
+                onClick={() => {
+                  setModalCreateOpen(true);
+                }}
+                disabled={loading}
+              >
+                <Icon_add />
+                <span className="body-m-medium">
+                  {buttonBlock?.title || "Create"}
+                </span>
+              </button>
+            </div>
+            <ListsItemsInTab
+              initData={initDataGroupAdmins}
+              searchState={searchState}
+            />{" "}
+          </>
         )}
         {tab === 2 && (
           <ListsItemsInTab

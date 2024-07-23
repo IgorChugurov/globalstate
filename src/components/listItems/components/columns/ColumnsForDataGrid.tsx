@@ -4,9 +4,10 @@ import styles from "./Columns.module.css";
 import { Dispatch, SetStateAction } from "react";
 import { IEntity } from "../../../../types/lists";
 import { ApiService, IApiService } from "../../../../services/servicesPackage";
-import ActionCell from "../actionCell/ActionCell";
+import ActionCell from "../../../actionCell/ActionCell";
 import { IColumnForDataGrud } from "../../../../types/appdata";
-import { Link, useMatches } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { GridColumnHeaderParams } from "@mui/x-data-grid";
 
 //import ActionCell from "./ActionCell";
 interface IItemInCell {
@@ -76,13 +77,18 @@ const getColumn = ({
   dataService: ApiService<IEntity>;
 }) => {
   //console.log(column);
-  const { field, headerName, width, options, type } = column;
+  const { field, headerName, width, options, type, flex } = column;
 
   const url = window.location.pathname;
   return {
     field: field,
     headerName: headerName,
     width: width,
+    flex: flex,
+    disableReorder: true,
+    renderHeader: (params: GridColumnHeaderParams) => (
+      <span className="text-secondary mono-s-medium">{headerName}</span>
+    ),
     renderCell: (params: any) => {
       const itemInRow = params.row;
       return (
@@ -94,16 +100,16 @@ const getColumn = ({
                 openForEdit(itemInRow);
               }}
             >
-              <span className="body-s-regular colorGreyBlack textWithEllipsis">
+              <span className="body-m-regular text-default textWithEllipsis">
                 {itemInRow[field]}
               </span>
             </div>
           ) : type && type === "naigateToDetails" ? (
-            <Link className={styles.linkWrap} to={`${url}/${itemInRow._id}`}>
-              <span className="body-s-regular colorGreyBlack textWithEllipsis">
-                {itemInRow[field]}
-              </span>
-            </Link>
+            <span className="body-m-regular text-default textWithEllipsis">
+              <Link className={styles.linkWrap} to={`${url}/${itemInRow._id}`}>
+                {itemInRow[field]}{" "}
+              </Link>
+            </span>
           ) : type &&
             type === "actions" &&
             column.options &&
@@ -117,7 +123,7 @@ const getColumn = ({
               dataService={dataService}
             />
           ) : (
-            <span className="body-s-regular colorGreyBlack textWithEllipsis">
+            <span className="body-m-regular text-default textWithEllipsis">
               {itemInRow[field]}
             </span>
           )}

@@ -17,7 +17,12 @@ import { setError } from "../utils";
 import Resultoutput from "../components/resultoutput/Resultuotput";
 import ParangaForViewport from "../components/parangaForViewport/ParangaForViewport";
 import { UserDataContextProvider } from "./userDataContext";
-import { getDarkModeLS, setDarkModeLS } from "../services/localStorage";
+import {
+  getCurrentProjectLS,
+  getDarkModeLS,
+  setCurrentProjectLS,
+  setDarkModeLS,
+} from "../services/localStorage";
 
 import { API } from "../api/apiRequest";
 
@@ -34,6 +39,7 @@ import { createTheme, PaletteMode, ThemeProvider } from "@mui/material";
 import { IAuthData, IInitalConfig } from "../types/appdata";
 
 const initDarkMode = getDarkModeLS() as PaletteMode;
+const initCurrentProject = getCurrentProjectLS();
 setModeClassForBody(initDarkMode);
 const initState = {
   state: {},
@@ -49,7 +55,7 @@ const initState = {
   LSPrefix: "",
   routeData: {},
   changeRouteData: () => {},
-  currentProject: "",
+  currentProject: initCurrentProject,
   setCurrentProject: () => {},
 };
 
@@ -105,7 +111,7 @@ export const GlobalStateProvider: React.FC<StateProviderProps> = ({
   const [LSPrefix] = useState(initialConfig.LSPrefix);
   const [AuthData] = useState(initialConfig.AuthData);
   const [currentProject, setCurrentProject] = useState(
-    initialConfig.currentProject
+    initState.currentProject
   );
   // this only for listItems
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -160,11 +166,24 @@ export const GlobalStateProvider: React.FC<StateProviderProps> = ({
   }, []);
   useEffect(() => {
     if (!state["projects"]?.loading && state["projects"]?.list.length > 0) {
-      console.log(state["projects"]?.list[0]);
-      setCurrentProject(state["projects"]?.list[0]._id);
+      //console.log(state["projects"]?.list[0]);
+      if (
+        !initState.currentProject ||
+        !state["projects"]?.list.find(
+          (p: any) => p._id === initState.currentProject
+        )
+      ) {
+        setCurrentProject(state["projects"]?.list[0]._id);
+      }
     }
   }, [state["projects"]?.loading]);
 
+  useEffect(() => {
+    //console.log(currentProject);
+    if (currentProject) {
+      setCurrentProjectLS(currentProject);
+    }
+  }, [currentProject]);
   return (
     <GlobalStateContext.Provider
       value={{

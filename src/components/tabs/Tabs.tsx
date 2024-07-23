@@ -17,7 +17,7 @@ const Tabs = ({
           onClick={() => setTab(i)}
           className={`${styles.tab} ${tab === i ? styles.active : ""}`}
         >
-          {t}
+          <span className="body-m-medium">{t}</span>
         </div>
       ))}
     </div>

@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./listItems.module.css";
-import "./customDataGrid.css";
+
 import { GlobalStateContext } from "../../context/GlobalStateProvider";
 
 import { servicesPackage } from "../../services/servicesPackage";
@@ -192,7 +192,7 @@ const ListItems = <
           setPaginate={setPaginate}
           paginate={paginate}
         />
-
+        {/* 
         <DataGrid
           className={"custom-data-grid"}
           onCellDoubleClick={(params, event) => {
@@ -238,8 +238,7 @@ const ListItems = <
             }) as readonly GridColDef<ItemClass>[]
           }
           localeText={{ noRowsLabel: "No matching accesses found" }}
-          //autoHeight={true}
-        />
+        /> */}
       </div>
     </>
   );

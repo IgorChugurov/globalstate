@@ -19,8 +19,8 @@ const ListsItemsInTab = ({
 
   const { forList, title, collectionName } = initData;
 
-  const { searchBlock: placeholder, buttonBlock, columnsForGrid } = forList;
-  //console.log(initData);
+  const { columnsForGrid, forEmptyList } = forList;
+  //console.log(forEmptyList);
 
   const itemsService = servicesPackage[collectionName];
   const [items, setItems] = useState<ICompany[]>([]);
@@ -111,6 +111,7 @@ const ListsItemsInTab = ({
       items={items}
       paginate={paginate}
       columns={columns}
+      forEmptyList={forEmptyList}
     />
   );
 };

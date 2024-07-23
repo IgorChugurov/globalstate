@@ -1,10 +1,15 @@
 import { sendMessage, setError, setSuccess } from "./sendMessage";
 
-export const createAnyEntity = async (data: any, service: any) => {
+export const createAnyEntity = async (
+  data: any,
+  service: any,
+  message?: string
+) => {
   sendMessage("showParange");
   try {
+    console.log(message);
     const res = await service.createOne(data);
-    setSuccess("Created successfully");
+    setSuccess(message || "Created successfully");
   } catch (err: any) {
     console.log(err);
     setError(err.message || "an error occurred");

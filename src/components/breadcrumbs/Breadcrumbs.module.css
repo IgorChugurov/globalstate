@@ -12,17 +12,18 @@
   align-items: center;
   gap: var(--space-100, 4px);
   border-radius: var(--radius-100, 4px);
-  background: var(--background-gray-secondary, #f6f6f6);
+  border: 1px solid var(--border-default-tertiary, #e7e7e7);
+  background: var(--background-gray-default, #fff);
   color: var(--text-default-secondary, #6d6d6d);
 }
 .breadcrumbsWrapper.active {
   color: var(--text-default-default, #262626);
-  background: var(--background-primary-tertiary, #e5e4f0);
+  background: var(--background-gray-secondary, #f6f6f6);
 }
 
 .breadcrumbsWrapper:hover {
-  background: var(--background-primary-secondary-hover, #e5e4f0);
-  color: var(--text-primary-default, #52466c);
+  background: var(--background-gray-secondary, #f6f6f6);
+  color: var(--text-default-default, #262626);
 }
 .breadcrumbsWrapper:active {
   color: var(--text-primary-default, #52466c);

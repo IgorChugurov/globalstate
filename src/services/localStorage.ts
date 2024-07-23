@@ -55,3 +55,14 @@ export const getDarkModeLS = () => {
 export const setDarkModeLS = (data: string) => {
   localStorage.setItem(`${LSPrefix}-DarkMode`, data);
 };
+
+export const getCurrentProjectLS = () => {
+  try {
+    return localStorage.getItem(`${LSPrefix}-CurrentProject`) ?? "";
+  } catch (error) {
+    return "light";
+  }
+};
+export const setCurrentProjectLS = (data: string) => {
+  localStorage.setItem(`${LSPrefix}-CurrentProject`, data);
+};

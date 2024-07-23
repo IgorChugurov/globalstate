@@ -46,7 +46,7 @@ const routers = EntitiesForListAndServicesPackageAndEditPage.filter((d) => {
 }).map((d) => ({
   path: `/${d.collectionName}`,
   element: (
-    <div className="mainCootainer">
+    <div className="mainContainer">
       <Navbar />
       <ListItems options={d as IOptionsListItem} />
     </div>
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
   // {
   //   path: "/",
   //   element: (
-  //     <div className="mainCootainer">
+  //     <div className="mainContainer">
   //       <NavbarApp />
   //     </div>
   //   ),
@@ -93,7 +93,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <div className="mainCootainer">
+      <div className="mainContainer">
         <NavbarApp />
         <GroupsCompanies initDataGroupCompanies={initDataGroupCompanies} />
       </div>
@@ -133,7 +133,7 @@ const router = createBrowserRouter([
   {
     path: "/environments",
     element: (
-      <div className="mainCootainer">
+      <div className="mainContainer">
         <NavbarApp />
         {/* <Environment initDataEnvironment={initDataEnvironment} /> */}
         <Environments
@@ -146,7 +146,7 @@ const router = createBrowserRouter([
   {
     path: "/settings",
     element: (
-      <div className="mainCootainer">
+      <div className="mainContainer">
         <NavbarApp />
         <Settings initDataAppAdmins={initDataAppAdmins} />
       </div>

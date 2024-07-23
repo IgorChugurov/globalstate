@@ -58,8 +58,8 @@ const Environments = ({
   initDataCompanyEnvironment: IOptionsListItem;
   initDataGroupEnvironment: IOptionsListItem;
 }) => {
-  const titleCompanies = "Companies";
-  const titleGroup = "Groups";
+  const titleCompanies = "For companies";
+  const titleGroup = "For groups";
   const [tab, setTab] = useState<number>(0);
   return (
     <div className={styles.container}>

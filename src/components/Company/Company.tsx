@@ -12,6 +12,8 @@ import CompanyAdmmins from "../companyAdmins/CompanyAdmins";
 import ListsItemsInTab from "../listItemsInTab/ListItemsInTab";
 import Createmodal from "../appmodal/Createmodal";
 import { GlobalStateContext } from "../../context/GlobalStateProvider";
+import CompanySettings from "../companySettings/CompanySettings";
+import { createAnyEntity } from "../../utils";
 
 const Company = ({
   initDataCompany,
@@ -26,6 +28,7 @@ const Company = ({
   const [searchState, setSearchState] = useState<string>("");
 
   const { forList, title } = initDataCompany;
+  const { afterCreate: afterCreateMessage } = forList.messages || {};
   const {
     forList: forListAdmins,
     title: titleAdmins,
@@ -54,6 +57,7 @@ const Company = ({
       return acc;
     }, [])
   );
+  const [item, setItem] = useState<ICompany | null>(null);
 
   const [tab, setTab] = useState<number>(0);
   const [placeholder, setPlaceholder] = useState<string>(
@@ -67,7 +71,7 @@ const Company = ({
   const changeRouteData = useContext(GlobalStateContext).changeRouteData;
 
   const createData = (data: any) => {
-    console.log(data);
+    createAnyEntity(data, itemsService, afterCreateMessage);
   };
   useEffect(() => {
     changeRouteData({ company: null });
@@ -77,12 +81,13 @@ const Company = ({
         const company: ICompany = res as ICompany;
         setLoading(false);
         changeRouteData({ company: company });
+        setItem(company);
       });
     }
   }, []);
   useEffect(() => {
     switch (tab) {
-      case 0:
+      case 1:
         setAllFields(
           forEditAdmins.sections.reduce((acc: any, section: any) => {
             acc = [...acc, ...section.fields];
@@ -93,7 +98,7 @@ const Company = ({
         setPlaceholder(placeholderSearchAdmins || "Search ...");
         setButtonBlock(buttonBlockAdmins);
         break;
-      case 1:
+      case 0:
         setAllFields(
           forEditSettings.sections.reduce((acc: any, section: any) => {
             acc = [...acc, ...section.fields];
@@ -122,39 +127,42 @@ const Company = ({
           handleAction={createData}
         />
       )}
-      <div className={styles.header}>
-        <div className={styles.right}>
-          <SearchInputSimple
-            disabled={loading}
-            setSearchState={setSearchState}
-            placeholder={placeholder || "Search ..."}
+      <div className={styles.container}>
+        <Tabs tabs={[titleSettings, titleAdmins]} setTab={setTab} tab={tab} />
+        {tab === 0 && (
+          <CompanySettings
+            initSettingData={initDataCompanySettings}
+            company={item}
+            initDataCompany={initDataCompany}
           />
-          <button
-            data-size="small"
-            className="button primaryButton colorBackgroundDefault"
-            onClick={() => {
-              setModalCreateOpen(true);
-            }}
-            disabled={loading}
-          >
-            <Icon_add />
-            <span className="body-m-medium">{buttonBlock?.title}</span>
-          </button>
-        </div>
+        )}
+        {tab === 1 && (
+          <>
+            <div className={styles.header}>
+              <SearchInputSimple
+                disabled={loading}
+                setSearchState={setSearchState}
+                placeholder={placeholder || "Search ..."}
+              />
+              <button
+                data-size="small"
+                className="button primaryButton colorBackgroundDefault"
+                onClick={() => {
+                  setModalCreateOpen(true);
+                }}
+                disabled={loading}
+              >
+                <Icon_add />
+                <span className="body-m-medium">{buttonBlock?.title}</span>
+              </button>
+            </div>
+            <ListsItemsInTab
+              initData={initDataCompanyAdmins}
+              searchState={searchState}
+            />
+          </>
+        )}
       </div>
-      <Tabs tabs={[titleAdmins, "Company setting"]} setTab={setTab} tab={tab} />
-      {tab === 0 && (
-        <ListsItemsInTab
-          initData={initDataCompanyAdmins}
-          searchState={searchState}
-        />
-      )}
-      {tab === 1 && (
-        <ListsItemsInTab
-          initData={initDataCompanySettings}
-          searchState={searchState}
-        />
-      )}
     </React.Fragment>
   );
 };

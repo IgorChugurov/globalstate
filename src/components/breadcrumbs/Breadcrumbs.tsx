@@ -1,26 +1,42 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Breadcrumbs.module.css";
 import { Link } from "react-router-dom";
-import { Icon_nav } from "./Icons";
+import {
+  Icon_account_balance,
+  Icon_adjust,
+  Icon_language,
+  Icon_nav,
+} from "./Icons";
+import { GlobalStateContext } from "../../context/GlobalStateProvider";
 
 const Breadcrumbs = ({
-  data,
+  data = [],
 }: {
   data: { title: string; link?: string }[];
 }) => {
+  const { currentProject, state } = useContext(GlobalStateContext);
+  const [items, setItems] = useState<{ title: string; link?: string }[]>([]);
+
+  const project = state["projects"].list.find(
+    (p: any) => p._id === currentProject
+  );
+  useEffect(() => {
+    setItems([{ title: project?.name || "application", link: "/" }, ...data]);
+  }, [data, project]);
+
   return (
     <div className={`${styles.breadcrumbsContainer}`}>
-      {data.map((d, i) => (
+      {items.map((d, i) => (
         <React.Fragment key={i}>
           {d.title && (
             <div
               className={`${styles.breadcrumbsWrapper} ${
-                i === data.length - 1 ? styles.active : ""
+                i === items.length - 1 ? styles.active : ""
               }`}
             >
-              <Icon_nav />
+              {getIcon(i)}
               <div className={styles.container} key={i}>
-                {i !== data.length - 1 ? (
+                {i !== items.length - 1 ? (
                   <>
                     <Link to={d.link || "/"}>
                       <span className={`${styles.text} body-s-medium`}>
@@ -36,7 +52,7 @@ const Breadcrumbs = ({
               </div>
             </div>
           )}
-          {i !== data.length - 1 && (
+          {i !== items.length - 1 && (
             <span className={`${styles.divider} body-l-regular`}>/</span>
           )}
         </React.Fragment>
@@ -46,3 +62,14 @@ const Breadcrumbs = ({
 };
 
 export default Breadcrumbs;
+
+const getIcon = (index: number) => {
+  const icons = [
+    <Icon_language />,
+    <Icon_nav />,
+    <Icon_adjust />,
+    <Icon_account_balance />,
+  ];
+
+  return index < icons.length ? icons[index] : null;
+};

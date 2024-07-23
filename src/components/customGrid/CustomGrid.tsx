@@ -1,6 +1,7 @@
 import { DataGrid, GridCellParams, MuiEvent } from "@mui/x-data-grid";
 import React from "react";
 import { IPaginate } from "../../types/request";
+import NoRowsOverlay from "../customNoRowsOverlay/CustomNoRowsOverlay";
 
 const CustomGrid = ({
   columns,
@@ -9,6 +10,7 @@ const CustomGrid = ({
   handlePaginationModelChange,
   rowSelectionModel,
   setRowSelectionModel,
+  forEmptyList,
 }: {
   items: any[];
   columns: any;
@@ -16,6 +18,7 @@ const CustomGrid = ({
   handlePaginationModelChange: (d: any) => void;
   rowSelectionModel: string[];
   setRowSelectionModel: (d: any) => void;
+  forEmptyList?: { title?: string; messages?: string[] };
 }) => {
   return (
     <DataGrid
@@ -52,18 +55,17 @@ const CustomGrid = ({
       }}
       rowSelectionModel={rowSelectionModel}
       rows={items}
-      columns={
-        columns
-        // columnsForDataGrid({
-        //   setCurrentItem,
-        //   items,
-        //   setItems,
-        //   setModalCreateOpen,
-        //   columnsForGrid,
-        //   dataService: itemsService,
-        // }) as readonly GridColDef<ItemClass>[]
-      }
+      columns={columns}
       localeText={{ noRowsLabel: "No matching accesses found" }}
+      slots={{
+        noRowsOverlay: NoRowsOverlay,
+      }}
+      slotProps={{
+        noRowsOverlay: {
+          title: forEmptyList?.title,
+          ...(forEmptyList?.messages && { messages: forEmptyList.messages }),
+        },
+      }}
       //autoHeight={true}
     />
   );

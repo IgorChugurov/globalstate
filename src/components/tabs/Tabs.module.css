@@ -1,29 +1,38 @@
 .container {
   display: flex;
-  padding: 13px 24px;
-
-  align-items: flex-start;
-  gap: 24px;
-
-  align-self: stretch;
+  align-items: center;
+  border-radius: var(--radius-100, 4px);
+  border: 1px solid var(--border-default-tertiary, #e7e7e7);
 }
 .tab {
   display: flex;
-  height: 32px;
-  padding: 4px 16px;
+  height: 24px;
+  padding: var(--space-100, 4px) var(--space-400, 16px);
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  border-radius: 8px;
+  gap: var(--space-200, 8px);
+  border-radius: var(--radius-00, 0px) var(--radius-100, 4px)
+    var(--radius-100, 4px) var(--radius-00, 0px);
+  border-right: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
+  border-left: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
   cursor: pointer;
-  color: var(--Gray-Black, #262626);
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 150%; /* 21px */
 }
 .active {
-  background: var(--Primary-200, #e5e4f0);
-  color: var(--Primary-950, #352d48);
+  border-radius: var(--radius-100, 4px) var(--radius-00, 0px)
+    var(--radius-00, 0px) var(--radius-100, 4px);
+  border-right: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
+  border-left: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
+  background: var(--background-gray-secondary, #f6f6f6);
+}
+.tab:hover {
+  border-radius: var(--radius-00, 0px);
+  border-right: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
+  border-left: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
+  background: var(--background-gray-secondary-hover, #d1d1d1);
 }

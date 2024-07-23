@@ -195,3 +195,27 @@ button:focus-visible {
 .primaryIconButton:active {
   background: var(--background-primary-tertiary-pressed, #d0cee4);
 }
+
+.tertiaryIconButton {
+  height: 24px;
+  width: 24x;
+  border: none;
+  color: var(--icons-primary-secondary);
+  background: var(--background-gray-default, #fff);
+}
+
+.tertiaryIconButton:hover {
+  border-radius: var(--radius-200, 8px);
+  background: var(--background-gray-default-hover, #e7e7e7);
+}
+.tertiaryIconButton:disabled {
+  border-radius: var(--radius-200, 8px);
+  background: var(--background-gray-default-disabled, #e7e7e7);
+  color: var(--icons-default-default-disabled);
+  cursor: not-allowed;
+}
+
+.tertiaryIconButton:active {
+  border-radius: var(--radius-200, 8px);
+  background: var(--background-gray-default-pressed, #f6f6f6);
+}

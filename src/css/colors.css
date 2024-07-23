@@ -1,6 +1,12 @@
 .colorSystemError {
   color: var(--text-error-default, #cf222e);
 }
+.text-default {
+  color: var(--text-default-default, #262626);
+}
+.text-secondary {
+  color: var(--text-default-secondary, #6d6d6d);
+}
 
 .colorBlack {
   color: var(--Grey-Black);

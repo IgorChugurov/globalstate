@@ -1,73 +1,76 @@
 .custom-data-grid {
-  padding-left: 24px;
-  padding-right: 24px;
   width: 100%;
   min-height: 200px !important;
 }
-
-.custom-data-grid .mui-data-grid-root {
-  border-top-left-radius: 16px !important;
-  border-top-right-radius: 16px !important;
+.custom-data-grid .MuiDataGrid-virtualScroller {
+  border-radius: var(--radius-400, 16px) !important;
+}
+/* .custom-data-grid .MuiDataGrid-columnHeaders {
+  max-height: 40px !important;
+} */
+.custom-data-grid .MuiDataGrid-columnHeader {
+  max-height: 40px !important;
+}
+.custom-data-grid .MuiSvgIcon-root {
+  width: 16px !important;
+  height: 16px !important;
 }
 
-.custom-data-grid .mui-data-grid-root .mui-svg-icon-root {
-  width: 16px;
+.custom-data-grid .MuiCheckbox-root:hover {
+  background-color: transparent !important;
+}
+.custom-data-grid .MuiDataGrid-cell {
+  height: 48px !important;
+  border: none !important;
+}
+.custom-data-grid .MuiToolbar-root {
+  height: 40px !important;
+}
+.custom-data-grid .MuiDataGrid-footerContainer {
+  min-height: 40px !important;
+  height: 40px !important;
 }
 
-.custom-data-grid .mui-data-grid-root .mui-data-grid-column-headers {
+.custom-data-grid .MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+  outline: none !important;
+}
+.MuiDataGrid-cell:focus {
+  outline: none !important;
+}
+.MuiDataGrid-columnHeader:focus-within {
+  outline: none !important;
+}
+
+/* .custom-data-grid .MuiDataGrid-root .mui-data-grid-column-headers {
   padding: 0px;
   min-height: 40px !important;
 }
 
-.custom-data-grid .mui-data-grid-root .mui-data-grid-column-header {
+.custom-data-grid .MuiDataGrid-root .mui-data-grid-column-header {
   height: 40px !important;
 }
 
-.custom-data-grid .mui-data-grid-root .mui-data-grid-row {
+.custom-data-grid .MuiDataGrid-root .MuiDataGrid-row {
   padding: 1px 0px;
   min-height: 48px !important;
+} */
+
+.custom-data-grid .MuiDataGrid-root .MuiTablePagination-selectLabel,
+.custom-data-grid .MuiDataGrid-root .MuiTablePagination-displayedRows,
+.custom-data-grid .MuiDataGrid-root .MuiTablePagination-select,
+.custom-data-grid .MuiDataGrid-root .MuiTablePagination-menuItem {
+  font-size: 12px !important;
+}
+.custom-data-grid .MuiDataGrid-root .MuiTablePagination-selectLabel {
+  font-size: 12px !important;
 }
 
-.custom-data-grid .mui-data-grid-root .mui-data-grid-cell {
-  border: none;
-  overflow: hidden;
-  color: var(--Grey-Black);
-  text-overflow: ellipsis;
-  font-family: Roboto;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 21px;
-}
-
-.custom-data-grid .mui-data-grid-root .mui-data-grid-column-header-title {
-  color: var(--Grey-600);
-  font-family: "Roboto Mono", monospace;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-  outline: none;
-}
-
-.custom-data-grid .mui-data-grid-root .mui-data-grid-column-header:focus,
-.custom-data-grid .mui-data-grid-root .mui-data-grid-cell:focus,
-.custom-data-grid .mui-data-grid-root .mui-data-grid-cell:focus-within {
-  outline: none;
-}
-
-.custom-data-grid .mui-data-grid-root .mui-data-grid-footer-container,
-.custom-data-grid .mui-data-grid-root .mui-table-pagination-toolbar {
-  min-height: 36px !important;
-}
-
-.custom-data-grid .mui-data-grid-root .mui-table-pagination-select-label,
-.custom-data-grid .mui-data-grid-root .mui-table-pagination-displayed-rows,
-.custom-data-grid .mui-data-grid-root .mui-table-pagination-select,
-.custom-data-grid .mui-data-grid-root .mui-table-pagination-menu-item {
-  font-size: 14px !important;
-}
-
-.custom-data-grid .mui-data-grid-root button {
+.custom-data-grid .MuiDataGrid-root button {
   max-height: 32px !important;
+}
+.MuiTablePagination-selectLabel {
+  color: var(--text-default-secondary, #6d6d6d);
+}
+.MuiMenuItem-root {
+  font-size: 12px !important;
 }

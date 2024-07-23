@@ -1,0 +1,18 @@
+.iconContainer {
+  display: flex;
+
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+/* .iconWrapper {
+  display: flex;
+  padding: var(--space-100, 4px);
+  align-items: center;
+  border-radius: var(--radius-200, 8px);
+  background: var(--background-gray-default, #fff);
+  cursor: pointer;
+}
+.iconWrapper:hover {
+  border-color: var(--Grey-500);
+} */

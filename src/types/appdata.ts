@@ -101,6 +101,16 @@ export interface IOptionsListItem {
      * The columns for the data grid.
      */
     columnsForGrid: IColumnForDataGrud[];
+    /**
+     * The options for an empty list.
+     */
+    forEmptyList?: { title: string; messages: string[] };
+    // Defines an optional 'messages' object that may contain optional strings for 'afterCreate', 'afterUpdate', and 'afterDelete' events.
+    messages?: {
+      afterCreate?: string; // Optional message to display after a create operation
+      afterUpdate?: string; // Optional message to display after an update operation
+      afterDelete?: string; // Optional message to display after a delete operation
+    };
   };
   /**
    * The options for the edit page of the item from the list.
@@ -115,7 +125,8 @@ export interface IActionData {
 export interface IColumnForDataGrud {
   field: string;
   headerName: string;
-  width: number;
+  width?: number;
+  flex?: number;
   type?: "view" | "openEditPage" | "actions" | "naigateToDetails";
   options?: {
     // this is for action cell
@@ -152,6 +163,24 @@ export interface IDataForEditPage {
    * The title of the event that will be triggered when the data is saved in the edit page.
    */
   reloadEventTitle?: string;
+  /**
+   * The options for the buttons on the edit page.
+   * default values are "Create" and "Update"
+   */
+  buttons?: {
+    /**
+     * The text for the "Create" button.
+     */
+    create?: string;
+    /**
+     * The text for the "Update" button.
+     */
+    update?: string;
+  };
+  buttonText?: {
+    new?: string;
+    update?: string;
+  };
 }
 
 /**

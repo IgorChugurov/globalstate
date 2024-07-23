@@ -168,19 +168,17 @@ const GroupCompanies = ({ group }: { group: any }) => {
 const EmptyState = () => {
   return (
     <div className={styles.emptyStateWrapper}>
-      <div className={styles.emptyState}>
-        <div className={styles.emptyStateContainer}>
-          <span className={`${styles.headerEmptyState} headings-h2`}>
-            You have no company groups
+      <div className={styles.emptyStateContainer}>
+        <span className={`${styles.headerEmptyState} headings-h2`}>
+          You have no company groups
+        </span>
+        <div className={styles.emptyStateTextWrapper}>
+          <span className={`${styles.headerEmptyText} body-m-regular`}>
+            Company groups that you create will end up here.
           </span>
-          <div className={styles.emptyStateTextWrapper}>
-            <span className={`${styles.headerEmptyText} body-m-regular`}>
-              Company groups that you create will end up here.
-            </span>
-            <span className={`${styles.headerEmptyText} body-m-regular`}>
-              Add a Company group to get started.
-            </span>
-          </div>
+          <span className={`${styles.headerEmptyText} body-m-regular`}>
+            Add a Company group to get started.
+          </span>
         </div>
       </div>
     </div>

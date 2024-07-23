@@ -135,9 +135,11 @@ const NavbarApp = () => {
             <NavItem title="Companies" link="/" startRoute="groups" />
             <NavItem title="Environments" link="/environments" />
           </div>
-          <Breadcrumbs data={breadcrumbsData} />
         </div>
 
+        <div className={styles.center}>
+          <Breadcrumbs data={breadcrumbsData} />
+        </div>
         <div className={styles.right}>
           <Link to={`/settings`}>
             <button

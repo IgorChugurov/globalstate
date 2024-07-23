@@ -54,7 +54,7 @@
       }
     },
     {
-      "title": "Companies",
+      "title": "Group companies",
       "collectionName": "company",
       "forServicePackage": {
         "url": "https://dummyjson.com/posts",
@@ -64,25 +64,33 @@
         "searchBlock": "Search for companies",
 
         "buttonBlock": { "title": "New company" },
+
         "columnsForGrid": [
           {
             "field": "title",
             "headerName": "Name",
-            "width": 250,
+            "flex": 1,
             "type": "naigateToDetails"
           },
-          { "field": "admins", "headerName": "Assigned users", "width": 250 },
+
           { "field": "createdAt", "headerName": "Created", "width": 250 },
           {
             "field": "actions",
-            "headerName": "Actions",
+            "headerName": "",
             "type": "actions",
-            "width": 250,
+            "width": 50,
             "options": {
-              "actions": [{ "name": "edit" }, { "name": "delete" }]
+              "actions": [{ "name": "edit", "link": true }]
             }
           }
-        ]
+        ],
+        "forEmptyList": {
+          "title": "You have no company in this group",
+          "messages": [
+            "Company  that you create will end up here.",
+            "Add a company to get started."
+          ]
+        }
       },
       "forEdit": {
         "title": ["Create new company", "Edit product"],
@@ -107,7 +115,7 @@
       }
     },
     {
-      "title": "Group Admins!",
+      "title": "Group Admins",
       "collectionName": "groupAdmins",
       "forServicePackage": {
         "url": "https://dummyjson.com/products",
@@ -252,29 +260,40 @@
       "forList": {
         "searchBlock": "Search for company admins",
 
-        "buttonBlock": { "title": "New admin" },
+        "buttonBlock": { "title": "New company admin" },
         "columnsForGrid": [
           {
             "field": "title",
             "headerName": "Email",
-            "width": 250,
+            "flex": 1,
             "type": "naigateToDetails"
           },
 
-          { "field": "createdAt", "headerName": "Created", "width": 250 },
+          { "field": "createdAt", "headerName": "Invited", "width": 250 },
           {
             "field": "actions",
-            "headerName": "Actions",
+            "headerName": "",
             "type": "actions",
-            "width": 250,
+            "width": 50,
             "options": {
               "actions": [{ "name": "delete" }]
             }
           }
-        ]
+        ],
+        "forEmptyList": {
+          "title": "You have no company admins",
+          "messages": [
+            "Company admins that you create will end up here.",
+            "Add a company admin to get started."
+          ]
+        },
+        "messages": {
+          "afterCreate": "Company admin created successfully!",
+          "afterDelete": "Company deleted"
+        }
       },
       "forEdit": {
-        "title": ["Create new admin for company", ""],
+        "title": ["Create new company admin", ""],
         "pageHeader": "",
         "sections": [
           {
@@ -292,7 +311,8 @@
               }
             ]
           }
-        ]
+        ],
+        "buttonText": { "create": "Invite", "edit": "Update" }
       }
     },
     {

@@ -37,6 +37,7 @@ const Createmodal = ({
   fields,
 }: IProps) => {
   const modalTitle = dataForPage.title[0];
+  const buttontext = dataForPage.buttonText?.create || "Create";
   //console.log(modalTitle, fields);
   const [item] = useState<any>(getItemForEdit(fields));
   const { darkMode, state, renewData } = useContext(GlobalStateContext);
@@ -137,7 +138,9 @@ const Createmodal = ({
                 <span className="body-m-regular colorGreyBlack">Cancel</span>
               </button>
               <button onClick={onSubmit} className="button primaryButton">
-                <span className="body-m-regular colorGreyWhite">Create</span>
+                <span className="body-m-regular colorGreyWhite">
+                  {buttontext}
+                </span>
               </button>
             </div>
           </div>
