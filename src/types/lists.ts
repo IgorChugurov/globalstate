@@ -11,8 +11,6 @@
  * Represents the any entity for the list page.
  */
 export interface IEntity {
-  _id: string;
-  name: string;
   [key: string]: any;
 }
 

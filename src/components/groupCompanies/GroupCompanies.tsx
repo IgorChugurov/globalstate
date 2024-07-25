@@ -60,6 +60,7 @@ const GroupCompany = ({
     searchBlock: placeholderSearchCompanies,
     buttonBlock: buttonBlockCompanies,
   } = forListCompanies;
+  const { afterCreate: afterCreateMessage } = forListCompanies.messages || {};
   const {
     searchBlock: placeholderSearchAdmins,
     buttonBlock: buttonBlockAdmins,
@@ -94,7 +95,7 @@ const GroupCompany = ({
     // here we add new item to the list from the active tab and add gorupId bs all items linked to group
     const tabService = servicesPackage[tabServiceName];
     const dataToSend = { ...data, groupId };
-    await createAnyEntity(dataToSend, tabService);
+    await createAnyEntity(dataToSend, tabService, afterCreateMessage);
   };
 
   useEffect(() => {
@@ -243,7 +244,7 @@ const GroupCompany = ({
             <ListsItemsInTab
               initData={initDataGroupAdmins}
               searchState={searchState}
-            />{" "}
+            />
           </>
         )}
         {tab === 2 && (

@@ -139,7 +139,7 @@ const ListItems = <
             allItems ? paginate.totalItems : rowSelectionModel.length
           } item${rowSelectionModel.length > 1 ? "s" : ""}?`}
           handleAction={() => {}}
-          action={"deleting"}
+          // action={{name:"deleting"}}
         />
       )}
       {modalCreateOpen && (

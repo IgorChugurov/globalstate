@@ -323,7 +323,7 @@ export const AccessActionButton = ({
         </div>
       </div>
 
-      {openModal && (
+      {/* {openModal && (
         <Appmodal
           openModal={openModal}
           handleCloseModal={() => setOpenModal(false)}
@@ -338,7 +338,7 @@ export const AccessActionButton = ({
           handleAction={handleAction}
           action={action === "regenerating" ? "access API key update" : action}
         />
-      )}
+      )} */}
     </>
   );
 };

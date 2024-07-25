@@ -219,3 +219,7 @@ button:focus-visible {
   border-radius: var(--radius-200, 8px);
   background: var(--background-gray-default-pressed, #f6f6f6);
 }
+
+.iconButton.bgTransparent {
+  background-color: transparent !important;
+}

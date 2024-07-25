@@ -16,17 +16,12 @@ import Avatar from "../avatar/Avatar";
 import NavItem from "../navItem/NavItem";
 
 const NavbarApp = () => {
-  const location = useLocation();
   const { userData } = useContext(UserDataContext);
 
-  const { toggleDarkMode, TITLE, VERSION, routeData } =
-    useContext(GlobalStateContext);
+  const { toggleDarkMode, TITLE, VERSION } = useContext(GlobalStateContext);
+
   const userTitle = (userData?.email || "PP").substring(0, 2);
   const { windowWidth } = useWindowDimensions();
-
-  const [breadcrumbsData, setBreadcrumbsData] = useState<
-    { title: string; link?: string }[]
-  >([]);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -45,30 +40,6 @@ const NavbarApp = () => {
     toggleDarkMode();
   };
   // set data for breadcrumbs
-  useEffect(() => {
-    const arr = location.pathname.split("/");
-    if (location.pathname === "/" || location.pathname === "/groups") {
-      setBreadcrumbsData([{ title: "Company groups", link: "/" }]);
-    } else if (arr[1] === "groups") {
-      const groupCompanies = routeData?.groupCompanies;
-      const titleGroup = groupCompanies?.name || groupCompanies?.title || "";
-      const arrData = [
-        { title: "Company groups", link: "/" },
-        { title: titleGroup },
-      ];
-      if (arr.length === 4) {
-        arrData[1].link = `/groups/${arr[2]}`;
-        const company = routeData?.company;
-        const titleCompany = company?.name || company?.title || "";
-        arrData.push({ title: titleCompany });
-      }
-      setBreadcrumbsData(arrData);
-    } else if (location.pathname === "/environments") {
-      setBreadcrumbsData([{ title: "Environments", link: "/environments" }]);
-    } else if (location.pathname === "/settings") {
-      setBreadcrumbsData([{ title: "Settings", link: "/settings" }]);
-    }
-  }, [location.pathname, routeData]);
 
   return (
     <>
@@ -138,7 +109,7 @@ const NavbarApp = () => {
         </div>
 
         <div className={styles.center}>
-          <Breadcrumbs data={breadcrumbsData} />
+          <Breadcrumbs />
         </div>
         <div className={styles.right}>
           <Link to={`/settings`}>

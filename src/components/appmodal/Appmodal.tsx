@@ -12,9 +12,9 @@ interface IProps {
   modalTitle: string;
   setOpenModal: (val: boolean) => void;
   handleAction: () => void;
-  confirm?: string;
+  confirmWord?: string;
   confirmSuggestion?: string;
-  action?: string;
+  modalText?: string;
 }
 const Appmodal = ({
   openModal,
@@ -22,15 +22,16 @@ const Appmodal = ({
   modalTitle,
   setOpenModal,
   handleAction,
-  confirm,
+  confirmWord,
   confirmSuggestion,
-  action,
+  modalText,
 }: IProps) => {
   const { darkMode } = useContext(GlobalStateContext);
   const [confirmText, setConfirmText] = useState("");
   const handleConfirm = () => {
     handleAction();
   };
+  //console.log(confirmText, confirmWord);
   return (
     <div>
       <Modal
@@ -45,7 +46,7 @@ const Appmodal = ({
         <div className={styles.wrapper}>
           <div className={styles.header}>
             <span className={`${styles.headerTitle} headings-h2`}>
-              Confirm {action ? action : "action"}
+              {modalTitle}
             </span>
 
             <CloseButton
@@ -57,11 +58,9 @@ const Appmodal = ({
 
           <div className={styles.content}>
             <div className={styles.textWrapper}>
-              <span className="body-m-regular colorGreyBlack">
-                {modalTitle}
-              </span>
+              <span className="body-m-regular colorGreyBlack">{modalText}</span>
             </div>
-            {confirm && (
+            {confirmWord && (
               <>
                 <div className={styles.textWrapper}>
                   <span className="body-m-medium colorGreyBlack">
@@ -92,7 +91,7 @@ const Appmodal = ({
               </button>
               <button
                 className="button primaryButton"
-                disabled={Boolean(confirm && confirm !== confirmText)}
+                disabled={Boolean(confirmWord && confirmWord !== confirmText)}
                 onClick={(e) => {
                   setOpenModal(false);
                   handleConfirm();

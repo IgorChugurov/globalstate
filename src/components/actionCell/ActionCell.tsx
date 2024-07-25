@@ -11,9 +11,11 @@ import Appmodal from "../appmodal/Appmodal";
 import { ApiService } from "../../services/servicesPackage";
 import { Icon_delete_inlist, Icon_setting_inlist } from "./Icons";
 import { Link } from "react-router-dom";
+import { IActionData } from "../../types/appdata";
+import { deleteAnyEntity } from "../../utils/createUpdateDeleteAnyEntity";
 
 const ActionCell: React.FC<{
-  actions: any[];
+  actions: IActionData[];
   rowId?: number | string;
   item: IEntity;
   setCurrentItem?: (d: any) => void;
@@ -28,35 +30,43 @@ const ActionCell: React.FC<{
   actions = [],
 }) => {
   const url = window.location.pathname;
-  const [action, setAction] = useState("");
+  const [action, setAction] = useState<IActionData | null>(null);
   const [modalTitle, setModalTitle] = useState("");
+  const [modalText, setModalText] = useState("");
   const [openModal, setOpenModal] = useState(false);
+  const [confirmText, setConfirmText] = useState("");
+  const [confirmWord, setConfirmWord] = useState("");
 
-  const handleActionItem = (action: string) => {
+  const handleActionItem = (action: IActionData) => {
     setAction(action);
-    const title =
-      action === "deleting"
-        ? `Are you sure you want to delete ${item.name}?`
-        : `Are you sure you want to update ${item.name}?`;
-
-    setModalTitle(title);
+    setConfirmText(action.confirmText || "");
+    setConfirmWord(action.confirmWord || "");
+    setModalTitle(action.modalTitle || `Confirm`);
+    setModalText(
+      action.modalText
+        ? action.modalText.replace(
+            "${item.name}",
+            item.name || item.title || item.email
+          )
+        : "Are you sure you want to do this?"
+    );
     setOpenModal(true);
   };
 
-  const copyToClipBoard = () => {
-    const data = item.apiKey;
-    copyToClipBoardUtil(data, "API-key was copied");
-  };
+  // const copyToClipBoard = () => {
+  //   const data = item.apiKey;
+  //   copyToClipBoardUtil(data, "API-key was copied");
+  // };
 
   const handleAction = async () => {
-    if (action === "deleting") {
+    if (action && action.name === "delete") {
       await deleteItem();
-    } else if (action === "regenerating") {
-      // await regenerateAPIKey();
     }
-    setAction("");
+    setAction(null);
   };
-  const deleteItem = async () => {};
+  const deleteItem = async () => {
+    deleteAnyEntity(item._id, dataService);
+  };
 
   return (
     <>
@@ -69,7 +79,7 @@ const ActionCell: React.FC<{
                   <Link to={`${url}/${rowId}`}>
                     <button
                       data-size="small"
-                      className="iconButton tertiaryIconButton"
+                      className="iconButton tertiaryIconButton bgTransparent"
                     >
                       <Icon_setting_inlist />
                     </button>
@@ -77,7 +87,7 @@ const ActionCell: React.FC<{
                 ) : setCurrentItem && setEditModalOpen ? (
                   <button
                     data-size="small"
-                    className="iconButton tertiaryIconButton"
+                    className="iconButton tertiaryIconButton bgTransparent"
                     onClick={(e: React.MouseEvent<HTMLElement>) => {
                       if (item) {
                         setCurrentItem(item);
@@ -94,14 +104,15 @@ const ActionCell: React.FC<{
             )}
 
             {action.name === "delete" && (
-              <div
-                className={styles.iconWrapper}
+              <button
+                data-size="small"
+                className="iconButton tertiaryIconButton bgTransparent"
                 onClick={(e: React.MouseEvent<HTMLElement>) => {
-                  handleActionItem("deleting");
+                  handleActionItem(action);
                 }}
               >
                 <Icon_delete_inlist />
-              </div>
+              </button>
             )}
           </React.Fragment>
         ))}
@@ -113,14 +124,10 @@ const ActionCell: React.FC<{
           handleCloseModal={() => setOpenModal(false)}
           setOpenModal={setOpenModal}
           modalTitle={modalTitle}
-          confirm={action === "regenerating" ? "Regenerate" : "Delete"}
-          confirmSuggestion={
-            action === "regenerating"
-              ? "To confirm, please type the word Regenerate"
-              : "To confirm, please type the word Delete"
-          }
+          confirmWord={confirmWord}
+          confirmSuggestion={confirmText}
           handleAction={handleAction}
-          action={action === "regenerating" ? "access API key update" : action}
+          modalText={modalText}
         />
       )}
     </>

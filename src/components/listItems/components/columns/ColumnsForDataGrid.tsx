@@ -35,9 +35,9 @@ export const columnsForDataGrid = ({
   dataService,
 }: {
   items: IItemInCell[];
-  setModalCreateOpen: Dispatch<SetStateAction<boolean>>;
+  setModalCreateOpen?: Dispatch<SetStateAction<boolean>>;
   setItems: Dispatch<SetStateAction<any[]>>;
-  setCurrentItem: Dispatch<SetStateAction<any | null>>;
+  setCurrentItem?: Dispatch<SetStateAction<any | null>>;
   onChange?: (data: any) => void;
   columnsForGrid: IColumnForDataGrud[];
   dataService: ApiService<IEntity>;
@@ -45,8 +45,12 @@ export const columnsForDataGrid = ({
   const openForEdit = (d: IItemInCell) => {
     const item = items.find((p) => p._id === d._id);
     if (item) {
-      setCurrentItem(item);
-      setModalCreateOpen(true);
+      if (setCurrentItem) {
+        setCurrentItem(item);
+      }
+      if (setModalCreateOpen) {
+        setModalCreateOpen(true);
+      }
     }
   };
   const columns = columnsForGrid.map((column) => {
@@ -72,8 +76,8 @@ const getColumn = ({
   column: IColumnForDataGrud;
   items: IItemInCell[];
   openForEdit: (d: IItemInCell) => void;
-  setModalCreateOpen: Dispatch<SetStateAction<boolean>>;
-  setCurrentItem: Dispatch<SetStateAction<any | null>>;
+  setModalCreateOpen?: Dispatch<SetStateAction<boolean>>;
+  setCurrentItem?: Dispatch<SetStateAction<any | null>>;
   dataService: ApiService<IEntity>;
 }) => {
   //console.log(column);

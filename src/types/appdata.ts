@@ -80,7 +80,13 @@ export interface IOptionsListItem {
      * The options for the service.
      */
     options: any;
+    reloadEvents?: { delete?: string; update?: string; create?: string };
   };
+  /**
+   * The title of the event that will be triggered when the element in the list updated or deleted
+   */
+  reloadEventTitle?: string;
+
   /**
    * The options for the header of the list page.
    */
@@ -117,9 +123,42 @@ export interface IOptionsListItem {
    */
   forEdit: IDataForEditPage;
 }
+/**
+ * Represents the data for an action.
+ */
 export interface IActionData {
+  /**
+   * The name of the action.
+   * Possible values are: "delete", "edit", "clone", "view", "copy", "actions".
+   */
   name: "delete" | "edit" | "clone" | "view" | "copy" | "actions";
+
+  /**
+   * if true and action = edit in the component create Link to=url/rowId. in othe case openEditModal
+   */
+
+  link?: boolean;
+
+  /**
+   * The confirmation word for the action.
+   */
+  confirmWord?: string;
+  /**
+   * The confirmation text for the action.
+   */
+  confirmText?: string;
+
+  modalTitle?: string;
+  modalText?: string;
+
+  /**
+   * The fields to be copied.
+   */
   copyFields?: { field: string }[];
+
+  /**
+   * The component associated with the action.
+   */
   component?: any;
 }
 export interface IColumnForDataGrud {
@@ -178,7 +217,7 @@ export interface IDataForEditPage {
     update?: string;
   };
   buttonText?: {
-    new?: string;
+    create?: string;
     update?: string;
   };
 }
@@ -237,6 +276,10 @@ export interface IEditField {
    * Indicates if the field is required.
    */
   required?: boolean;
+  /**
+   * Indicates if the field is disabled for edit page.
+   */
+  forEditPageDisabled?: boolean;
   /**
    * The text to display when the field is required.
    */

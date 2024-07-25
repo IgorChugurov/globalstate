@@ -1,12 +1,13 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import { IOptionsListItem } from "../../types/appdata";
 import styles from "./Environment.module.css";
-import { IEnvirnoment } from "../../types/environment";
+
 import { servicesPackage } from "../../services/servicesPackage";
 import { createAnyEntity } from "../../utils";
 import { get } from "http";
 import { getEnvironmentData } from "worker_threads";
 import { updateAnyEntity } from "../../utils/createUpdateDeleteAnyEntity";
+import { IEnvironment } from "../../types/environment";
 const dumnData = [
   {
     id: "1",
@@ -55,15 +56,15 @@ const Environment = ({
   initDataEnvironment: IOptionsListItem;
 }) => {
   const wrapper = useRef<HTMLDivElement | null>(null);
-  const [envVariables, setEnvVariables] = useState<IEnvirnoment[]>(dumnData);
+  const [envVariables, setEnvVariables] = useState<IEnvironment[]>(dumnData);
   const { title, collectionName } = initDataEnvironment;
   const itemsService = servicesPackage[collectionName];
 
-  const createItem = async (d: IEnvirnoment) => {
+  const createItem = async (d: IEnvironment) => {
     await createAnyEntity(d, itemsService);
     getEnvironmentData();
   };
-  const updateItem = async (d: IEnvirnoment) => {
+  const updateItem = async (d: IEnvironment) => {
     await updateAnyEntity(d, itemsService);
     getEnvironmentData();
   };
@@ -143,10 +144,10 @@ const EditEnvVar = ({
   updateItem,
   setEnvVariables,
 }: {
-  item: IEnvirnoment;
+  item: IEnvironment;
   idx: number;
-  updateItem: (d: IEnvirnoment) => void;
-  setEnvVariables: (d: IEnvirnoment[]) => void;
+  updateItem: (d: IEnvironment) => void;
+  setEnvVariables: (d: IEnvironment[]) => void;
 }) => {
   const [data, setData] = useReducer(
     (state: { [key: string]: any }, newState: { [key: string]: any }) => ({
@@ -193,7 +194,7 @@ const EditEnvVar = ({
         <button
           data-size="small"
           className="button primaryButton"
-          onClick={() => updateItem(data as IEnvirnoment)}
+          onClick={() => updateItem(data as IEnvironment)}
         >
           save
         </button>
@@ -211,9 +212,9 @@ const EditEnvVar = ({
 const CreateEnvVar = ({
   createItem,
 }: {
-  createItem: (d: IEnvirnoment) => void;
+  createItem: (d: IEnvironment) => void;
 }) => {
-  const item: IEnvirnoment = {
+  const item: IEnvironment = {
     id: "",
     key: "",
     value: "",

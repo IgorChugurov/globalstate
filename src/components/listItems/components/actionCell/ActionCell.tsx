@@ -163,7 +163,7 @@ const ActionCell: React.FC<{
         ))}
       </div>
 
-      {openModal && (
+      {/* {openModal && (
         <Appmodal
           openModal={openModal}
           handleCloseModal={() => setOpenModal(false)}
@@ -178,7 +178,7 @@ const ActionCell: React.FC<{
           handleAction={handleAction}
           action={action === "regenerating" ? "access API key update" : action}
         />
-      )}
+      )} */}
     </>
   );
 };

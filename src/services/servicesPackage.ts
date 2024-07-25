@@ -26,24 +26,15 @@ export class ApiService<T extends IEntity, U extends boolean = false> {
   constructor(
     private endpoint: string,
     private options?: any, //{ create: string },
+    private reloadEvents?: any, //{ delete: "reloadItems" },
     private useListResponse: U = false as U
   ) {}
 
-  getAll = (
-    paginate?: IPaginate
-  ): Promise<U extends true ? IListResponse<T> : T[]> => {
+  getAll = (): Promise<U extends true ? IListResponse<T> : T[]> => {
     return new Promise((resolve, reject) => {
       const req = {
         url: `${this.endpoint}`,
         method: "GET",
-        queryString: paginate?.query,
-        page: paginate?.currentPage,
-        perPage: paginate?.perPage,
-        search: paginate?.search,
-        limit: paginate?.perPage,
-        skip:
-          (paginate?.perPage || 0) *
-          (paginate?.currentPage ? paginate?.currentPage - 1 : 0),
       };
 
       sendRequest(req).then(resolve, reject);
@@ -133,7 +124,7 @@ export const servicesPackage: { [key: string]: ApiService<IEntity, false> } =
   Object.fromEntries(
     arrForServicesPackage.map((d) => [
       d.collectionName,
-      new ApiService<IEntity>(d.url, d.options),
+      new ApiService<IEntity>(d.url, d.options, d.reloadEvents),
     ])
   );
 //console.log(servicesPackage);

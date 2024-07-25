@@ -1,4 +1,4 @@
-export interface IEnvirnoment {
+export interface IEnvironment {
   id: string;
   key: string;
   value?: string;

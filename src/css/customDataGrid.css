@@ -1,6 +1,10 @@
 .custom-data-grid {
   width: 100%;
   min-height: 200px !important;
+  border-radius: var(--radius-400, 16px) !important;
+}
+.hidePagination .MuiDataGrid-footerContainer {
+  display: none !important;
 }
 .custom-data-grid .MuiDataGrid-virtualScroller {
   border-radius: var(--radius-400, 16px) !important;
@@ -38,6 +42,9 @@
   outline: none !important;
 }
 .MuiDataGrid-columnHeader:focus-within {
+  outline: none !important;
+}
+.MuiDataGrid-root .MuiDataGrid-cell:focus-within {
   outline: none !important;
 }
 

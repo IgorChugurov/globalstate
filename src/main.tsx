@@ -36,6 +36,7 @@ import Company from "./components/Company/Company.tsx";
 import Environment from "./components/environment/Environment.tsx";
 import Settings from "./components/settings/Settings.tsx";
 import Environments from "./components/environment/Environments.tsx";
+import ProjectEnvironment from "./components/projectEnvironment/ProjectEnvironment.tsx";
 export const LSPrefix = initConfig.LSPrefix;
 
 const EntitiesForListAndServicesPackageAndEditPage =
@@ -136,10 +137,7 @@ const router = createBrowserRouter([
       <div className="mainContainer">
         <NavbarApp />
         {/* <Environment initDataEnvironment={initDataEnvironment} /> */}
-        <Environments
-          initDataCompanyEnvironment={initDataEnvironment}
-          initDataGroupEnvironment={initDataEnvironment}
-        />
+        <ProjectEnvironment initDataEnvironment={initDataEnvironment} />
       </div>
     ),
   },

@@ -14,7 +14,7 @@ const SearchInputSimple = ({
 }) => {
   const inputSearchRef = useRef<HTMLInputElement>(null);
   const [search, setSearch] = useState("");
-  const debounced = useDebounce(search, 700);
+  const debounced = useDebounce(search, 200);
   const clearSearch = () => {
     setSearch("");
     setSearchState("");
@@ -24,9 +24,6 @@ const SearchInputSimple = ({
   };
 
   useEffect(() => {
-    if (!debounced) {
-      return;
-    }
     setSearchState(debounced);
   }, [debounced]);
   return (

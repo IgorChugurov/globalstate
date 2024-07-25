@@ -54,14 +54,16 @@
       }
     },
     {
-      "title": "Group companies",
+      "title": "Group company",
       "collectionName": "company",
       "forServicePackage": {
         "url": "https://dummyjson.com/posts",
-        "options": { "create": "/add" }
+        "options": { "create": "/add" },
+        "reloadEvents": { "delete": "reloadGroupCompanies" }
       },
+      "reloadEventTitle": "reloadGroupCompanies",
       "forList": {
-        "searchBlock": "Search for companies",
+        "searchBlock": "Search for group companies",
 
         "buttonBlock": { "title": "New company" },
 
@@ -90,10 +92,15 @@
             "Company  that you create will end up here.",
             "Add a company to get started."
           ]
+        },
+
+        "messages": {
+          "afterCreate": "Group company was created successfully!",
+          "afterDelete": "Group company was deleted successfully."
         }
       },
       "forEdit": {
-        "title": ["Create new company", "Edit product"],
+        "title": ["Create new group company", "Edit group company"],
         "pageHeader": "Group of companies details",
         "sections": [
           {
@@ -101,8 +108,8 @@
             "fields": [
               {
                 "name": "name",
-                "label": "Company name",
-                "placeholder": "Enter company  name",
+                "label": "Group company",
+                "placeholder": "Enter group company",
                 "type": "text",
                 "forEitPage": "yes",
                 "forNewPage": "yes",
@@ -111,7 +118,8 @@
               }
             ]
           }
-        ]
+        ],
+        "buttonText": { "create": "Create", "edit": "Update" }
       }
     },
     {
@@ -255,8 +263,11 @@
       "collectionName": "companyAdmins",
       "forServicePackage": {
         "url": "https://dummyjson.com/products",
-        "options": { "create": "/add" }
+        "options": { "create": "/add" },
+        "reloadEvents": { "delete": "reloadCompanyAdmins" }
       },
+      "reloadEventTitle": "reloadCompanyAdmins",
+
       "forList": {
         "searchBlock": "Search for company admins",
 
@@ -276,7 +287,15 @@
             "type": "actions",
             "width": 50,
             "options": {
-              "actions": [{ "name": "delete" }]
+              "actions": [
+                {
+                  "name": "delete",
+                  "modalText": "Are you sure you want to delete ${item.name}?",
+                  "modalTitle": "Confirm deleting",
+                  "confirmWord": "Delete",
+                  "confirmText": "To confirm, please type the word Delete"
+                }
+              ]
             }
           }
         ],
@@ -403,18 +422,75 @@
       "collectionName": "environment",
       "forServicePackage": {
         "url": "https://dummyjson.com/posts",
-        "options": { "create": "/add" }
+        "options": { "create": "/add" },
+        "reloadEvents": {
+          "update": "reloadEnvironments",
+          "create": "reloadEnvironments"
+        }
       },
+      "reloadEventTitle": "reloadEnvironments",
       "forList": {
         "searchBlock": "Search for environment",
 
-        "buttonBlock": { "title": "New environment variable" },
-        "columnsForGrid": []
+        "buttonBlock": { "title": "New environment" },
+        "columnsForGrid": [
+          {
+            "field": "title",
+            "headerName": "Key",
+            "flex": 1,
+            "type": "openEditPage"
+          },
+
+          { "field": "type", "headerName": "Type", "width": 150 },
+          { "field": "parent", "headerName": "Parent", "width": 150 },
+          { "field": "adminPanel", "headerName": "Admin panel", "width": 150 },
+          {
+            "field": "actions",
+            "headerName": "",
+            "type": "actions",
+            "width": 50,
+            "options": {
+              "actions": [
+                {
+                  "name": "edit"
+                }
+              ]
+            }
+          }
+        ],
+        "forEmptyList": {
+          "title": "You have no environments",
+          "messages": [
+            "Environments that you create will end up here.",
+            "Add a environment to get started."
+          ]
+        },
+        "messages": {
+          "afterCreate": "Environment created successfully!",
+          "afterDelete": "Environmentcreated deleted"
+        }
       },
       "forEdit": {
-        "title": ["Create new varible", ""],
-        "pageHeader": "Environment variable details",
-        "sections": []
+        "title": ["New environment", "Edit environment"],
+        "pageHeader": "Environment details",
+        "sections": [
+          {
+            "title": "Info",
+            "fields": [
+              {
+                "name": "name",
+                "label": "Environment name",
+                "placeholder": "Enter environment name",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Environment name is required",
+                "forEditPageDisabled": true
+              }
+            ]
+          }
+        ]
       }
     },
     {

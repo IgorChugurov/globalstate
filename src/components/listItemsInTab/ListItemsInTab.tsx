@@ -17,10 +17,10 @@ const ListsItemsInTab = ({
   const [modalCreateOpen, setModalCreateOpen] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
-  const { forList, title, collectionName } = initData;
+  const { forList, title, collectionName, reloadEventTitle } = initData;
 
   const { columnsForGrid, forEmptyList } = forList;
-  //console.log(forEmptyList);
+  //console.log(initData);
 
   const itemsService = servicesPackage[collectionName];
   const [items, setItems] = useState<ICompany[]>([]);
@@ -89,6 +89,28 @@ const ListsItemsInTab = ({
     tempPagination.currentPage = 1;
     setPaginate(tempPagination);
   }, [searchState]);
+
+  useEffect(() => {
+    // Define the event handler function
+    const handleReload = () => {
+      setPaginate((prev) => ({
+        ...prev,
+        loaded: false,
+      }));
+    };
+
+    // Add the event handler
+    if (reloadEventTitle) {
+      window.addEventListener(reloadEventTitle, handleReload);
+    }
+
+    // Remove the event handler
+    return () => {
+      if (reloadEventTitle) {
+        window.removeEventListener(reloadEventTitle, handleReload);
+      }
+    };
+  }, [reloadEventTitle]);
 
   useEffect(() => {
     setColumns(
