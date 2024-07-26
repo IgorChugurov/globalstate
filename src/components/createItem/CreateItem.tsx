@@ -1,13 +1,18 @@
-import React, { Dispatch, SetStateAction, useContext, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import { Modal } from "@mui/material";
 import styles from "./CreateItem.module.css";
-import CloseButton from "../CloseButton/CloseButton";
 
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, set, useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IDataForEditPage, IEditField } from "../../types/lists";
+
 import { InputText } from "../inputs/InputText";
 import { InputSelect } from "../inputs/InputSelect";
 import { InputSwitch } from "../inputs/InputSwitch";
@@ -18,6 +23,8 @@ import { TextView } from "../inputs/TextView";
 import { TextCopy } from "../inputs/TextCopy";
 import { GlobalStateContext } from "../../context/GlobalStateProvider";
 import { on } from "events";
+import { Icon_info, Icon_window_close } from "./Icons";
+import { IDataForEditPage, IEditField } from "../../types/appdata";
 
 interface IItem {
   _id: string;
@@ -47,8 +54,12 @@ const CreateItem = ({
 
   allFields,
 }: IProps) => {
-  const { sections: initSection, reloadEventTitle } =
-    structuredClone(dataForEditPage);
+  const [buttonTitle, setButtonTitle] = useState("Create");
+  const {
+    sections: initSection,
+    reloadEventTitle,
+    buttonText,
+  } = structuredClone(dataForEditPage);
   const sections = initSection.filter((sec) => {
     sec.fields = sec.fields.filter((field) => {
       if (currentItem._id) {
@@ -58,7 +69,7 @@ const CreateItem = ({
       }
     });
 
-    return Boolean(sec.fields.length);
+    return Boolean(sec.fields.length || sec.button);
   });
 
   const { darkMode, state } = useContext(GlobalStateContext);
@@ -76,6 +87,13 @@ const CreateItem = ({
     setLoading(true);
     onSuccess(data);
   });
+  useEffect(() => {
+    if (currentItem.id) {
+      setButtonTitle(buttonText?.update || "Update");
+    } else {
+      setButtonTitle(buttonText?.create || "Create");
+    }
+  }, [currentItem]);
 
   return (
     <Modal
@@ -88,151 +106,131 @@ const CreateItem = ({
       }
     >
       <div className={styles.container}>
-        {/* {loading && (
-          <div className={styles.loadingBox}>
-            <CircularProgress />
-          </div>
-        )} */}
-
         <div className={styles.header}>
-          <CloseButton
+          <button
+            data-size="small"
+            className="iconButton secondatyIconButton"
             onClick={() => {
               setOpenModal(false);
             }}
-          />
+          >
+            <Icon_window_close />
+          </button>
 
           <span
-            className="headers-h3 colorGreyBlack"
+            className="body-l-medium"
             style={{
               flex: "1 0 0",
             }}
           >
-            {!currentItem._id
+            {!currentItem.id
               ? dataForEditPage.title[0]
               : dataForEditPage.title[1]}
           </span>
-          {currentItem._id && (
-            <button
-              className="button primaryButton"
-              onClick={onSubmitUpload}
-              data-size="small"
-            >
-              <span className="body-m-medium colorGreyWhite">Save Changes</span>
-            </button>
-          )}
-        </div>
-        {currentItem._id && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "8px",
-              width: "100%",
-            }}
+
+          <button
+            className="button primaryButton"
+            onClick={onSubmitUpload}
+            data-size="small"
           >
-            {/* <ImageForTypeFile
-                  fileType={fileTypes.find((item) => item._id === fileType)?.name || ""}
-                  item={currentItem}
-                  onClick={() => {
-                    setPreviewModalOpen(true);
-                  }}
-                  
-                /> */}
-            <div className={styles.imageContainer}>
+            <span className="body-m-medium colorGreyWhite">{buttonTitle}</span>
+          </button>
+        </div>
+
+        <FormProvider {...methods}>
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            //onSubmit={methods.handleSubmit(onSubmit, onError)}
+            noValidate
+            autoComplete="new-password"
+            className={styles.form}
+          >
+            {sections.map((section, i) => (
               <div
-                className={styles.imageBox}
-                style={{
-                  backgroundImage: `url(/assets/img/access.png) !important`,
-                }}
-              ></div>
-            </div>
-
-            <div className={styles.containerForRule}>
-              {/* <AccessActionButton
-                  item={currentItem}
-                  setEditModalOpen={setOpenModal}
-                /> */}
-            </div>
-          </div>
-        )}
-
-        <div id="modalUploadInfo" className={styles.info}>
-          <span className={[styles.title, "colorBlack body-m-bold"].join(" ")}>
-            {dataForEditPage.pageHeader}
-          </span>
-
-          <FormProvider {...methods}>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              //onSubmit={methods.handleSubmit(onSubmit, onError)}
-              noValidate
-              autoComplete="new-password"
-              style={{ width: "100%" }}
-            >
-              <div className={styles.fileDetails}>
-                {currentItem && currentItem._id && <></>}
-
-                {sections.map((section) => (
-                  <div className={styles.box1} key={section.title}>
-                    <div className={styles.boxtitle}>
-                      <div className={styles.number_box}>
-                        <span className="headers-h4 colorBlack"></span>
+                className={`${styles.section} ${
+                  i !== 0 ? styles.borderTop : ""
+                }`}
+                key={section.title}
+              >
+                <div className={styles.boxtitle}>
+                  <div className={styles.number_box}></div>
+                  <span className="mono-s-medium">{section.title}</span>
+                </div>
+                {section.info && (
+                  <div className={styles.info_section_container}>
+                    <div className={styles.titleInfoContainerWrapper}>
+                      <div className={styles.info_containerIconWrapper}>
+                        <Icon_info />
                       </div>
-                      <span className="headers-h4 colorBlack">
-                        {section.title}
+                      <span className="body-m-medium">
+                        {section.info.title}
                       </span>
                     </div>
-
-                    {section.fields.map((field) => {
-                      return (
-                        <div className={styles.box_container} key={field.name}>
-                          {field.type === "select" ? (
-                            <InputSelect
-                              {...field}
-                              control={control}
-                              options={
-                                field.collection && state[field.collection]
-                                  ? state[field.collection].list
-                                  : []
-                              }
-                            />
-                          ) : field.type === "switch" ? (
-                            <InputSwitch {...field} control={control} />
-                          ) : field.type === "radio" ? (
-                            <InputRadio {...field} control={control} />
-                          ) : field.type === "array" ? (
-                            <InputMultipleSelect
-                              {...field}
-                              control={control}
-                              options={
-                                field.collection && state[field.collection]
-                                  ? state[field.collection].list
-                                  : []
-                              }
-                            />
-                          ) : field.type === "view" ? (
-                            <TextView
-                              {...field}
-                              value={currentItem[field.name]}
-                            />
-                          ) : field.type === "copy" ? (
-                            <TextCopy
-                              {...field}
-                              value={currentItem[field.name]}
-                            />
-                          ) : (
-                            <InputText {...field} />
-                          )}
-                        </div>
-                      );
-                    })}
+                    <div className={styles.info_textWrapper}>
+                      <span className="body-s-multiline">
+                        {section.info.text}
+                      </span>
+                    </div>
                   </div>
-                ))}
+                )}
+                {section.button && (
+                  <>
+                    {section.button.action === "delete" && (
+                      <button
+                        className="button dangerButton"
+                        onClick={() => {}}
+                      >
+                        {section.button.title}
+                      </button>
+                    )}
+                  </>
+                )}
+
+                {section.fields.map((field) => {
+                  return (
+                    <div className={`${styles.box_container}`} key={field.name}>
+                      {field.type === "select" ? (
+                        <InputSelect
+                          {...field}
+                          control={control}
+                          options={
+                            field.options
+                              ? field.options
+                              : field.collection && state[field.collection]
+                              ? state[field.collection].list
+                              : []
+                          }
+                        />
+                      ) : field.type === "switch" ? (
+                        <InputSwitch {...field} control={control} />
+                      ) : field.type === "radio" ? (
+                        <InputRadio {...field} control={control} />
+                      ) : field.type === "array" ? (
+                        <InputMultipleSelect
+                          {...field}
+                          control={control}
+                          options={
+                            field.collection && state[field.collection]
+                              ? state[field.collection].list
+                              : []
+                          }
+                        />
+                      ) : field.type === "view" ? (
+                        <TextView {...field} value={currentItem[field.name]} />
+                      ) : field.type === "copy" ? (
+                        <TextCopy {...field} value={currentItem[field.name]} />
+                      ) : (
+                        <InputText {...field} />
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-            </form>
-          </FormProvider>
-        </div>
-        {!Boolean(currentItem && currentItem._id) && (
+            ))}
+          </form>
+        </FormProvider>
+
+        {/* {!Boolean(currentItem && currentItem._id) && (
           <div className={styles.button_container}>
             <button
               className="button secondaryButton"
@@ -246,7 +244,7 @@ const CreateItem = ({
               <span className="body-m-medium colorGreyWhite">Create</span>
             </button>
           </div>
-        )}
+        )} */}
       </div>
     </Modal>
   );

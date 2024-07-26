@@ -94,7 +94,7 @@ const ListItems = <
   useEffect(() => {
     if (!paginate.loaded && itemsService && itemsService.getAll) {
       itemsService
-        .getAll(paginate)
+        .getAll()
         .then((res: any) => {
           const data = res.items || res[collectionName];
           setItems(

@@ -31,26 +31,12 @@ button:focus-visible {
   height: 32px; /* Default height */
 }
 
-.primaryButton[data-variant="outlined"] {
-  border: 1px solid var(--background-primary-default, #52466c);
-  background-color: var(--text-primary-default); /* White background */
-  color: var(--background-primary-default, #52466c);
-}
-
 .primaryButton:hover {
   background: var(--background-primary-default-hover, #75649d);
 }
 
-.primaryButton[data-variant="outlined"]:hover {
-  color: var(--Primary-800); /* Even darker text */
-  background-color: var(
-    --background-primary-default
-  ); /* White background stays */
-  border-color: var(--Primary-800);
-}
-
 .primaryButton:disabled {
-  background: var(--background-gray-default-disabled, #e7e7e7);
+  background: var(--background-gray-default-disabled, #f6f6f6);
   color: var(--text-default-default-disabled, #888);
   cursor: not-allowed;
 }
@@ -149,6 +135,46 @@ button:focus-visible {
   cursor: not-allowed;
 }
 
+/* danger Button */
+.dangerButton {
+  display: inline-flex;
+  height: 40px;
+
+  padding: var(--space-250, 10px) var(--space-400, 16px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-200, 8px);
+  flex-shrink: 0;
+  border-radius: var(--radius-200, 8px);
+  border: var(--stroke-border, 1px) solid
+    var(--border-default-tertiary, #e7e7e7);
+  background: var(--background-gray-default, #fff);
+  color: var(---icon-error-default, #cf222e);
+}
+
+.dangerButton:not(:disabled):hover {
+  border-radius: var(--radius-200, 8px);
+  border: var(--stroke-border, 1px) solid var(--border-error-default, #82071e);
+  background: var(--background-gray-default, #fff);
+  color: var(---text-error-default, #cf222e);
+}
+
+.dangerButton:not(:disabled):active {
+  border-radius: var(--radius-200, 8px);
+  border: var(--stroke-border, 1px) solid var(--border-error-default, #82071e);
+  background: var(--background-gray-default-pressed, #f6f6f6);
+  color: var(---text-error-default, #cf222e);
+}
+
+.dangerButton:disabled {
+  color: var(--text-error-disabled, #ff8182);
+
+  border-radius: var(--radius-200, 8px);
+  border: none;
+  background: var(--background-gray-default-disabled, #f6f6f6);
+  cursor: not-allowed;
+}
+
 /* icon Button */
 .iconButton {
   cursor: pointer;
@@ -187,13 +213,38 @@ button:focus-visible {
   background: var(--background-primary-tertiary-hover, #b7b1d4);
 }
 .primaryIconButton:disabled {
-  background: var(--background-gray-default-disabled, #e7e7e7);
+  background: var(--background-gray-default-disabled, #f6f6f6);
   color: var(--icons-default-default-disabled);
   cursor: not-allowed;
 }
 
 .primaryIconButton:active {
   background: var(--background-primary-tertiary-pressed, #d0cee4);
+}
+
+.secondatyIconButton {
+  height: 40px;
+  width: 40px;
+  border: none;
+  color: var(--icons-default-default);
+  border-radius: var(--radius-200, 8px);
+  border: 1px solid var(--border-primary-default, #b7b1d4);
+}
+.secondatyIconButton[data-size="small"] {
+  height: 32px;
+  width: 32px;
+}
+.secondatyIconButton:hover {
+  border: 1px solid var(--border-primary-secondary, #b7b1d4);
+}
+.secondatyIconButton:disabled {
+  border: 1px solid var(--border-default-default-disabled, #e7e7e7);
+  color: var(--icons-default-default-disabled);
+  cursor: not-allowed;
+}
+
+.secondatyIconButton:active {
+  border: 1px solid var(--border-primary-tertiary, #352d48);
 }
 
 .tertiaryIconButton {
@@ -210,7 +261,7 @@ button:focus-visible {
 }
 .tertiaryIconButton:disabled {
   border-radius: var(--radius-200, 8px);
-  background: var(--background-gray-default-disabled, #e7e7e7);
+  background: var(--background-gray-default-disabled, #f6f6f6);
   color: var(--icons-default-default-disabled);
   cursor: not-allowed;
 }

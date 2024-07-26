@@ -42,7 +42,7 @@ export const InputSelect = <T,>({
   const [optioinsWithEmpty, setOptioinsWithEmpty] = useState<any[]>([]);
   useEffect(() => {
     if (options && options.length > 0) {
-      const emptyOption = { _id: "none", name: placeholder };
+      const emptyOption = { id: "none", name: placeholder };
       setOptioinsWithEmpty([emptyOption, ...options]);
     }
   }, [options]);
@@ -102,7 +102,7 @@ export const InputSelect = <T,>({
                     }}
                     renderValue={(selValue) => {
                       const selectedOption = optioinsWithEmpty.find(
-                        (option) => option._id === selValue
+                        (option) => option.id === selValue
                       );
                       return (
                         <div
@@ -124,7 +124,7 @@ export const InputSelect = <T,>({
 
                           <span
                             className={`menuItemText body-s-regular ${
-                              selectedOption._id !== "none"
+                              selectedOption.id !== "none"
                                 ? "colorGreyBlack"
                                 : "colorGrey600"
                             }`}
@@ -136,14 +136,20 @@ export const InputSelect = <T,>({
                     }}
                   >
                     {optioinsWithEmpty.map(
-                      (r: { _id: string; name: string }, i) => (
+                      (
+                        r: {
+                          id: string;
+                          name: string;
+                        },
+                        i
+                      ) => (
                         <MenuItem
-                          value={r._id}
-                          key={r._id}
+                          value={r.id}
+                          key={r.id}
                           className="menuItem"
                           sx={{
                             display:
-                              r._id === "none" ? "none !important" : "flex",
+                              r.id === "none" ? "none !important" : "flex",
                             "&.MuiButtonBase-root.MuiMenuItem-root.Mui-focusVisible":
                               {
                                 backgroundColor: "grey.white",
@@ -163,7 +169,7 @@ export const InputSelect = <T,>({
                             className={[
                               "menuItemText",
                               "body-s-regular",
-                              r._id === "none"
+                              r.id === "none"
                                 ? "colorGrey500"
                                 : "colorGreyBlack",
                             ].join(" ")}

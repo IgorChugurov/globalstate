@@ -140,7 +140,7 @@
   /* Collection: COLOR */
   --background-gray-default: var(--gray-white);
   --background-gray-default-hover: var(--gray-50);
-  --background-gray-default-disabled: var(--gray-100);
+  --background-gray-default-disabled: var(--gray-50);
   --background-gray-default-pressed: var(--gray-100);
   --background-gray-secondary: var(--gray-50);
   --background-gray-secondary-hover: var(--gray-100);

@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import { IOptionsListItem } from "../../types/appdata";
 import styles from "./Environment.module.css";
-import { IEnvirnoment } from "../../types/environment";
+
 import { servicesPackage } from "../../services/servicesPackage";
 import { createAnyEntity } from "../../utils";
 import { get } from "http";

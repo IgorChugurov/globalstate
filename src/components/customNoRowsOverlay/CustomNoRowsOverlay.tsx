@@ -25,7 +25,7 @@ const NoRowsOverlay: React.FC<{ title?: string; messages?: string[] }> = ({
           {messagesComponent.map((message, index) => (
             <span
               key={index}
-              className={`${styles.headerEmptyText} body-m-regular`}
+              className={`${styles.headerEmptyText} body-m-multiline`}
             >
               {message}
             </span>

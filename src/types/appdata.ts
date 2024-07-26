@@ -190,6 +190,10 @@ export interface IDataForEditPage {
    */
   sections: {
     /**
+     * The info of the section
+     */
+    info?: { title: string; text: string };
+    /**
      * The title of the section.
      */
     title: string;
@@ -197,6 +201,11 @@ export interface IDataForEditPage {
      * The fields in the section.
      */
     fields: IEditField[];
+
+    /**
+     * The button for the section.
+     */
+    button?: { title: string; action: string };
   }[];
   /**
    * The title of the event that will be triggered when the data is saved in the edit page.
@@ -296,4 +305,18 @@ export interface IEditField {
    * The text to display when the field value is an empty array.
    */
   arrayEmptyText?: string;
+  /**
+   * The options for the field.
+   */
+  options?: IOptionsForRadioAndSelect[];
+}
+export interface IOptionsForRadioAndSelect {
+  value?: string; //for radio
+  id?: string; // for select
+
+  /**
+   * The label of the option.
+   */
+  label?: string; //for radio
+  name?: string; // for select
 }

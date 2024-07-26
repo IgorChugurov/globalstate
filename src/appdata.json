@@ -471,24 +471,112 @@
         }
       },
       "forEdit": {
-        "title": ["New environment", "Edit environment"],
+        "title": ["Create new environment", "Edit environment"],
         "pageHeader": "Environment details",
+        "buttonText": { "create": "Create", "edit": "Update" },
         "sections": [
           {
-            "title": "Info",
+            "title": "Key",
             "fields": [
               {
-                "name": "name",
+                "name": "key",
                 "label": "Environment name",
-                "placeholder": "Enter environment name",
+                "placeholder": "Enter key",
                 "type": "text",
                 "forEitPage": "yes",
                 "forNewPage": "yes",
                 "required": true,
-                "requiredText": "Environment name is required",
-                "forEditPageDisabled": true
+                "requiredText": "Key is required",
+                "forEditPageDisabled": false
               }
             ]
+          },
+          {
+            "title": "Configuration",
+            "info": {
+              "title": "Permanent Settings",
+              "text": "Once you select these settings, they can't be changed later. Please review your choices carefully before confirming."
+            },
+            "fields": [
+              {
+                "name": "type",
+                "label": "Key type",
+                "placeholder": "Chose key type",
+                "type": "select",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Key type is required",
+                "forEditPageDisabled": true,
+                "options": [
+                  { "id": "string", "name": "String" },
+                  { "id": "number", "name": "Number" },
+                  { "id": "boolean", "name": "Boolean" }
+                ]
+              },
+              {
+                "name": "destination",
+                "label": "Select admin panel",
+                "placeholder": "Select admin panel",
+                "type": "radio",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Admin panel is required",
+                "forEditPageDisabled": true,
+                "options": [
+                  { "value": "first", "label": "First" },
+                  { "value": "second", "label": "Second" }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Details",
+
+            "fields": [
+              {
+                "name": "label",
+                "label": "Label",
+                "placeholder": "Enter label",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Label is required",
+                "forEditPageDisabled": false
+              },
+              {
+                "name": "description",
+                "label": "Description",
+                "placeholder": "Enter description",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Description is required",
+                "forEditPageDisabled": false
+              },
+              {
+                "name": "placeholder",
+                "label": "Placeholder",
+                "placeholder": "Enter placeholder",
+                "type": "text",
+                "forEitPage": "yes",
+                "forNewPage": "yes",
+                "required": true,
+                "requiredText": "Placeholder is required",
+                "forEditPageDisabled": false
+              }
+            ]
+          },
+          {
+            "title": "Deletion",
+            "button": {
+              "action": "delete",
+              "title": "Delete environment"
+            },
+            "fields": []
           }
         ]
       }

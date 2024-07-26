@@ -1,6 +1,7 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { useState } from "react";
 import InputLabel from "./InputLabel";
+import { IOptionsForRadioAndSelect } from "../../types/appdata";
 
 const isFormInvalid = (err: any) => {
   if (Object.keys(err).length > 0) return true;
@@ -22,7 +23,7 @@ export const InputRadio = ({
   label?: string;
   type?: string;
   placeholder?: string;
-  options?: { label: string; value: any }[];
+  options?: IOptionsForRadioAndSelect[];
   disabled?: boolean;
   helperText?: string;
   required?: boolean;
@@ -39,7 +40,7 @@ export const InputRadio = ({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="input-container">
+    <div className="input-container-radio">
       {label && (
         <InputLabel
           label={label}
@@ -53,7 +54,7 @@ export const InputRadio = ({
         />
       )}
       <div
-        style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+        className="input-radio-wrapper"
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         onMouseEnter={() => setIsHovered(true)}
@@ -66,25 +67,16 @@ export const InputRadio = ({
             <>
               {options &&
                 options.map((option, index) => (
-                  <label
-                    key={index}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                    }}
-                  >
+                  <label key={index} className="input-radio-label">
                     <input
+                      className="input-radio"
                       type="radio"
                       value={option.value}
                       checked={field.value === option.value}
                       onChange={field.onChange}
                       disabled={disabled}
-                      style={{ height: "20px", minWidth: "20px" }}
                     />
-                    <span className="body-s-medium colorGreyBlack">
-                      {option.label}
-                    </span>
+                    <span className="body-m-regular">{option.label}</span>
                   </label>
                 ))}
             </>

@@ -6,7 +6,9 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-150, 6px);
+  align-self: stretch;
 }
+
 .input-container .labelWrapper {
   display: flex;
   align-items: center;
@@ -117,7 +119,7 @@ input:disabled,
 textarea:disabled {
   border: var(--stroke-border, 1px) solid
     var(--border-default-default-disabled, #b0b0b0);
-  background: var(--background-gray-default-disabled, #e7e7e7);
+  background: var(--background-gray-default-disabled, #f6f6f6);
   cursor: not-allowed;
   color: var(--text-default-default-disabled, #888);
 }
@@ -152,6 +154,36 @@ textarea:disabled::placeholder {
   font-style: normal;
   font-weight: var(--body-font-weight-strong, 500);
   line-height: 115%; /* 13.8px */
+}
+
+.input-container-radio {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-300, 12px);
+  align-self: stretch;
+}
+.input-radio-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-600, 24px);
+  color: var(--text-default-default, #262626);
+}
+.input-radio-label {
+  display: flex;
+  align-items: flex-start;
+
+  gap: var(--space-200, 8px);
+  height: 20px;
+  cursor: pointer;
+}
+.input-radio {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  color: var(--text-default-default, #262626);
+  accent-color: var(--text-default-default, #262626);
 }
 
 .custom_select {

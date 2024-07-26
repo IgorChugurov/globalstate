@@ -9,8 +9,9 @@ export const createAnyEntity = async (
   try {
     // console.log(message);
     const res = await service.createOne(data);
-    if (service.reloadEvents && service.reloadEvents.delete) {
-      sendMessage(service.reloadEvents.delete);
+    // this reload event from initdata for this service and was set while servoce was created in the service package
+    if (service.reloadEvents && service.reloadEvents.create) {
+      sendMessage(service.reloadEvents.create);
     }
     setSuccess(message || "Created successfully");
   } catch (err: any) {
@@ -32,8 +33,8 @@ export const updateAnyEntity = async (
   sendMessage("showParange");
   try {
     const res = await service.updateOne(data);
-    if (service.reloadEvents && service.reloadEvents.delete) {
-      sendMessage(service.reloadEvents.delete);
+    if (service.reloadEvents && service.reloadEvents.update) {
+      sendMessage(service.reloadEvents.update);
     }
     setSuccess(message || "Updated successfully");
   } catch (err: any) {
@@ -47,15 +48,18 @@ export const updateAnyEntity = async (
     }, 5000);
   }
 };
-export const deleteAnyEntity = async (id: string, service: any) => {
-  console.log(service);
+export const deleteAnyEntity = async (
+  id: string,
+  service: any,
+  message?: string
+) => {
   sendMessage("showParange");
   try {
     const res = await service.deleteOne(id);
     if (service.reloadEvents && service.reloadEvents.delete) {
       sendMessage(service.reloadEvents.delete);
     }
-    setSuccess("Deleted successfully");
+    setSuccess(message || "Deleted successfully");
   } catch (err: any) {
     console.log(err);
     setError(err.message || "an error occurred");

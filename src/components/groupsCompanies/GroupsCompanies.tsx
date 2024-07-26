@@ -176,7 +176,7 @@ const EmptyState = () => {
           <span className={`${styles.headerEmptyText} body-m-regular`}>
             Company groups that you create will end up here.
           </span>
-          <span className={`${styles.headerEmptyText} body-m-regular`}>
+          <span className={`${styles.headerEmptyText} body-m-multiline`}>
             Add a Company group to get started.
           </span>
         </div>
