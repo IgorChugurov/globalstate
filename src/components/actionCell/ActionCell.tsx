@@ -9,7 +9,11 @@ import { sendMessage, setError, setSuccess } from "../../utils";
 
 import Appmodal from "../appmodal/Appmodal";
 import { ApiService } from "../../services/servicesPackage";
-import { Icon_delete_inlist, Icon_setting_inlist } from "./Icons";
+import {
+  Icon_delete_inlist,
+  Icon_pencil_outline,
+  Icon_setting_inlist,
+} from "./Icons";
 import { Link } from "react-router-dom";
 import { IActionData } from "../../types/appdata";
 import { deleteAnyEntity } from "../../utils/createUpdateDeleteAnyEntity";
@@ -39,12 +43,14 @@ const ActionCell: React.FC<{
 
   const handleActionItem = (action: IActionData) => {
     setAction(action);
-    setConfirmText(action.confirmText || "");
-    setConfirmWord(action.confirmWord || "");
-    setModalTitle(action.modalTitle || `Confirm`);
+    const { confirmText, confirmWord, modalTitle, modalText } =
+      action.options || {};
+    setConfirmText(confirmText || "");
+    setConfirmWord(confirmWord || "");
+    setModalTitle(modalTitle || `Confirm`);
     setModalText(
-      action.modalText
-        ? action.modalText.replace(
+      modalText
+        ? modalText.replace(
             "${item.name}",
             item.name || item.title || item.email
           )
@@ -59,7 +65,7 @@ const ActionCell: React.FC<{
   // };
 
   const handleAction = async () => {
-    if (action && action.name === "delete") {
+    if (action && action.action === "delete") {
       await deleteItem();
     }
     setAction(null);
@@ -73,21 +79,21 @@ const ActionCell: React.FC<{
       <div className={styles.iconContainer}>
         {actions.map((action, i) => (
           <React.Fragment key={i}>
-            {action.name === "edit" && (
+            {action.action === "edit" && (
               <>
                 {action.link ? (
                   <Link to={`${url}/${rowId}`}>
                     <button
                       data-size="small"
-                      className="iconButton tertiaryIconButton bgTransparent"
+                      className="iconButton tertiaryIconButton"
                     >
-                      <Icon_setting_inlist />
+                      <Icon_pencil_outline />
                     </button>
                   </Link>
                 ) : setCurrentItem && setEditModalOpen ? (
                   <button
                     data-size="small"
-                    className="iconButton tertiaryIconButton bgTransparent"
+                    className="iconButton tertiaryIconButton"
                     onClick={(e: React.MouseEvent<HTMLElement>) => {
                       if (item) {
                         setCurrentItem(item);
@@ -95,7 +101,7 @@ const ActionCell: React.FC<{
                       }
                     }}
                   >
-                    <Icon_setting_inlist />
+                    <Icon_pencil_outline />
                   </button>
                 ) : (
                   <></>
@@ -103,10 +109,10 @@ const ActionCell: React.FC<{
               </>
             )}
 
-            {action.name === "delete" && (
+            {action.action === "delete" && (
               <button
                 data-size="small"
-                className="iconButton tertiaryIconButton bgTransparent"
+                className="iconButton tertiaryIconButton"
                 onClick={(e: React.MouseEvent<HTMLElement>) => {
                   handleActionItem(action);
                 }}

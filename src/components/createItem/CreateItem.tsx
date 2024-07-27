@@ -24,7 +24,12 @@ import { TextCopy } from "../inputs/TextCopy";
 import { GlobalStateContext } from "../../context/GlobalStateProvider";
 import { on } from "events";
 import { Icon_info, Icon_window_close } from "./Icons";
-import { IDataForEditPage, IEditField } from "../../types/appdata";
+import {
+  IDataForEditPage,
+  IEditField,
+  IOptionsForActionDelete,
+} from "../../types/appdata";
+import Appmodal from "../appmodal/Appmodal";
 
 interface IItem {
   _id: string;
@@ -42,6 +47,7 @@ interface IProps {
 
   allFields: IEditField[];
   onSuccess: (data: any) => void;
+  onDelete: () => void;
 }
 
 const CreateItem = ({
@@ -51,6 +57,7 @@ const CreateItem = ({
   setOpenModal,
   dataForEditPage,
   onSuccess,
+  onDelete,
 
   allFields,
 }: IProps) => {
@@ -69,11 +76,40 @@ const CreateItem = ({
       }
     });
 
-    return Boolean(sec.fields.length || sec.button);
+    return Boolean(sec.fields.length || (sec.button && currentItem.id));
   });
 
   const { darkMode, state } = useContext(GlobalStateContext);
+  const [openConfirmModal, setOpenConfirmModal] = useState<boolean>(false);
   const [item, setItem] = useState<IItem>(currentItem);
+  const [action, setAction] = useState<any>(null);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalText, setModalText] = useState("");
+  const [confirmText, setConfirmText] = useState("");
+  const [confirmWord, setConfirmWord] = useState("");
+
+  const handleActionItem = (section: {
+    action: string;
+    title: string;
+    options?: IOptionsForActionDelete;
+  }) => {
+    setAction(section);
+    const { confirmText, confirmWord, modalTitle, modalText } =
+      section.options || {};
+    setConfirmText(confirmText || "");
+    setConfirmWord(confirmWord || "");
+    setModalTitle(modalTitle || `Confirm`);
+    setModalText(
+      modalText
+        ? modalText.replace(
+            "${item.name}",
+            item.name || item.title || item.email
+          )
+        : "Are you sure you want to do this?"
+    );
+    setOpenConfirmModal(true);
+  };
+
   const [loading, setLoading] = useState(false);
   const resolverSchema = Yup.object().shape(createSchema(allFields));
   const methods = useForm({
@@ -95,142 +131,167 @@ const CreateItem = ({
     }
   }, [currentItem]);
 
+  const handleAction = async () => {
+    if (action && action.action === "delete") {
+      await onDelete();
+    }
+    setAction(null);
+    setOpenConfirmModal(false);
+    setOpenModal(false);
+  };
+
   return (
-    <Modal
-      open={openModal}
-      onClose={handleCloseModal}
-      BackdropProps={
-        darkMode === "dark"
-          ? { style: { backgroundColor: "rgb(255, 255, 255,0.15)" } }
-          : {}
-      }
-    >
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <button
-            data-size="small"
-            className="iconButton secondatyIconButton"
-            onClick={() => {
-              setOpenModal(false);
-            }}
-          >
-            <Icon_window_close />
-          </button>
+    <>
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        BackdropProps={
+          darkMode === "dark"
+            ? { style: { backgroundColor: "rgb(255, 255, 255,0.15)" } }
+            : {}
+        }
+      >
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <button
+              data-size="small"
+              className="iconButton secondatyIconButton"
+              onClick={() => {
+                setOpenModal(false);
+              }}
+            >
+              <Icon_window_close />
+            </button>
 
-          <span
-            className="body-l-medium"
-            style={{
-              flex: "1 0 0",
-            }}
-          >
-            {!currentItem.id
-              ? dataForEditPage.title[0]
-              : dataForEditPage.title[1]}
-          </span>
+            <span
+              className="body-l-medium"
+              style={{
+                flex: "1 0 0",
+              }}
+            >
+              {!currentItem.id
+                ? dataForEditPage.title[0]
+                : dataForEditPage.title[1]}
+            </span>
 
-          <button
-            className="button primaryButton"
-            onClick={onSubmitUpload}
-            data-size="small"
-          >
-            <span className="body-m-medium colorGreyWhite">{buttonTitle}</span>
-          </button>
-        </div>
+            <button
+              className="button primaryButton"
+              onClick={onSubmitUpload}
+              data-size="small"
+            >
+              <span className="body-m-medium colorGreyWhite">
+                {buttonTitle}
+              </span>
+            </button>
+          </div>
 
-        <FormProvider {...methods}>
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            //onSubmit={methods.handleSubmit(onSubmit, onError)}
-            noValidate
-            autoComplete="new-password"
-            className={styles.form}
-          >
-            {sections.map((section, i) => (
-              <div
-                className={`${styles.section} ${
-                  i !== 0 ? styles.borderTop : ""
-                }`}
-                key={section.title}
-              >
-                <div className={styles.boxtitle}>
-                  <div className={styles.number_box}></div>
-                  <span className="mono-s-medium">{section.title}</span>
-                </div>
-                {section.info && (
-                  <div className={styles.info_section_container}>
-                    <div className={styles.titleInfoContainerWrapper}>
-                      <div className={styles.info_containerIconWrapper}>
-                        <Icon_info />
-                      </div>
-                      <span className="body-m-medium">
-                        {section.info.title}
-                      </span>
-                    </div>
-                    <div className={styles.info_textWrapper}>
-                      <span className="body-s-multiline">
-                        {section.info.text}
-                      </span>
-                    </div>
+          <FormProvider {...methods}>
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              //onSubmit={methods.handleSubmit(onSubmit, onError)}
+              noValidate
+              autoComplete="new-password"
+              className={styles.form}
+            >
+              {sections.map((section, i) => (
+                <div
+                  className={`${styles.section} ${
+                    i !== 0 ? styles.borderTop : ""
+                  }`}
+                  key={section.title}
+                >
+                  <div className={styles.boxtitle}>
+                    <div className={styles.number_box}></div>
+                    <span className="mono-s-medium">{section.title}</span>
                   </div>
-                )}
-                {section.button && (
-                  <>
-                    {section.button.action === "delete" && (
-                      <button
-                        className="button dangerButton"
-                        onClick={() => {}}
-                      >
-                        {section.button.title}
-                      </button>
-                    )}
-                  </>
-                )}
-
-                {section.fields.map((field) => {
-                  return (
-                    <div className={`${styles.box_container}`} key={field.name}>
-                      {field.type === "select" ? (
-                        <InputSelect
-                          {...field}
-                          control={control}
-                          options={
-                            field.options
-                              ? field.options
-                              : field.collection && state[field.collection]
-                              ? state[field.collection].list
-                              : []
-                          }
-                        />
-                      ) : field.type === "switch" ? (
-                        <InputSwitch {...field} control={control} />
-                      ) : field.type === "radio" ? (
-                        <InputRadio {...field} control={control} />
-                      ) : field.type === "array" ? (
-                        <InputMultipleSelect
-                          {...field}
-                          control={control}
-                          options={
-                            field.collection && state[field.collection]
-                              ? state[field.collection].list
-                              : []
-                          }
-                        />
-                      ) : field.type === "view" ? (
-                        <TextView {...field} value={currentItem[field.name]} />
-                      ) : field.type === "copy" ? (
-                        <TextCopy {...field} value={currentItem[field.name]} />
-                      ) : (
-                        <InputText {...field} />
-                      )}
+                  {section.info && (
+                    <div className={styles.info_section_container}>
+                      <div className={styles.titleInfoContainerWrapper}>
+                        <div className={styles.info_containerIconWrapper}>
+                          <Icon_info />
+                        </div>
+                        <span className="body-m-medium">
+                          {section.info.title}
+                        </span>
+                      </div>
+                      <div className={styles.info_textWrapper}>
+                        <span className="body-s-multiline">
+                          {section.info.text}
+                        </span>
+                      </div>
                     </div>
-                  );
-                })}
-              </div>
-            ))}
-          </form>
-        </FormProvider>
+                  )}
+                  {section.button && (
+                    <>
+                      {section.button.action === "delete" && item.id && (
+                        <button
+                          className="button dangerButton"
+                          onClick={(e: React.MouseEvent<HTMLElement>) => {
+                            if (section.button) {
+                              handleActionItem(section.button);
+                            }
+                          }}
+                        >
+                          {section.button.title}
+                        </button>
+                      )}
+                    </>
+                  )}
 
-        {/* {!Boolean(currentItem && currentItem._id) && (
+                  {section.fields.map((field) => {
+                    return (
+                      <div
+                        className={`${styles.box_container}`}
+                        key={field.name}
+                      >
+                        {field.type === "select" ? (
+                          <InputSelect
+                            {...field}
+                            control={control}
+                            options={
+                              field.options
+                                ? field.options
+                                : field.collection && state[field.collection]
+                                ? state[field.collection].list
+                                : []
+                            }
+                          />
+                        ) : field.type === "switch" ? (
+                          <InputSwitch {...field} control={control} />
+                        ) : field.type === "radio" ? (
+                          <InputRadio {...field} control={control} />
+                        ) : field.type === "array" ? (
+                          <InputMultipleSelect
+                            {...field}
+                            control={control}
+                            options={
+                              field.collection && state[field.collection]
+                                ? state[field.collection].list
+                                : []
+                            }
+                          />
+                        ) : field.type === "view" ? (
+                          <TextView
+                            {...field}
+                            value={currentItem[field.name]}
+                          />
+                        ) : field.type === "copy" ? (
+                          <TextCopy
+                            {...field}
+                            value={currentItem[field.name]}
+                          />
+                        ) : (
+                          <InputText {...field} />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </form>
+          </FormProvider>
+
+          {/* {!Boolean(currentItem && currentItem._id) && (
           <div className={styles.button_container}>
             <button
               className="button secondaryButton"
@@ -245,8 +306,22 @@ const CreateItem = ({
             </button>
           </div>
         )} */}
-      </div>
-    </Modal>
+        </div>
+      </Modal>
+
+      {openModal && (
+        <Appmodal
+          openModal={openConfirmModal}
+          handleCloseModal={() => setOpenConfirmModal(false)}
+          setOpenModal={setOpenConfirmModal}
+          modalTitle={modalTitle}
+          confirmWord={confirmWord}
+          confirmSuggestion={confirmText}
+          handleAction={handleAction}
+          modalText={modalText}
+        />
+      )}
+    </>
   );
 };
 

@@ -82,28 +82,6 @@ export const InputRadio = ({
             </>
           )}
         />
-        {/* {options &&
-          options.length > 0 &&
-          options.map((option, index) => (
-            <div key={index}>
-              <label
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
-              >
-                <input
-                  //className="custom-input"
-                  style={{ height: "20px", minWidth: "20px" }}
-                  type="radio"
-                  value={option.value}
-                  disabled={disabled}
-                  {...register(name)}
-                  checked={Boolean(JSON.parse(fieldValue) === option.value)}
-                />
-                <span className="body-s-medium colorGreyBlack">
-                  {option.name}
-                </span>
-              </label>
-            </div>
-          ))} */}
       </div>
 
       {helperText && !isInvalid && (

@@ -9,11 +9,28 @@
   ],
   "AuthData": {
     "loginAndGetTokenUrl": "https://dummyjson.com/auth/login",
-    "credentials": {
-      "varName": "username",
-      "title": "User name",
-      "type": "text"
-    },
+    "fields": [
+      {
+        "name": "email",
+        "label": "Email",
+        "placeholder": "Enter email",
+        "type": "email",
+        "forEitPage": "yes",
+        "forNewPage": "yes",
+        "required": true,
+        "requiredText": "Email is required"
+      },
+      {
+        "name": "password",
+        "label": "Password",
+        "placeholder": "Enter Password",
+        "type": "password",
+        "forEitPage": "yes",
+        "forNewPage": "yes",
+        "required": true,
+        "requiredText": "Password is required"
+      }
+    ],
 
     "getCurrentAuthUserUrl": "https://dummyjson.com/auth/me",
     "refreshAuthSessionUrl": "https://dummyjson.com/auth/refresh"
@@ -82,7 +99,7 @@
             "type": "actions",
             "width": 50,
             "options": {
-              "actions": [{ "name": "edit", "link": true }]
+              "actions": [{ "action": "edit", "link": true }]
             }
           }
         ],
@@ -147,7 +164,7 @@
             "type": "actions",
             "width": 250,
             "options": {
-              "actions": [{ "name": "delete" }]
+              "actions": [{ "action": "delete" }]
             }
           }
         ]
@@ -209,7 +226,7 @@
             "type": "actions",
             "width": 250,
             "options": {
-              "actions": [{ "name": "delete" }]
+              "actions": [{ "action": "delete" }]
             }
           }
         ]
@@ -289,11 +306,13 @@
             "options": {
               "actions": [
                 {
-                  "name": "delete",
-                  "modalText": "Are you sure you want to delete ${item.name}?",
-                  "modalTitle": "Confirm deleting",
-                  "confirmWord": "Delete",
-                  "confirmText": "To confirm, please type the word Delete"
+                  "action": "delete",
+                  "options": {
+                    "modalText": "Are you sure you want to delete ${item.name}?",
+                    "modalTitle": "Confirm deleting",
+                    "confirmWord": "Delete",
+                    "confirmText": "To confirm, please type the word Delete"
+                  }
                 }
               ]
             }
@@ -369,7 +388,7 @@
             "type": "actions",
             "width": 250,
             "options": {
-              "actions": [{ "name": "delete" }]
+              "actions": [{ "action": "delete" }]
             }
           }
         ]
@@ -425,7 +444,8 @@
         "options": { "create": "/add" },
         "reloadEvents": {
           "update": "reloadEnvironments",
-          "create": "reloadEnvironments"
+          "create": "reloadEnvironments",
+          "delete": "reloadEnvironments"
         }
       },
       "reloadEventTitle": "reloadEnvironments",
@@ -441,8 +461,8 @@
             "type": "openEditPage"
           },
 
+          { "field": "label", "headerName": "Label", "flex": 1 },
           { "field": "type", "headerName": "Type", "width": 150 },
-          { "field": "parent", "headerName": "Parent", "width": 150 },
           { "field": "adminPanel", "headerName": "Admin panel", "width": 150 },
           {
             "field": "actions",
@@ -452,7 +472,7 @@
             "options": {
               "actions": [
                 {
-                  "name": "edit"
+                  "action": "edit"
                 }
               ]
             }
@@ -511,7 +531,8 @@
                 "options": [
                   { "id": "string", "name": "String" },
                   { "id": "number", "name": "Number" },
-                  { "id": "boolean", "name": "Boolean" }
+                  { "id": "boolean", "name": "Boolean" },
+                  { "id": "date", "name": "Date" }
                 ]
               },
               {
@@ -574,7 +595,13 @@
             "title": "Deletion",
             "button": {
               "action": "delete",
-              "title": "Delete environment"
+              "title": "Delete environment",
+              "options": {
+                "modalText": "Are you sure you want to delete ${item.name}?",
+                "modalTitle": "Confirm deleting!",
+                "confirmWord": "Delete!",
+                "confirmText": "To confirm, please type the word Delete!"
+              }
             },
             "fields": []
           }
@@ -606,7 +633,7 @@
             "type": "actions",
             "width": 250,
             "options": {
-              "actions": [{ "name": "delete" }]
+              "actions": [{ "action": "delete" }]
             }
           }
         ]
@@ -667,11 +694,10 @@
             "width": 250,
             "options": {
               "actions": [
-                { "name": "edit" },
-                { "name": "delete" },
-                { "name": "clone" },
-                { "name": "copy" },
-                { "name": "actions" }
+                { "action": "edit" },
+                { "action": "delete" },
+                { "action": "clone" },
+                { "action": "copy" }
               ]
             }
           }

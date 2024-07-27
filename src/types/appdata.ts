@@ -15,22 +15,7 @@ export interface IAuthData {
   /**
    * The credentials required for authentication.
    */
-  credentials: {
-    /**
-     * The variable name for the credentials.
-     */
-    varName: string;
-
-    /**
-     * The title of the credentials.
-     */
-    title: string;
-
-    /**
-     * The type of the credentials.
-     */
-    type: string;
-  };
+  fields: IEditField[];
 
   /**
    * The URL to get the current authenticated user.
@@ -131,31 +116,16 @@ export interface IActionData {
    * The name of the action.
    * Possible values are: "delete", "edit", "clone", "view", "copy", "actions".
    */
-  name: "delete" | "edit" | "clone" | "view" | "copy" | "actions";
-
+  action: "delete" | "edit" | "clone" | "view" | "copy" | "actions";
   /**
    * if true and action = edit in the component create Link to=url/rowId. in othe case openEditModal
    */
-
   link?: boolean;
-
-  /**
-   * The confirmation word for the action.
-   */
-  confirmWord?: string;
-  /**
-   * The confirmation text for the action.
-   */
-  confirmText?: string;
-
-  modalTitle?: string;
-  modalText?: string;
-
+  options?: IOptionsForActionDelete;
   /**
    * The fields to be copied.
    */
   copyFields?: { field: string }[];
-
   /**
    * The component associated with the action.
    */
@@ -205,8 +175,13 @@ export interface IDataForEditPage {
     /**
      * The button for the section.
      */
-    button?: { title: string; action: string };
+    button?: {
+      title: string;
+      action: string;
+      options?: IOptionsForActionDelete;
+    };
   }[];
+
   /**
    * The title of the event that will be triggered when the data is saved in the edit page.
    */
@@ -229,6 +204,13 @@ export interface IDataForEditPage {
     create?: string;
     update?: string;
   };
+}
+
+export interface IOptionsForActionDelete {
+  modalText?: string;
+  modalTitle?: string;
+  confirmWord?: string;
+  confirmText?: string;
 }
 
 /**
@@ -260,7 +242,9 @@ export interface IEditField {
     | "array"
     | "view"
     | "copy"
-    | "file";
+    | "file"
+    | "email"
+    | "password";
   /**
    * The collection of the field.
    */

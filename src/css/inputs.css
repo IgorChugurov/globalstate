@@ -172,7 +172,7 @@ textarea:disabled::placeholder {
 }
 .input-radio-label {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 
   gap: var(--space-200, 8px);
   height: 20px;
@@ -184,6 +184,36 @@ textarea:disabled::placeholder {
   vertical-align: middle;
   color: var(--text-default-default, #262626);
   accent-color: var(--text-default-default, #262626);
+  cursor: pointer;
+}
+.input-switch {
+  /* color: var(--background-grey-secondary-pressed, "red"); */
+}
+
+.input-switch .MuiSwitch-switchBase.Mui-checked {
+  color: var(--background-primary-default);
+  background: var(--background-primary-tertiary, #e5e4f0);
+}
+
+.input-switch .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  color: var(--background-gray-secondary-pressed, #e7e7e7);
+}
+
+.input-switch .MuiSwitch-switchBase {
+  color: var(--background-gray-default, #fff);
+  background-color: var(--background-grey-secondary-pressed);
+}
+
+.input-switch .MuiSwitch-track {
+  color: var(--background-gray-secondary-pressed, #e7e7e7);
+}
+
+.input-switch .MuiSwitch-switchBase:focus {
+  outline: none; /* Убирает обводку при фокусе */
+}
+
+.input-switch .MuiSwitch-track {
+  border: none; /* Убирает обводку трека */
 }
 
 .custom_select {

@@ -4,6 +4,7 @@ import { IUser } from "../types/user";
 import LoginPage from "../pages/login/Login";
 import { GlobalStateContext } from "./GlobalStateProvider";
 import { createLoginMessageHandler } from "requestwithrefreshtoken";
+import Login from "../components/login/Login";
 
 const INIT_USER: IUser | null = getUser();
 
@@ -67,7 +68,8 @@ export const UserDataContextProvider: React.FC<Props> = ({ children }) => {
         userData,
       }}
     >
-      {userData ? children : <LoginPage />}
+      {userData ? children : <Login />}
+      {/* {userData ? children : <LoginPage />} */}
     </UserDataContext.Provider>
   );
 };

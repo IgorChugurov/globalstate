@@ -50,7 +50,7 @@ const Breadcrumbs = ({}: {}) => {
         state["projects"].list.find((p: any) => p._id === currentProject)) ||
       {};
     setProject(p);
-  }, [currentProject, state["projects"].list]);
+  }, [currentProject, state["projects"]?.list]);
   return (
     <div className={`${styles.breadcrumbsContainer}`}>
       {breadcrumbsData.map((d, i) => (

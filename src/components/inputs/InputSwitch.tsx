@@ -56,6 +56,7 @@ export const InputSwitch = ({
           render={({ field, fieldState: { error } }) => {
             return (
               <Switch
+                className="input-switch"
                 checked={field.value}
                 onChange={field.onChange}
                 name={field.name}

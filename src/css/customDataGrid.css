@@ -3,6 +3,9 @@
   min-height: 200px !important;
   border-radius: var(--radius-400, 16px) !important;
 }
+.custom-data-grid .MuiDataGrid-row:hover {
+  background-color: var(--background-primary-secondary, #f8f7fb) !important;
+}
 .hidePagination .MuiDataGrid-footerContainer {
   display: none !important;
 }

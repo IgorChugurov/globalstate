@@ -20,6 +20,18 @@ export const createSchema = (allFields: IEditField[]) => {
             message
           );
           break;
+        case "email":
+          // Apply email validation
+          validator = (validator as Yup.StringSchema)
+            .email("Invalid email format")
+            .required(message);
+          break;
+        case "password":
+          // Apply password validation
+          validator = (validator as Yup.StringSchema)
+            .min(8, "Password must be at least 8 characters")
+            .required(message);
+          break;
         default:
           validator = validator.required(message);
           break;
@@ -40,6 +52,10 @@ export const createSchema = (allFields: IEditField[]) => {
         return Yup.date();
       case "array":
         return Yup.array();
+      case "email":
+        return Yup.string().email("Invalid email format");
+      case "password":
+        return Yup.string().min(8, "Password must be at least 8 characters");
       default:
         return Yup.string();
     }

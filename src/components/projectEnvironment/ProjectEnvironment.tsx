@@ -9,7 +9,10 @@ import { createAnyEntity, getItemForEdit } from "../../utils";
 import { IEnvironment } from "../../types/environment";
 import ListsItemsForAllItems from "../listsItemsForAllItems/ListsItemsForAllItems";
 import CreateItem from "../createItem/CreateItem";
-import { updateAnyEntity } from "../../utils/createUpdateDeleteAnyEntity";
+import {
+  deleteAnyEntity,
+  updateAnyEntity,
+} from "../../utils/createUpdateDeleteAnyEntity";
 
 const ProjectEnvironment = ({
   initDataEnvironment,
@@ -51,6 +54,11 @@ const ProjectEnvironment = ({
       updateAnyEntity(data, itemsService, afterCreateMessage);
     }
   };
+  const deleteItem = async () => {
+    if (currentItem) {
+      deleteAnyEntity(currentItem.id, itemsService);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -63,6 +71,7 @@ const ProjectEnvironment = ({
           handleCloseModal={() => setModalCreateOpen(false)}
           setOpenModal={setModalCreateOpen}
           onSuccess={createOrUpdateData}
+          onDelete={deleteItem}
         />
       )}
       <div className={styles.container}>

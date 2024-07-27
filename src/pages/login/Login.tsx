@@ -17,7 +17,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { credentials, loginAndGetTokenUrl } = AuthData;
+  const { fields, loginAndGetTokenUrl } = AuthData;
   const today = new Date();
   const year = today.getFullYear();
 
@@ -36,7 +36,7 @@ const LoginPage = () => {
         },
         method: "POST",
         body: JSON.stringify({
-          [credentials.varName]: "emilys", //email,
+          // [credentials.varName]: "emilys",
           password: "emilyspass", //password,
           expiresInMins: 30,
         }),
@@ -118,8 +118,8 @@ const LoginPage = () => {
               <input
                 className="custom-input"
                 required
-                placeholder={credentials.title}
-                type={credentials.type}
+                // placeholder={credentials.title}
+                // type={credentials.type}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setError(false);

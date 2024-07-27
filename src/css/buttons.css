@@ -134,6 +134,33 @@ button:focus-visible {
   background: var(--background-gray-default, #fff);
   cursor: not-allowed;
 }
+/* tertiary Button */
+.tertiaryButton {
+  height: 30px; /* Default height */
+  display: inline-flex;
+  padding: var(--space-150, 6px) var(--space-100, 4px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-200, 8px);
+  color: var(--text-primary-default, #52466c);
+  border-radius: 0% !important;
+  border: none;
+  background-color: transparent;
+}
+
+.tertiaryButton:not(:disabled):hover {
+  border-bottom: var(--stroke-border, 1px) solid
+    var(--border-primary-tertiary, #352d48);
+  background-color: transparent;
+}
+
+.tertiaryButton:not(:disabled):active {
+}
+
+.tertiaryButton:disabled {
+  color: var(--text-default-default-disabled, #888);
+  cursor: not-allowed;
+}
 
 /* danger Button */
 .dangerButton {
@@ -249,7 +276,7 @@ button:focus-visible {
 
 .tertiaryIconButton {
   height: 24px;
-  width: 24x;
+  width: 24px;
   border: none;
   color: var(--icons-primary-secondary);
   background: var(--background-gray-default, #fff);
@@ -257,7 +284,7 @@ button:focus-visible {
 
 .tertiaryIconButton:hover {
   border-radius: var(--radius-200, 8px);
-  background: var(--background-gray-default-hover, #e7e7e7);
+  background: var(--icon-primary-secondary, #e7e7e7);
 }
 .tertiaryIconButton:disabled {
   border-radius: var(--radius-200, 8px);
